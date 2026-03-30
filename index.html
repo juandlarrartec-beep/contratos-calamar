@@ -344,17 +344,17 @@
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showTab('resumen')">Resumen</div>
+  <div class="tab active" onclick="showTab('preguntas')">Preguntas <span id="badge-preguntas" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
+  <div class="tab" onclick="showTab('resumen')">Resumen</div>
   <div class="tab" onclick="showTab('contratos')">Contratos</div>
   <div class="tab" onclick="showTab('finanzas')">Finanzas</div>
   <div class="tab" onclick="showTab('riesgos')">Riesgos</div>
-  <div class="tab" onclick="showTab('preguntas')">Preguntas <span id="badge-preguntas" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
 </div>
 
 <div class="container">
 
   <!-- ── RESUMEN ── -->
-  <div id="tab-resumen" class="section active">
+  <div id="tab-resumen" class="section">
     <div class="grid-2">
       <div class="card">
         <h3>Descripción del negocio</h3>
@@ -567,7 +567,7 @@
   </div>
 
   <!-- ── PREGUNTAS ── -->
-  <div id="tab-preguntas" class="section">
+  <div id="tab-preguntas" class="section active">
     <div class="progress-bar-wrap">
       <h3>Progreso de la reunión</h3>
       <div class="progress-stats">
