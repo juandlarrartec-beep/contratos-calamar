@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contratos Calamar — Due Diligence</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #232636;
+      --border: #2e3347;
+      --accent: #4f7cff;
+      --accent2: #7c5cff;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #7c8599;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      max-width: 1100px;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-left h1 {
+      font-size: 26px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4f7cff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-left p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .4px;
+    }
+    .badge-warning { background: rgba(245,158,11,.15); color: var(--yellow); border: 1px solid rgba(245,158,11,.3); }
+    .badge-info    { background: rgba(79,124,255,.15);  color: var(--accent); border: 1px solid rgba(79,124,255,.3); }
+    .badge-success { background: rgba(34,197,94,.15);   color: var(--green);  border: 1px solid rgba(34,197,94,.3); }
+
+    /* ── TABS ── */
+    .tabs {
+      max-width: 1100px;
+      margin: 0 auto 24px;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .tab {
+      padding: 10px 18px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+      margin-bottom: -1px;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── CARDS GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media(max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .card p { font-size: 15px; line-height: 1.6; }
+
+    /* ── CONTRATOS ── */
+    .contrato-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 12px;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      align-items: start;
+      gap: 16px;
+    }
+    .contrato-num {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px;
+      flex-shrink: 0;
+    }
+    .contrato-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .contrato-sub { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .contrato-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ── ACTORES ── */
+    .actor-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; flex-shrink: 0;
+    }
+    .avatar-1 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .avatar-2 { background: linear-gradient(135deg, #a78bfa, #4f7cff); }
+    .avatar-3 { background: linear-gradient(135deg, #22c55e, #16a34a); }
+    .actor-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+    .actor-rol { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+    .actor-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ── RIESGOS ── */
+    .riesgo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .riesgo-card.alto { border-left-color: var(--red); }
+    .riesgo-card.medio { border-left-color: var(--yellow); }
+    .riesgo-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .riesgo-tipo { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+    .riesgo-card.alto .riesgo-tipo { color: var(--red); }
+    .riesgo-card.medio .riesgo-tipo { color: var(--yellow); }
+    .riesgo-desc { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* ── FINANZAS ── */
+    .fin-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .fin-row:last-child { border-bottom: none; }
+    .fin-label { color: var(--muted); }
+    .fin-val { font-weight: 600; color: var(--text); }
+    .fin-val.accent { color: var(--accent); }
+    .fin-val.green { color: var(--green); }
+
+    /* ── PREGUNTAS ── */
+    .progress-bar-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .progress-bar-wrap h3 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 14px; }
+    .progress-stats { display: flex; align-items: center; gap: 16px; margin-bottom: 10px; }
+    .progress-num { font-size: 28px; font-weight: 700; color: var(--accent); }
+    .progress-total { font-size: 14px; color: var(--muted); }
+    .bar-bg { height: 8px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 999px; transition: width .4s ease; }
+
+    .cat-block { margin-bottom: 20px; }
+    .cat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      user-select: none;
+      transition: background .2s;
+    }
+    .cat-header:hover { background: var(--surface2); }
+    .cat-header.open { border-radius: var(--radius) var(--radius) 0 0; border-bottom-color: transparent; }
+    .cat-title { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+    .cat-count { font-size: 12px; color: var(--muted); background: var(--surface2); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border); }
+    .cat-arrow { color: var(--muted); font-size: 13px; transition: transform .2s; }
+    .cat-header.open .cat-arrow { transform: rotate(180deg); }
+
+    .cat-items {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .3s ease;
+    }
+    .cat-items.open { max-height: 1000px; }
+
+    .pregunta-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+      cursor: pointer;
+    }
+    .pregunta-item:last-child { border-bottom: none; }
+    .pregunta-item:hover { background: var(--surface2); }
+    .pregunta-item.done { opacity: .5; }
+    .pregunta-item.done .pregunta-text { text-decoration: line-through; }
+
+    .check-box {
+      width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .pregunta-item.done .check-box {
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .check-box svg { display: none; }
+    .pregunta-item.done .check-box svg { display: block; }
+    .pregunta-num { font-size: 12px; color: var(--muted); flex-shrink: 0; min-width: 22px; margin-top: 2px; }
+    .pregunta-text { font-size: 14px; line-height: 1.5; }
+
+    /* ── NOTAS ── */
+    .notas-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .notas-box h3 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; }
+    .notas-box textarea {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 12px;
+      resize: vertical;
+      min-height: 120px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .notas-box textarea:focus { border-color: var(--accent); }
+
+    .secop-box {
+      background: linear-gradient(135deg, rgba(79,124,255,.1), rgba(124,92,255,.1));
+      border: 1px solid rgba(79,124,255,.3);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .secop-icon { font-size: 28px; flex-shrink: 0; }
+    .secop-box strong { font-size: 15px; display: block; margin-bottom: 3px; }
+    .secop-box p { font-size: 13px; color: var(--muted); }
+    .secop-box code {
+      background: rgba(79,124,255,.2);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>Contratos Calamar</h1>
+    <p>Análisis de inversión — Due Diligence · 30 marzo 2026</p>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span class="badge badge-warning">⚠ En Evaluación</span>
+    <span class="badge badge-info">📍 Calamar, Colombia</span>
+    <span class="badge badge-success">3 Contratos</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('resumen')">Resumen</div>
+  <div class="tab" onclick="showTab('contratos')">Contratos</div>
+  <div class="tab" onclick="showTab('finanzas')">Finanzas</div>
+  <div class="tab" onclick="showTab('riesgos')">Riesgos</div>
+  <div class="tab" onclick="showTab('preguntas')">Preguntas <span id="badge-preguntas" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
+</div>
+
+<div class="container">
+
+  <!-- ── RESUMEN ── -->
+  <div id="tab-resumen" class="section active">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Descripción del negocio</h3>
+        <p>Oportunidad de entrar como socio financiero en un consorcio con <strong>3 contratos de obras civiles adjudicados por el Estado</strong> colombiano. Emily (contratista principal) busca inversor que aporte capital y comparta la gestión. La utilidad quedaría dividida entre los dos socios.</p>
+      </div>
+      <div class="card">
+        <h3>Estado actual</h3>
+        <div class="fin-row"><span class="fin-label">Contratos adjudicados</span><span class="fin-val green">3</span></div>
+        <div class="fin-row"><span class="fin-label">Inicio en campo</span><span class="fin-val accent">~15 días</span></div>
+        <div class="fin-row"><span class="fin-label">Anticipo esperado</span><span class="fin-val accent">~40 días</span></div>
+        <div class="fin-row"><span class="fin-label">Anticipo %</span><span class="fin-val green">20%</span></div>
+        <div class="fin-row"><span class="fin-label">Acuerdo socio</span><span class="fin-val" style="color:var(--yellow)">Solo verbal</span></div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="actor-card">
+        <div class="avatar avatar-1">E</div>
+        <div>
+          <div class="actor-name">Emily</div>
+          <div class="actor-rol">Contratista Principal</div>
+          <div class="actor-desc">Maneja técnica, campo, nómina y pólizas. Integrante del consorcio.</div>
+        </div>
+      </div>
+      <div class="actor-card">
+        <div class="avatar avatar-2">A</div>
+        <div>
+          <div class="actor-name">Alejandra</div>
+          <div class="actor-rol">Socia del Consorcio</div>
+          <div class="actor-desc">Co-integrante. Arma reportes de nómina que Emily ejecuta.</div>
+        </div>
+      </div>
+      <div class="actor-card">
+        <div class="avatar avatar-3">T</div>
+        <div>
+          <div class="actor-name">Tú (inversor)</div>
+          <div class="actor-rol">Potencial Socio Financiero</div>
+          <div class="actor-desc">Aportaría capital, firmaría documentos, manejaría parte administrativa.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="secop-box">
+      <div class="secop-icon">🔍</div>
+      <div>
+        <strong>Verificar en SECOP antes de la reunión</strong>
+        <p>Pedí el número de contrato y buscalo en <code>secop.gov.co</code> — si existe, aparece público con valor, entidad y estado.</p>
+      </div>
+    </div>
+
+    <div class="notas-box">
+      <h3>Notas personales</h3>
+      <textarea id="notas-resumen" placeholder="Anotá tus observaciones aquí..." oninput="saveNotes('resumen', this.value)"></textarea>
+    </div>
+  </div>
+
+  <!-- ── CONTRATOS ── -->
+  <div id="tab-contratos" class="section">
+    <div class="contrato-card">
+      <div class="contrato-num">1</div>
+      <div>
+        <div class="contrato-title">Mejoramientos / Reparaciones</div>
+        <div class="contrato-sub">📍 Calamar</div>
+        <div class="contrato-tags">
+          <span class="tag">Por iniciar ~15 días</span>
+          <span class="tag">Anticipo 20%</span>
+          <span class="tag">Prioritario</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5">Primer contrato a ejecutar. Considerado de menor complejidad que los otros dos. Anticipo del ministerio llega en ~40 días.</p>
+      </div>
+      <span class="badge badge-warning">Próximo</span>
+    </div>
+
+    <div class="contrato-card">
+      <div class="contrato-num">2</div>
+      <div>
+        <div class="contrato-title">Construcción Nueva — Colegio</div>
+        <div class="contrato-sub">📍 Carlos Maurio, casco urbano de Calamar</div>
+        <div class="contrato-tags">
+          <span class="tag">Adjudicado</span>
+          <span class="tag">No iniciado</span>
+          <span class="tag">Mismo monto</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5">Emily decidió no empezarlo al mismo tiempo por el monto elevado y el riesgo climático (invierno).</p>
+      </div>
+      <span class="badge badge-info">En espera</span>
+    </div>
+
+    <div class="contrato-card">
+      <div class="contrato-num">3</div>
+      <div>
+        <div class="contrato-title">Construcción Nueva</div>
+        <div class="contrato-sub">📍 Zona alejada de Calamar</div>
+        <div class="contrato-tags">
+          <span class="tag">Adjudicado</span>
+          <span class="tag">No iniciado</span>
+          <span class="tag">Mismo monto</span>
+          <span class="tag">Mayor distancia</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px;line-height:1.5">Tercer contrato. Mayor complejidad logística por distancia. Emily propone empezar si el contrato 1 va bien.</p>
+      </div>
+      <span class="badge badge-info">En espera</span>
+    </div>
+  </div>
+
+  <!-- ── FINANZAS ── -->
+  <div id="tab-finanzas" class="section">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Estructura de pagos del Estado</h3>
+        <div class="fin-row"><span class="fin-label">Anticipo inicial</span><span class="fin-val green">20% del contrato</span></div>
+        <div class="fin-row"><span class="fin-label">Días para recibir anticipo</span><span class="fin-val accent">~40 días</span></div>
+        <div class="fin-row"><span class="fin-label">Actas de pago</span><span class="fin-val" style="color:var(--yellow)">Por confirmar</span></div>
+        <div class="fin-row"><span class="fin-label">Velocidad pagos ministerio</span><span class="fin-val" style="color:var(--yellow)">Lentos (dicho por Emily)</span></div>
+        <div class="fin-row"><span class="fin-label">Control cuenta consorcio</span><span class="fin-val green">PIN compartido</span></div>
+      </div>
+      <div class="card">
+        <h3>Gastos identificados</h3>
+        <div class="fin-row"><span class="fin-label">Pólizas</span><span class="fin-val" style="color:var(--yellow)">Pre-inicio</span></div>
+        <div class="fin-row"><span class="fin-label">Profesionales externos</span><span class="fin-val" style="color:var(--yellow)">Pre-inicio</span></div>
+        <div class="fin-row"><span class="fin-label">Viabilidades (Bogotá)</span><span class="fin-val" style="color:var(--yellow)">Pre-inicio</span></div>
+        <div class="fin-row"><span class="fin-label">Materiales anticipados</span><span class="fin-val" style="color:var(--yellow)">Pre-invierno</span></div>
+        <div class="fin-row"><span class="fin-label">Mano de obra / nómina</span><span class="fin-val" style="color:var(--yellow)">En ejecución</span></div>
+        <div class="fin-row"><span class="fin-label">Maquinaria</span><span class="fin-val" style="color:var(--yellow)">En ejecución</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3>Datos faltantes — obtener en reunión</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:4px">
+        <div style="background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:14px;text-align:center">
+          <div style="font-size:22px;margin-bottom:6px">💰</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Valor total contratos</div>
+          <div style="font-size:12px;color:var(--muted)">¿Cuántos millones en total?</div>
+        </div>
+        <div style="background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:14px;text-align:center">
+          <div style="font-size:22px;margin-bottom:6px">📊</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">Rentabilidad estimada</div>
+          <div style="font-size:12px;color:var(--muted)">¿Qué % de utilidad?</div>
+        </div>
+        <div style="background:var(--surface2);border:1px dashed var(--border);border-radius:8px;padding:14px;text-align:center">
+          <div style="font-size:22px;margin-bottom:6px">🤝</div>
+          <div style="font-size:13px;font-weight:600;margin-bottom:3px">% para el inversor</div>
+          <div style="font-size:12px;color:var(--muted)">¿Qué porcentaje me toca?</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notas-box">
+      <h3>Notas financieras</h3>
+      <textarea id="notas-finanzas" placeholder="Anotá montos, porcentajes o datos que te den..." oninput="saveNotes('finanzas', this.value)"></textarea>
+    </div>
+  </div>
+
+  <!-- ── RIESGOS ── -->
+  <div id="tab-riesgos" class="section">
+    <div style="margin-bottom:20px">
+      <div class="riesgo-card medio">
+        <div class="riesgo-icon">🌧</div>
+        <div>
+          <div class="riesgo-tipo">Climático — Medio</div>
+          <div class="riesgo-desc">El invierno puede retrasar la ejecución de obra. Emily prioriza comprar materiales antes de que lleguen las lluvias para mitigar este riesgo.</div>
+        </div>
+      </div>
+      <div class="riesgo-card alto">
+        <div class="riesgo-icon">💸</div>
+        <div>
+          <div class="riesgo-tipo">Liquidez — Alto</div>
+          <div class="riesgo-desc">El anticipo tarda ~40 días. Hay gastos pre-inicio (pólizas, viabilidades, materiales) que alguien debe financiar antes de recibir ese dinero. Riesgo de quedar "corto" si el anticipo demora más.</div>
+        </div>
+      </div>
+      <div class="riesgo-card alto">
+        <div class="riesgo-icon">🏛</div>
+        <div>
+          <div class="riesgo-tipo">Demora Estatal — Alto</div>
+          <div class="riesgo-desc">Los pagos del ministerio "no son rápidos" según Emily. Riesgo de demora en actas de pago por avance. Puede generar problemas de flujo de caja durante la ejecución.</div>
+        </div>
+      </div>
+      <div class="riesgo-card medio">
+        <div class="riesgo-icon">📈</div>
+        <div>
+          <div class="riesgo-tipo">Sobrecostos — Medio</div>
+          <div class="riesgo-desc">No queda claro quién absorbe sobrecostos en la propuesta verbal. En obras civiles los sobrecostos son comunes (maquinaria, materiales, imprevistos).</div>
+        </div>
+      </div>
+      <div class="riesgo-card alto">
+        <div class="riesgo-icon">📄</div>
+        <div>
+          <div class="riesgo-tipo">Falta de Contrato Escrito — Alto</div>
+          <div class="riesgo-desc">El acuerdo entre Emily y el inversor es solo verbal. Sin contrato de cuentas en participación o similar, el inversor no tiene respaldo legal para reclamar su porcentaje de utilidad.</div>
+        </div>
+      </div>
+      <div class="riesgo-card medio">
+        <div class="riesgo-icon">✅</div>
+        <div>
+          <div class="riesgo-tipo">Verificación del Contrato — Medio</div>
+          <div class="riesgo-desc">Aún no se verificó en SECOP que los contratos existen, están adjudicados y tienen los montos mencionados. Esto se puede (y debe) hacer antes de cualquier desembolso.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Mitigaciones sugeridas</h3>
+      <div class="fin-row"><span class="fin-label">✅ Verificar en SECOP</span><span class="fin-val accent">Gratis y público</span></div>
+      <div class="fin-row"><span class="fin-label">✅ Firmar contrato de cuentas en participación</span><span class="fin-val accent">Antes de cualquier pago</span></div>
+      <div class="fin-row"><span class="fin-label">✅ Acceso consulta a cuenta del consorcio</span><span class="fin-val accent">Negociar con Emily</span></div>
+      <div class="fin-row"><span class="fin-label">✅ Visitar Calamar antes de comprometerse</span><span class="fin-val accent">Emily ya lo propuso</span></div>
+      <div class="fin-row"><span class="fin-label">✅ Definir quién absorbe sobrecostos</span><span class="fin-val accent">Acuerdo escrito</span></div>
+    </div>
+  </div>
+
+  <!-- ── PREGUNTAS ── -->
+  <div id="tab-preguntas" class="section">
+    <div class="progress-bar-wrap">
+      <h3>Progreso de la reunión</h3>
+      <div class="progress-stats">
+        <div class="progress-num" id="prog-done">0</div>
+        <div class="progress-total" id="prog-total">de 30 preguntas respondidas</div>
+      </div>
+      <div class="bar-bg"><div class="bar-fill" id="prog-bar" style="width:0%"></div></div>
+    </div>
+
+    <div id="preguntas-container"></div>
+  </div>
+
+</div>
+
+<script>
+const DATA = {
+  preguntas: [
+    {
+      categoria: "Legalidad y estructura del contrato",
+      emoji: "📋",
+      items: [
+        "¿Podés mostrarme el contrato adjudicado con número, entidad contratante y valor total?",
+        "¿El consorcio ya está constituido legalmente? ¿Puedo ver el documento de constitución?",
+        "¿Cuáles son los nombres legales de todos los integrantes del consorcio?",
+        "¿Hay alguna inhabilidad, sanción o proceso disciplinario activo contra el consorcio o sus integrantes?",
+        "¿El contrato ya está perfeccionado (firmado, legalizado y con acta de inicio emitida)?"
+      ]
+    },
+    {
+      categoria: "Valor, flujo de caja y retorno",
+      emoji: "💰",
+      items: [
+        "¿Cuál es el valor total de cada contrato? ¿Cuánto representa el 20% de anticipo en pesos?",
+        "¿Cuál es la rentabilidad estimada del proyecto y cómo llegaste a ese número?",
+        "¿Cuánto dinero necesitás de mi parte específicamente y para qué se va a usar?",
+        "¿Cuándo recupero mi inversión? ¿Hay un cronograma de pagos del ministerio?",
+        "¿Las actas de pago son mensuales, por avance de obra o por hitos? ¿Cuál es la periodicidad real?"
+      ]
+    },
+    {
+      categoria: "Riesgo operativo",
+      emoji: "⚠️",
+      items: [
+        "¿Qué pasa si el ministerio se demora en pagar? ¿Hay casos anteriores de retrasos en esta entidad?",
+        "¿Qué contingencias hay para el invierno? ¿Puede retrasar el cronograma significativamente?",
+        "¿Ya tenés los proveedores de materiales cerrados? ¿Hay contratos o solo acuerdos verbales?",
+        "¿Cuántas personas tiene la nómina y cuál es el costo mensual?",
+        "¿Qué pasa si hay un sobrecosto? ¿Quién lo absorbe?"
+      ]
+    },
+    {
+      categoria: "Control del dinero",
+      emoji: "🏦",
+      items: [
+        "¿Cómo funciona exactamente el PIN del consorcio? ¿Quién tiene acceso y cómo se aprueba cada movimiento?",
+        "¿Puedo tener acceso de consulta a la cuenta del consorcio en tiempo real?",
+        "¿Cómo se documenta cada gasto? ¿Hay contabilidad formal del proyecto?",
+        "¿Quién tiene firma autorizada en la cuenta? ¿Se requieren dos firmas para mover plata?"
+      ]
+    },
+    {
+      categoria: "Mi rol como socio",
+      emoji: "🤝",
+      items: [
+        "¿Qué porcentaje de participación me corresponde sobre la utilidad neta del proyecto?",
+        "¿Eso queda por escrito? ¿Hay un contrato de cuentas en participación o similar?",
+        "¿Mi nombre aparece en algún documento oficial del contrato o soy un inversor silencioso?",
+        "¿Qué responsabilidades legales asumo al entrar? ¿Puedo quedar expuesto a demandas o deudas?",
+        "¿Cuál es el mecanismo para salir del acuerdo si algo no funciona?"
+      ]
+    },
+    {
+      categoria: "Historial y referencias",
+      emoji: "📂",
+      items: [
+        "¿Tenés contratos ejecutados anteriormente con el Estado? ¿Puedo ver antecedentes de cumplimiento?",
+        "¿Alejandra tiene experiencia en este tipo de contratos? ¿Cuál es su rol exacto?",
+        "¿Podés darme contactos del ministerio o la interventoría para verificar el contrato directamente?"
+      ]
+    },
+    {
+      categoria: "Próximos pasos",
+      emoji: "🚀",
+      items: [
+        "¿Cuándo necesitás la plata? ¿Cuál es la urgencia real?",
+        "¿Qué documentos me entregás a mí como respaldo de mi inversión antes de poner un peso?",
+        "¿Cuándo hacemos la visita a Calamar para ver el proyecto en campo?"
+      ]
+    }
+  ]
+};
+
+// ── STATE ──
+let state = JSON.parse(localStorage.getItem('calamar-state') || '{}');
+let openCats = JSON.parse(localStorage.getItem('calamar-opencats') || '[]');
+
+function saveState() {
+  localStorage.setItem('calamar-state', JSON.stringify(state));
+}
+function saveNotes(key, val) {
+  state['notes-' + key] = val;
+  saveState();
+}
+
+// ── TABS ──
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── PREGUNTAS ──
+function buildPreguntas() {
+  const container = document.getElementById('preguntas-container');
+  container.innerHTML = '';
+  let globalIdx = 0;
+
+  DATA.preguntas.forEach((cat, ci) => {
+    const key = 'cat-' + ci;
+    const isOpen = openCats.includes(key);
+
+    const block = document.createElement('div');
+    block.className = 'cat-block';
+
+    const doneCount = cat.items.filter((_, ii) => state[`q-${ci}-${ii}`]).length;
+
+    block.innerHTML = `
+      <div class="cat-header ${isOpen ? 'open' : ''}" onclick="toggleCat(${ci}, this)">
+        <div class="cat-title">
+          <span>${cat.emoji}</span>
+          <span>${cat.categoria}</span>
+          ${doneCount > 0 ? `<span style="color:var(--green);font-size:12px">${doneCount}/${cat.items.length} ✓</span>` : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="cat-count">${cat.items.length} preguntas</span>
+          <span class="cat-arrow">▾</span>
+        </div>
+      </div>
+      <div class="cat-items ${isOpen ? 'open' : ''}" id="cat-items-${ci}">
+        ${cat.items.map((q, ii) => {
+          const idx = globalIdx + ii;
+          const done = !!state[`q-${ci}-${ii}`];
+          return `
+            <div class="pregunta-item ${done ? 'done' : ''}" id="pq-${ci}-${ii}" onclick="togglePregunta(${ci}, ${ii})">
+              <div class="check-box">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none">
+                  <path d="M1 5L4.5 8.5L11 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="pregunta-num">${idx + 1}.</div>
+              <div class="pregunta-text">${q}</div>
+            </div>`;
+        }).join('')}
+      </div>`;
+
+    container.appendChild(block);
+    globalIdx += cat.items.length;
+  });
+
+  updateProgress();
+}
+
+function toggleCat(ci, header) {
+  const key = 'cat-' + ci;
+  const items = document.getElementById('cat-items-' + ci);
+  const isOpen = items.classList.contains('open');
+  if (isOpen) {
+    items.classList.remove('open');
+    header.classList.remove('open');
+    openCats = openCats.filter(k => k !== key);
+  } else {
+    items.classList.add('open');
+    header.classList.add('open');
+    if (!openCats.includes(key)) openCats.push(key);
+  }
+  localStorage.setItem('calamar-opencats', JSON.stringify(openCats));
+}
+
+function togglePregunta(ci, ii) {
+  const k = `q-${ci}-${ii}`;
+  state[k] = !state[k];
+  saveState();
+  buildPreguntas();
+  updateBadge();
+}
+
+function updateProgress() {
+  let total = 0, done = 0;
+  DATA.preguntas.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      total++;
+      if (state[`q-${ci}-${ii}`]) done++;
+    });
+  });
+  document.getElementById('prog-done').textContent = done;
+  document.getElementById('prog-total').textContent = `de ${total} preguntas respondidas`;
+  document.getElementById('prog-bar').style.width = (done / total * 100) + '%';
+}
+
+function updateBadge() {
+  let done = 0;
+  DATA.preguntas.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => { if (state[`q-${ci}-${ii}`]) done++; });
+  });
+  document.getElementById('badge-preguntas').textContent = done || '0';
+}
+
+// ── NOTAS ──
+function loadNotes() {
+  const r = document.getElementById('notas-resumen');
+  const f = document.getElementById('notas-finanzas');
+  if (r && state['notes-resumen']) r.value = state['notes-resumen'];
+  if (f && state['notes-finanzas']) f.value = state['notes-finanzas'];
+}
+
+// ── INIT ──
+buildPreguntas();
+updateBadge();
+loadNotes();
+</script>
+</body>
+</html>

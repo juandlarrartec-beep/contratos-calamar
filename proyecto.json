@@ -1,0 +1,153 @@
+{
+  "proyecto": {
+    "nombre": "Contratos de Obra Civil — Calamar",
+    "fecha_analisis": "2026-03-30",
+    "tipo": "Inversión en contratos públicos de obras civiles",
+    "estado": "Evaluación / Due Diligence",
+    "descripcion": "Oportunidad de inversión como socio en consorcio con contratos adjudicados por el Estado colombiano para obras civiles en Calamar. La contratista principal (Emily) busca inversor que aporte capital y comparta la gestión administrativa. La ganancia del proyecto quedaría entre los dos socios.",
+    "entidad_pagadora": "Ministerio (Colombia)",
+    "plataforma_verificacion": "SECOP — secop.gov.co",
+    "ubicacion": "Calamar, Colombia"
+  },
+  "actores": [
+    {
+      "nombre": "Emily",
+      "rol": "Contratista principal / Socia técnica",
+      "descripcion": "Maneja la parte técnica y de campo. Gestiona nómina, pólizas y pagos. Integrante del consorcio."
+    },
+    {
+      "nombre": "Alejandra",
+      "rol": "Socia de Emily en el consorcio",
+      "descripcion": "Co-integrante del consorcio. Arma los reportes de nómina que Emily ejecuta."
+    },
+    {
+      "nombre": "Inversor (tú)",
+      "rol": "Potencial socio financiero / administrativo",
+      "descripcion": "Aportaría capital, firmaría documentos junto a Emily, y podría manejar la parte administrativa mientras Emily se concentra en lo técnico."
+    }
+  ],
+  "contratos": [
+    {
+      "id": 1,
+      "tipo": "Mejoramientos (reparaciones)",
+      "ubicacion": "Calamar",
+      "estado": "Por iniciar (~15 días para arranque en campo)",
+      "anticipo": "20% del valor total (llega en ~40 días)",
+      "notas": "Primer contrato a ejecutar. Considerado más simple que los otros dos."
+    },
+    {
+      "id": 2,
+      "tipo": "Construcción nueva — Colegio",
+      "ubicacion": "Carlos Maurio, casco urbano de Calamar",
+      "estado": "Adjudicado, no iniciado",
+      "anticipo": "Mismo monto que contrato 1",
+      "notas": "Emily decidió no empezar al tiempo por monto elevado y riesgo de invierno."
+    },
+    {
+      "id": 3,
+      "tipo": "Construcción nueva",
+      "ubicacion": "Zona más alejada de Calamar",
+      "estado": "Adjudicado, no iniciado",
+      "anticipo": "Mismo monto que contratos anteriores",
+      "notas": "Tercer contrato. Mayor distancia logística."
+    }
+  ],
+  "mecanica_financiera": {
+    "anticipo_porcentaje": "20%",
+    "dias_para_anticipo": 40,
+    "dias_para_inicio_campo": 15,
+    "control_cuenta": "PIN compartido del consorcio — ningún movimiento sin conocimiento de Emily",
+    "periodicidad_nómina": "Por confirmar (¿mensual / quincenal / semanal?)",
+    "gastos_pre_inicio": ["Pólizas", "Profesionales externos", "Viabilidades (pagos a Bogotá)", "Materiales anticipados por invierno"],
+    "gastos_en_ejecucion": ["Materiales", "Maquinaria", "Mano de obra"]
+  },
+  "riesgos_identificados": [
+    {
+      "tipo": "Climático",
+      "descripcion": "Invierno puede retrasar ejecución. Emily prioriza comprar materiales antes de que lleguen las lluvias."
+    },
+    {
+      "tipo": "Liquidez",
+      "descripcion": "El anticipo tarda ~40 días. Hay gastos antes de recibirlo que alguien debe financiar."
+    },
+    {
+      "tipo": "Demora estatal",
+      "descripcion": "Los pagos del ministerio no son rápidos según Emily. Riesgo de demora en actas de pago."
+    },
+    {
+      "tipo": "Sobrecostos",
+      "descripcion": "No queda claro quién absorbe sobrecostos en la propuesta verbal."
+    },
+    {
+      "tipo": "Documentación",
+      "descripcion": "El acuerdo de socios aún es verbal. No hay contrato escrito entre Emily y el inversor."
+    }
+  ],
+  "preguntas": [
+    {
+      "categoria": "Legalidad y estructura del contrato",
+      "items": [
+        "¿Podés mostrarme el contrato adjudicado con número, entidad contratante y valor total?",
+        "¿El consorcio ya está constituido legalmente? ¿Puedo ver el documento de constitución?",
+        "¿Cuáles son los nombres legales de todos los integrantes del consorcio?",
+        "¿Hay alguna inhabilidad, sanción o proceso disciplinario activo contra el consorcio o sus integrantes?",
+        "¿El contrato ya está perfeccionado (firmado, legalizado y con acta de inicio emitida)?"
+      ]
+    },
+    {
+      "categoria": "Valor, flujo de caja y retorno",
+      "items": [
+        "¿Cuál es el valor total de cada contrato? ¿Cuánto representa el 20% de anticipo en pesos?",
+        "¿Cuál es la rentabilidad estimada del proyecto y cómo llegaste a ese número?",
+        "¿Cuánto dinero necesitás de mi parte específicamente y para qué se va a usar?",
+        "¿Cuándo recupero mi inversión? ¿Hay un cronograma de pagos del ministerio?",
+        "¿Las actas de pago son mensuales, por avance de obra o por hitos? ¿Cuál es la periodicidad real?"
+      ]
+    },
+    {
+      "categoria": "Riesgo operativo",
+      "items": [
+        "¿Qué pasa si el ministerio se demora en pagar? ¿Hay casos anteriores de retrasos en esta entidad?",
+        "¿Qué contingencias hay para el invierno? ¿Puede retrasar el cronograma significativamente?",
+        "¿Ya tenés los proveedores de materiales cerrados? ¿Hay contratos o solo acuerdos verbales?",
+        "¿Cuántas personas tiene la nómina y cuál es el costo mensual?",
+        "¿Qué pasa si hay un sobrecosto? ¿Quién lo absorbe?"
+      ]
+    },
+    {
+      "categoria": "Control del dinero",
+      "items": [
+        "¿Cómo funciona exactamente el PIN del consorcio? ¿Quién tiene acceso y cómo se aprueba cada movimiento?",
+        "¿Puedo tener acceso de consulta a la cuenta del consorcio en tiempo real?",
+        "¿Cómo se documenta cada gasto? ¿Hay contabilidad formal del proyecto?",
+        "¿Quién tiene firma autorizada en la cuenta? ¿Se requieren dos firmas para mover plata?"
+      ]
+    },
+    {
+      "categoria": "Mi rol como socio",
+      "items": [
+        "¿Qué porcentaje de participación me corresponde sobre la utilidad neta del proyecto?",
+        "¿Eso queda por escrito? ¿Hay un contrato de cuentas en participación o similar?",
+        "¿Mi nombre aparece en algún documento oficial del contrato o soy un inversor silencioso?",
+        "¿Qué responsabilidades legales asumo al entrar? ¿Puedo quedar expuesto a demandas o deudas?",
+        "¿Cuál es el mecanismo para salir del acuerdo si algo no funciona?"
+      ]
+    },
+    {
+      "categoria": "Historial y referencias",
+      "items": [
+        "¿Tenés contratos ejecutados anteriormente con el Estado? ¿Puedo ver antecedentes de cumplimiento?",
+        "¿Alejandra tiene experiencia en este tipo de contratos? ¿Cuál es su rol exacto?",
+        "¿Podés darme contactos del ministerio o la interventoría para verificar el contrato directamente?"
+      ]
+    },
+    {
+      "categoria": "Próximos pasos",
+      "items": [
+        "¿Cuándo necesitás la plata? ¿Cuál es la urgencia real?",
+        "¿Qué documentos me entregás a mí como respaldo de mi inversión antes de poner un peso?",
+        "¿Cuándo hacemos la visita a Calamar para ver el proyecto en campo?"
+      ]
+    }
+  ]
+}
