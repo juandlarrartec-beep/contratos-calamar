@@ -71,19 +71,25 @@
       max-width: 1100px;
       margin: 0 auto 24px;
       display: flex;
-      gap: 8px;
+      gap: 4px;
       border-bottom: 1px solid var(--border);
       padding-bottom: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .tabs::-webkit-scrollbar { display: none; }
     .tab {
-      padding: 10px 18px;
+      padding: 10px 14px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--muted);
       border-bottom: 2px solid transparent;
       transition: all .2s;
       margin-bottom: -1px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .tab:hover { color: var(--text); }
     .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
@@ -345,10 +351,10 @@
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('preguntas')">Preguntas <span id="badge-preguntas" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
+  <div class="tab" onclick="showTab('riesgos')">Riesgos</div>
   <div class="tab" onclick="showTab('resumen')">Resumen</div>
   <div class="tab" onclick="showTab('contratos')">Contratos</div>
   <div class="tab" onclick="showTab('finanzas')">Finanzas</div>
-  <div class="tab" onclick="showTab('riesgos')">Riesgos</div>
 </div>
 
 <div class="container">
