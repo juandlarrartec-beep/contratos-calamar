@@ -568,7 +568,11 @@ function buildPreguntas() {
           </div>
           <div class="respuesta-area">
             <textarea id="ta-${ci}-${ii}" placeholder="Respuesta de Emily...">${texto}</textarea>
-            ${archUrl ? `<a class="archivo-adjunto" href="${archUrl}" target="_blank">📎 ${archNom || 'Archivo adjunto'}</a>` : ''}
+            ${archUrl ? `
+              <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+                <a class="archivo-adjunto" href="${archUrl}" target="_blank">📎 ${archNom || 'Archivo adjunto'}</a>
+                <button onclick="deleteRespArchivo(${ci},${ii})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 5px;border-radius:4px;transition:color .2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--muted)'" title="Eliminar archivo">✕</button>
+              </div>` : ''}
             <div class="resp-footer">
               <span class="resp-saved" id="rs-${ci}-${ii}"></span>
               <div class="resp-actions">
@@ -638,6 +642,15 @@ async function uploadRespArchivo(ci, ii, input) {
   const { error } = await sb.from('respuestas').upsert(payload, { onConflict: 'cat_idx,item_idx' });
   if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_url: publicUrl, archivo_nombre: file.name, texto }; buildPreguntas(); toast('Archivo subido ✓'); }
   else toast('Error al guardar archivo', 'err');
+}
+
+async function deleteRespArchivo(ci, ii) {
+  if (!confirm('¿Eliminar el archivo adjunto?')) return;
+  const existing = respuestas[`${ci}-${ii}`] || {};
+  const payload = { cat_idx: ci, item_idx: ii, texto: existing.texto||'', checked: existing.checked||false, archivo_url: null, archivo_nombre: null, updated_at: new Date().toISOString() };
+  const { error } = await sb.from('respuestas').upsert(payload, { onConflict: 'cat_idx,item_idx' });
+  if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_url: null, archivo_nombre: null }; buildPreguntas(); toast('Archivo eliminado'); }
+  else toast('Error al eliminar archivo', 'err');
 }
 
 function toggleCat(ci, header) {
