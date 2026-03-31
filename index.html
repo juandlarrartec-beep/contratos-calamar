@@ -507,6 +507,13 @@ function showTab(id) {
 // ── FORMAT ──
 function fmt(n) { return '$' + Number(n).toLocaleString('es-CO'); }
 function catClass(c) { return { 'Póliza':'cat-poliza','Nómina':'cat-nomina','Materiales':'cat-material','Derechos':'cat-derechos','Otro':'cat-otro' }[c] || 'cat-otro'; }
+function safeName(name) {
+  return name
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
+    .replace(/[^a-zA-Z0-9._-]/g, '_')                // reemplaza espacios y especiales
+    .replace(/_+/g, '_')                              // colapsa guiones bajos múltiples
+    .replace(/^_|_$/g, '');                           // limpia extremos
+}
 
 // ── PREGUNTAS ──
 async function loadRespuestas() {
@@ -604,7 +611,7 @@ async function toggleCheck(ci, ii) {
 async function uploadRespArchivo(ci, ii, input) {
   const file = input.files[0];
   if (!file) return;
-  const path = `respuestas/${ci}-${ii}-${Date.now()}-${file.name}`;
+  const path = `respuestas/${ci}-${ii}-${Date.now()}-${safeName(file.name)}`;
   const { error: upErr } = await sb.storage.from('archivos').upload(path, file, { upsert: true });
   if (upErr) { toast('Error al subir archivo', 'err'); return; }
   const { data: { publicUrl } } = sb.storage.from('archivos').getPublicUrl(path);
@@ -688,7 +695,7 @@ async function addPago() {
 
   let archivo_url = null, archivo_nombre = null;
   if (pagoArchivoFile) {
-    const path = `pagos/${Date.now()}-${pagoArchivoFile.name}`;
+    const path = `pagos/${Date.now()}-${safeName(pagoArchivoFile.name)}`;
     const { error: upErr } = await sb.storage.from('archivos').upload(path, pagoArchivoFile);
     if (upErr) { toast('Error al subir comprobante', 'err'); return; }
     const { data: { publicUrl } } = sb.storage.from('archivos').getPublicUrl(path);
