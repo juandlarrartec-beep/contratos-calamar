@@ -146,13 +146,13 @@
     .attach-preview { font-size: 12px; color: var(--green); margin-top: 6px; display: none; }
 
     .planilla-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 20px; }
-    .planilla-header { display: grid; grid-template-columns: 100px 1fr 120px 80px 120px 40px; gap: 0; padding: 12px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .planilla-header { display: grid; grid-template-columns: 100px 1fr 120px 70px 150px 110px 40px; gap: 8px; padding: 12px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); }
     .planilla-header span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
-    @media(max-width:700px){ .planilla-header { display: none; } }
-    .pago-row { display: grid; grid-template-columns: 100px 1fr 120px 80px 120px 40px; gap: 0; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background .15s; }
+    @media(max-width:900px){ .planilla-header { display: none; } }
+    .pago-row { display: grid; grid-template-columns: 100px 1fr 120px 70px 150px 110px 40px; gap: 8px; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background .15s; }
     .pago-row:last-child { border-bottom: none; }
     .pago-row:hover { background: var(--surface2); }
-    @media(max-width:700px){ .pago-row { grid-template-columns: 1fr 1fr; gap: 6px; } }
+    @media(max-width:900px){ .pago-row { grid-template-columns: 1fr 1fr; gap: 8px; } }
     .pago-date { font-size: 13px; color: var(--muted); }
     .pago-cat { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
     .cat-poliza   { background: rgba(124,92,255,.2); color: #a78bfa; }
@@ -279,7 +279,7 @@
 
     <div class="planilla-wrap">
       <div class="planilla-header">
-        <span>Fecha</span><span>Concepto</span><span>Categoría</span><span>Quién</span><span>Comprobante</span><span style="text-align:right">Monto</span>
+        <span>Fecha</span><span>Concepto</span><span>Categoría</span><span>Quién</span><span>Comprobante</span><span style="text-align:right">Monto</span><span></span>
       </div>
       <div id="planilla-body"><div class="loading"><div class="spinner"></div>Cargando pagos...</div></div>
     </div>
@@ -657,18 +657,16 @@ function renderPagos() {
   body.innerHTML = pagos.map(p => `
     <div class="pago-row">
       <div class="pago-date">${p.fecha}</div>
-      <div style="font-size:14px">${p.concepto}</div>
+      <div style="font-size:14px;line-height:1.4">${p.concepto}</div>
       <div><span class="pago-cat ${catClass(p.categoria)}">${p.categoria}</span></div>
       <div class="pago-quien ${p.quien==='Stiven'?'quien-stiven':'quien-emily'}">${p.quien}</div>
       <div>
         ${p.archivo_url
           ? `<a class="pago-archivo-link" href="${p.archivo_url}" target="_blank">📎 ${p.archivo_nombre||'Ver'}</a>`
-          : `<span style="font-size:12px;color:var(--muted)">Sin comprobante</span>`}
+          : `<span style="font-size:12px;color:var(--muted)">—</span>`}
       </div>
-      <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px">
-        <span class="pago-monto">${fmt(p.monto)}</span>
-        <button class="btn-del" onclick="deletePago(${p.id})" title="Eliminar">✕</button>
-      </div>
+      <div class="pago-monto" style="text-align:right">${fmt(p.monto)}</div>
+      <div style="text-align:center"><button class="btn-del" onclick="deletePago(${p.id})" title="Eliminar">✕</button></div>
     </div>`).join('');
 }
 
