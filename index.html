@@ -235,20 +235,21 @@
   <!-- ── PAGOS ── -->
   <div id="tab-pagos" class="section">
 
+    <div style="background:rgba(126,134,153,.08);border:1px dashed var(--border);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+      <span style="font-size:13px">👷</span>
+      <span style="font-size:12px;color:var(--muted)"><strong style="color:var(--muted)">Referencia Emily — Etapa 1:</strong> inversión estimada anterior ~$80.000.000 (dato no verificado)</span>
+    </div>
+
     <div class="contador-wrap">
-      <h3 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px">Total invertido al día de hoy</h3>
-      <div class="contador-grid">
+      <h3 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px">Inversión de Stiven al día de hoy</h3>
+      <div class="contador-grid" style="grid-template-columns:1fr 1fr">
         <div class="contador-item">
-          <div class="contador-label">💼 Stiven</div>
+          <div class="contador-label">💼 Total pagado</div>
           <div class="contador-num stiven" id="cnt-stiven">$0</div>
         </div>
         <div class="contador-item">
-          <div class="contador-label">👷 Emily (referencia)</div>
-          <div class="contador-num emily">~$61.000.000</div>
-        </div>
-        <div class="contador-item">
-          <div class="contador-label">📊 Total general</div>
-          <div class="contador-num total" id="cnt-total">$0</div>
+          <div class="contador-label">📋 Pagos registrados</div>
+          <div class="contador-num total" id="cnt-total" style="font-size:32px">0</div>
         </div>
       </div>
     </div>
@@ -366,7 +367,7 @@
         <div class="fin-row"><span class="fin-label">3 socios poderosos</span><span class="fin-val" style="color:var(--muted)">70% del contrato</span></div>
         <div class="fin-row"><span class="fin-label">Emily</span><span class="fin-val green">30% del contrato</span></div>
         <div class="fin-row"><span class="fin-label">Utilidad estimada (30%)</span><span class="fin-val green">$150M – $200M</span></div>
-        <div class="fin-row"><span class="fin-label">Emily ya invirtió</span><span class="fin-val yellow" style="color:var(--yellow)">~$61.000.000</span></div>
+        <div class="fin-row"><span class="fin-label">Emily — inv. estimada etapa 1</span><span class="fin-val" style="color:var(--muted)">~$80.000.000 (ref.)</span></div>
         <div class="fin-row"><span class="fin-label">Capital Stiven disponible</span><span class="fin-val accent">$50.000.000</span></div>
         <div class="fin-row"><span class="fin-label">Costo financiero capital</span><span class="fin-val" style="color:var(--red)">5% mensual = $2.5M/mes</span></div>
       </div>
@@ -736,9 +737,8 @@ function renderPagos() {
     </div>`).join('');
 
   const totalStiven = pagos.filter(p => p.quien === 'Stiven').reduce((s,p) => s + p.monto, 0);
-  const totalGeneral = totalStiven + 61000000;
   document.getElementById('cnt-stiven').textContent = fmt(totalStiven);
-  document.getElementById('cnt-total').textContent = fmt(totalGeneral);
+  document.getElementById('cnt-total').textContent = pagos.length;
   document.getElementById('badge-pagos').textContent = pagos.length;
 }
 
