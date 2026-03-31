@@ -508,11 +508,26 @@ function showTab(id) {
 function fmt(n) { return '$' + Number(n).toLocaleString('es-CO'); }
 function catClass(c) { return { 'Póliza':'cat-poliza','Nómina':'cat-nomina','Materiales':'cat-material','Derechos':'cat-derechos','Otro':'cat-otro' }[c] || 'cat-otro'; }
 function safeName(name) {
-  return name
+  // Separar nombre y extensión
+  const lastDot = name.lastIndexOf('.');
+  const ext  = lastDot > 0 ? name.slice(lastDot).toLowerCase() : '';
+  const base = lastDot > 0 ? name.slice(0, lastDot) : name;
+  const clean = base
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita tildes
-    .replace(/[^a-zA-Z0-9._-]/g, '_')                // reemplaza espacios y especiales
-    .replace(/_+/g, '_')                              // colapsa guiones bajos múltiples
-    .replace(/^_|_$/g, '');                           // limpia extremos
+    .replace(/[^a-zA-Z0-9_-]/g, '_')                  // espacios y especiales → _
+    .replace(/_+/g, '_')                               // colapsa múltiples _
+    .replace(/^_|_$/g, '')                             // limpia extremos
+    || 'archivo';
+  return clean + ext;
+}
+
+function validateFile(file) {
+  const MAX = 10 * 1024 * 1024; // 10MB
+  const ALLOWED = ['image/jpeg','image/png','image/webp','image/heic','application/pdf'];
+  if (file.size > MAX) return `El archivo pesa ${(file.size/1024/1024).toFixed(1)}MB — máximo 10MB`;
+  if (!ALLOWED.includes(file.type) && !file.name.match(/\.(jpg|jpeg|png|webp|heic|pdf)$/i))
+    return 'Solo se permiten imágenes (JPG, PNG, WEBP) y PDF';
+  return null;
 }
 
 // ── PREGUNTAS ──
@@ -611,6 +626,8 @@ async function toggleCheck(ci, ii) {
 async function uploadRespArchivo(ci, ii, input) {
   const file = input.files[0];
   if (!file) return;
+  const err = validateFile(file);
+  if (err) { toast(err, 'err'); input.value = ''; return; }
   const path = `respuestas/${ci}-${ii}-${Date.now()}-${safeName(file.name)}`;
   const { error: upErr } = await sb.storage.from('archivos').upload(path, file, { upsert: true });
   if (upErr) { toast('Error al subir archivo', 'err'); return; }
@@ -678,10 +695,14 @@ function renderPagos() {
 }
 
 function previewPagoArchivo(input) {
-  pagoArchivoFile = input.files[0] || null;
+  const file = input.files[0] || null;
   const prev = document.getElementById('pago-attach-preview');
-  if (pagoArchivoFile) { prev.textContent = '📎 ' + pagoArchivoFile.name; prev.style.display = 'block'; }
-  else { prev.style.display = 'none'; }
+  if (!file) { pagoArchivoFile = null; prev.style.display = 'none'; return; }
+  const err = validateFile(file);
+  if (err) { toast(err, 'err'); input.value = ''; pagoArchivoFile = null; prev.style.display = 'none'; return; }
+  pagoArchivoFile = file;
+  prev.textContent = '📎 ' + file.name;
+  prev.style.display = 'block';
 }
 
 async function addPago() {
