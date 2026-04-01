@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contratos Calamar — Due Diligence</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
       --bg: #0f1117; --surface: #1a1d27; --surface2: #232636; --border: #2e3347;
@@ -317,31 +318,239 @@
 
   <!-- ── RESUMEN ── -->
   <div id="tab-resumen" class="section">
-    <div class="grid-2">
-      <div class="card">
-        <h3>Descripción del negocio</h3>
-        <p style="font-size:15px;line-height:1.6">Stiven entra como socio financiero en el <strong>30% que le corresponde a Emily</strong> dentro de un consorcio con 3 contratos adjudicados por el Estado colombiano. Los otros 3 socios tienen el 70% restante. El porcentaje para Stiven se define por mutuo acuerdo proporcional a la inversión.</p>
-      </div>
-      <div class="card">
-        <h3>Estructura societaria</h3>
-        <div class="fin-row"><span class="fin-label">3 socios poderosos</span><span class="fin-val" style="color:var(--muted)">70% del contrato</span></div>
-        <div class="fin-row">
-          <span class="fin-label">Emily + Stiven <span style="font-size:11px;color:var(--muted)">(15% c/u)</span></span>
-          <span class="fin-val green">30% del contrato</span>
+
+    <!-- 1. RESUMEN GENERAL -->
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Resumen General <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+      <div style="background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(22,163,74,.05));border:1px solid rgba(34,197,94,.3);border-radius:var(--radius);padding:18px 20px;display:flex;align-items:flex-start;gap:14px">
+        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#16a34a,#15803d);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">✅</div>
+        <div>
+          <div style="font-size:16px;font-weight:800;color:var(--green);margin-bottom:6px">Proyecto viable — estructura clara y objetivos compartidos</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.7">Este proyecto representa una asociación real entre Emily y Stiven, construida sobre un contrato de obra civil pública ya adjudicado y en ejecución desde el 5 de marzo de 2026 (contrato #1380-2097-2025). El valor del contrato supera los <strong style="color:var(--text)">$1.084 millones de pesos</strong>, con respaldo del Estado colombiano. Emily aporta la experiencia técnica y la ejecución en campo; Stiven aporta el capital financiero para las etapas administrativas y de ejecución. Ambas partes trabajan con transparencia, documentación formal y un acuerdo claro de participación del <strong style="color:var(--green)">15% para cada uno</strong> sobre el 30% que corresponde a Emily. El objetivo compartido es ejecutar la obra en el plazo de 6 meses y distribuir la utilidad estimada entre $150M y $200M.</div>
         </div>
-        <div class="fin-row"><span class="fin-label">Utilidad estimada (30%)</span><span class="fin-val green">$150M – $200M</span></div>
-        <div class="fin-row"><span class="fin-label">Emily — inv. estimada etapa 1</span><span class="fin-val" style="color:var(--muted)">~$80.000.000 (ref.)</span></div>
-        <div class="fin-row"><span class="fin-label">Capital Stiven disponible</span><span class="fin-val accent">$50.000.000</span></div>
-        <div class="fin-row"><span class="fin-label">Costo financiero capital</span><span class="fin-val" style="color:var(--red)">5% mensual = $2.5M/mes</span></div>
       </div>
     </div>
-    <div class="grid-2">
+
+    <!-- 2. NÚMEROS CLAVE -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Números Clave del Contrato <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Valor total</div>
+        <div style="font-size:20px;font-weight:800;color:var(--accent)">$1.084M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Contrato #1380-2097-2025</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Anticipo Estado (20%)</div>
+        <div style="font-size:20px;font-weight:800;color:var(--green)">$216.6M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">En tramitación</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Utilidad estimada (30%)</div>
+        <div style="font-size:20px;font-weight:800;color:var(--accent2)">$150–200M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Sujeto a interventoría</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">Participación c/u</div>
+        <div style="font-size:20px;font-weight:800;color:var(--yellow)">15% cada uno</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Emily y Stiven</div>
+      </div>
+    </div>
+    @media(max-width:768px){#resumen-kpi{grid-template-columns:1fr 1fr!important}}
+
+    <!-- 3. GRÁFICOS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Distribución societaria</div>
+        <div style="height:160px"><canvas id="r-chartSocietario"></canvas></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Comparativa financiera (millones COP)</div>
+        <div style="height:160px"><canvas id="r-chartFinanciero"></canvas></div>
+      </div>
+    </div>
+
+    <!-- 4. PROGRESO DUE DILIGENCE -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Progreso del Due Diligence <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Preguntas respondidas por categoría</div>
+      <div style="height:100px"><canvas id="r-chartProgress"></canvas></div>
+    </div>
+
+    <!-- 5. PROYECCIÓN FINANCIERA -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Proyección Financiera <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:12px 16px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start">
+      <span style="font-size:16px;flex-shrink:0">⚠️</span>
+      <div style="font-size:12px;color:var(--yellow);line-height:1.6"><strong>El 30% no es utilidad pura — es facturación.</strong> Emily factura el 30% del contrato = $325.200.000. De esa facturación se descuentan todos los costos de ejecución y lo que queda es la utilidad estimada.</div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--muted)">Emily factura (30% del contrato)</span>
+        <span style="font-size:13px;font-weight:700;color:var(--accent)">$325.200.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--muted)">− Inversión Emily (etapa 1, referencia)</span>
+        <span style="font-size:13px;font-weight:700;color:var(--red)">− $80.000.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--muted)">− Inversión Stiven (capital de trabajo)</span>
+        <span style="font-size:13px;font-weight:700;color:var(--red)">− $100.000.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border)">
+        <span style="font-size:13px;color:var(--muted)">− Otros costos de ejecución estimados</span>
+        <span style="font-size:13px;font-weight:700;color:var(--red)">~ − $45M</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:13px 16px;background:rgba(34,197,94,.08)">
+        <span style="font-size:14px;font-weight:700;color:var(--green)">= Utilidad neta estimada (para los dos)</span>
+        <span style="font-size:15px;font-weight:800;color:var(--green)">$100M – $200M</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Proyección Emily (millones COP)</div>
+        <div style="height:140px"><canvas id="r-chartEmily"></canvas></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Proyección Stiven (millones COP)</div>
+        <div style="height:140px"><canvas id="r-chartStiven"></canvas></div>
+      </div>
+    </div>
+
+    <!-- 6. CRONOGRAMA -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Cronograma del Proyecto <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+      <div style="display:flex;gap:0">
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="position:absolute;top:13px;left:50%;right:-50%;height:2px;background:var(--green);z-index:0"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">✓</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Contrato firmado</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">5 Mar 2026</div>
+        </div>
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="position:absolute;top:13px;left:50%;right:-50%;height:2px;background:var(--green);z-index:0"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">✓</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Fase diagnóstico</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">Mar 2026</div>
+        </div>
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="position:absolute;top:13px;left:50%;right:-50%;height:2px;background:var(--border);z-index:0"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">→</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Presupuestación</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">Abr 2026</div>
+        </div>
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="position:absolute;top:13px;left:50%;right:-50%;height:2px;background:var(--border);z-index:0"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">4</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Anticipo Estado</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">May 2026</div>
+        </div>
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="position:absolute;top:13px;left:50%;right:-50%;height:2px;background:var(--border);z-index:0"></div>
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">5</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Ejecución obra</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">May–Sep 2026</div>
+        </div>
+        <div style="flex:1;text-align:center;position:relative">
+          <div style="width:28px;height:28px;border-radius:50%;background:var(--muted);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;margin:0 auto 8px;position:relative;z-index:1">6</div>
+          <div style="font-size:10px;font-weight:600;color:var(--text)">Liquidación</div>
+          <div style="font-size:9px;color:var(--muted);margin-top:2px">Sep–Oct 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. MAPA DE RIESGOS -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Mapa de Riesgos y Oportunidades <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-left:3px solid var(--red);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px">Formalización del acuerdo — Prioritario</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">Para proteger los intereses de ambas partes, el acuerdo de participación debe quedar por escrito antes de los próximos desembolsos.</div>
+      </div>
+      <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-left:3px solid var(--red);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px">Costo de nómina mensual pendiente</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">Sin este dato no se puede construir el flujo de caja real que Emily solicitó. Es necesario para planificar bien los próximos pagos.</div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-left:3px solid var(--yellow);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:4px">Invierno — Factor climático real</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">El municipio presenta alta complejidad de accesos en inviernos fuertes. Hay planes de contingencia pero el impacto en el cronograma puede variar.</div>
+      </div>
+      <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-left:3px solid var(--yellow);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--yellow);margin-bottom:4px">Presupuestos en proceso de aval</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">Los 6 presupuestos están a días de ser avalados por la interventoría. La utilidad final depende de esta aprobación.</div>
+      </div>
+      <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-left:3px solid var(--green);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px">Entidad pagadora con historial limpio</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">No se tiene registro de retrasos en pagos por parte del ministerio en contratos similares.</div>
+      </div>
+      <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-left:3px solid var(--green);border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px">Doble PIN y doble firma en cuenta</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.5">Ningún movimiento de fondos se realiza sin aprobación conjunta. Sistema de control compartido entre los socios del consorcio.</div>
+      </div>
+    </div>
+
+    <!-- 8. PLAN DE ACCIÓN -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Plan de Acción — Orden Estricto <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Esta semana — Pasos inmediatos</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--red);background:rgba(239,68,68,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">1</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(239,68,68,.2);color:var(--red);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">INMEDIATO</span>Revisar el contrato PDF completo y extraer: nombres legales, NITs, valor exacto y plazo de ejecución.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--red);background:rgba(239,68,68,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">2</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(239,68,68,.2);color:var(--red);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">INMEDIATO</span>Verificar el contrato #1380-2097-2025 en <strong>secop.gov.co</strong> para confirmación pública del estado y valor.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--red);background:rgba(239,68,68,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">3</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(239,68,68,.2);color:var(--red);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">INMEDIATO</span>Solicitar el costo mensual de nómina por categoría — dato necesario para construir el flujo de caja real.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Antes del próximo desembolso</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--accent);background:rgba(79,124,255,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">4</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(79,124,255,.2);color:var(--accent);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">ANTES DE PAGAR</span>Formalizar el acuerdo de participación del 15% mediante un <strong>contrato de cuentas en participación</strong> — protege a ambas partes por igual.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--accent);background:rgba(79,124,255,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">5</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(79,124,255,.2);color:var(--accent);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">ANTES DE PAGAR</span>El contrato debe incluir: participación del 15% c/u, frecuencia de reportes financieros, manejo de imprevistos y condiciones de liquidación.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--accent);background:rgba(79,124,255,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">6</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(79,124,255,.2);color:var(--accent);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">ANTES DE PAGAR</span>Construir el flujo de caja real en conjunto — Emily lo solicitó y es el instrumento de planificación de los dos.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <div style="font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Cuando avalen los presupuestos</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--green);background:rgba(34,197,94,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">7</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(34,197,94,.2);color:var(--green);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">PRÓXIMO</span>Visita a Calamar para ver la obra en campo y conocer a todos los integrantes del consorcio en persona.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border-left:3px solid var(--green);background:rgba(34,197,94,.06)">
+          <div style="width:22px;height:22px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0">8</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.5"><span style="background:rgba(34,197,94,.2);color:var(--green);font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-right:6px">PRÓXIMO</span>Solicitar: acta de inicio, análisis de costos del analista de presupuestos, cronograma avalado y documentación del consorcio.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. ACTORES (al final) -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Equipo del Proyecto <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="actor-card">
         <div class="avatar avatar-1">E</div>
         <div>
           <div class="actor-name">Emily</div>
           <div class="actor-rol">Contratista — 15% del contrato</div>
-          <div class="actor-desc">Ejecuta la obra. Gestiona técnica, campo, nómina y pólizas. Delega pagos a Stiven de ahora en adelante.</div>
+          <div class="actor-desc">Lidera la ejecución técnica y de campo. Gestiona nómina, pólizas y relación con el consorcio.</div>
         </div>
       </div>
       <div class="actor-card">
@@ -349,33 +558,27 @@
         <div>
           <div class="actor-name">Stiven</div>
           <div class="actor-rol">Socio Financiero — 15% del contrato</div>
-          <div class="actor-desc">Financia inversiones desde ahora. Tiene $50M a disposición para el proyecto.</div>
+          <div class="actor-desc">Aporta el capital de trabajo para la ejecución del proyecto. Seguimiento financiero y administrativo.</div>
         </div>
       </div>
       <div class="actor-card">
         <div class="avatar avatar-3">A</div>
         <div>
           <div class="actor-name">Alejandra</div>
-          <div class="actor-rol">Socia de Emily en el Consorcio</div>
-          <div class="actor-desc">Parte del consorcio. Arma reportes de nómina que Emily ejecuta.</div>
+          <div class="actor-rol">Socia del Consorcio</div>
+          <div class="actor-desc">Integrante del consorcio. Experiencia en múltiples contratos estatales a nivel nacional.</div>
         </div>
       </div>
       <div class="actor-card">
         <div class="avatar" style="background:linear-gradient(135deg,#64748b,#475569)">3S</div>
         <div>
-          <div class="actor-name">3 Socios Poderosos</div>
-          <div class="actor-rol">70% del Contrato — No identificados</div>
-          <div class="actor-desc">Personas con experiencia en contratos estatales grandes que introdujeron a Emily en estos contratos.</div>
+          <div class="actor-name">3 Socios del Consorcio</div>
+          <div class="actor-rol">70% del Contrato</div>
+          <div class="actor-desc">Socios con experiencia en contratos estatales de gran escala que estructuraron la licitación.</div>
         </div>
       </div>
     </div>
-    <div class="secop-box">
-      <div class="secop-icon">🔍</div>
-      <div>
-        <strong>Verificar en SECOP antes de cualquier pago adicional</strong>
-        <p>Pedí el número de contrato y buscalo en <code>secop.gov.co</code> — aparece público con valor, entidad y estado de adjudicación.</p>
-      </div>
-    </div>
+
   </div>
 
   <!-- ── CONTRATOS ── -->
@@ -774,10 +977,84 @@ async function deletePago(id) {
   else toast('Error al eliminar', 'err');
 }
 
+// ── CHARTS RESUMEN ──
+function initResumenCharts() {
+  const grid = { color: 'rgba(255,255,255,.06)' };
+  const tickStyle = { color: '#7c8599', font: { size: 9 } };
+
+  // Societario
+  new Chart(document.getElementById('r-chartSocietario'), {
+    type: 'doughnut',
+    data: {
+      labels: ['3 Socios Consorcio (70%)', 'Emily (15%)', 'Stiven (15%)'],
+      datasets: [{ data: [70,15,15], backgroundColor:['#1e3a5f','#f59e0b','#4f7cff'], borderColor:'#1a1d27', borderWidth:3, hoverOffset:6 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false, cutout:'62%',
+      plugins: { legend: { position:'right', labels:{ color:'#e2e8f0', font:{size:10}, padding:10, boxWidth:12 } } }
+    }
+  });
+
+  // Financiero barras
+  new Chart(document.getElementById('r-chartFinanciero'), {
+    type:'bar', indexAxis:'y',
+    data: {
+      labels:['Valor contrato','Anticipo (20%)','Utilidad est. (30%)','Participación c/u','Inversión Stiven'],
+      datasets:[{ data:[1084,216.6,175,87.5,100], backgroundColor:['#4f7cff','#22c55e','#7c5cff','#f59e0b','#ef4444'], borderRadius:5 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` $${c.parsed.x}M`}} },
+      scales:{ x:{grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'}}, y:{grid:{display:false}, ticks:tickStyle} }
+    }
+  });
+
+  // Progreso categorías
+  new Chart(document.getElementById('r-chartProgress'), {
+    type:'bar',
+    data: {
+      labels:['Legalidad','Valor/Retorno','Riesgo Op.','Control $','Mi Rol','Historial','Próx. Pasos'],
+      datasets:[
+        { label:'Respondidas', data:[5,5,4,4,3,3,3], backgroundColor:'#22c55e', borderRadius:4 },
+        { label:'Sin responder', data:[0,0,1,0,2,0,0], backgroundColor:'rgba(239,68,68,.35)', borderRadius:4 }
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{color:'#e2e8f0', font:{size:9}, padding:8, boxWidth:10} } },
+      scales:{ x:{stacked:true, grid:{display:false}, ticks:tickStyle}, y:{stacked:true, grid, ticks:{...tickStyle, stepSize:1}} }
+    }
+  });
+
+  // Emily proyección
+  new Chart(document.getElementById('r-chartEmily'), {
+    type:'bar',
+    data: {
+      labels:['Invirtió\n(etapa 1)','Recupera\ncapital','Utilidad\n15%','Total\nrecibe'],
+      datasets:[{ data:[80,80,87.5,167.5], backgroundColor:['#ef4444','#4f7cff','#22c55e','#a78bfa'], borderRadius:8 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` $${c.parsed.y}M`}} },
+      scales:{ x:{grid:{display:false}, ticks:tickStyle}, y:{grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'}} }
+    }
+  });
+
+  // Stiven proyección
+  new Chart(document.getElementById('r-chartStiven'), {
+    type:'bar',
+    data: {
+      labels:['Invierte','Recupera\ncapital','Utilidad\n15%','Costo\nfinanciero','Total\nrecibe'],
+      datasets:[{ data:[100,100,87.5,-15,172.5], backgroundColor:['#ef4444','#4f7cff','#22c55e','#f97316','#a78bfa'], borderRadius:8 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` $${Math.abs(c.parsed.y)}M`}} },
+      scales:{ x:{grid:{display:false}, ticks:tickStyle}, y:{grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'}} }
+    }
+  });
+}
+
 // ── INIT ──
 document.getElementById('pago-fecha').value = new Date().toISOString().split('T')[0];
 loadRespuestas();
 loadPagos();
+initResumenCharts();
 </script>
 </body>
 </html>
