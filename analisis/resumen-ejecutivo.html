@@ -462,12 +462,51 @@
     <div class="page-brand">Contratos Calamar · Due Diligence 2026</div>
   </div>
 
+  <!-- Cómo se genera la utilidad -->
+  <div class="section-title">Cómo se genera la utilidad del 30%</div>
+  <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:14px 16px;margin-bottom:5mm">
+    <div style="font-size:11px;font-weight:700;color:#1e40af;margin-bottom:8px">⚠️ El 30% no es utilidad pura — es facturación. La utilidad es lo que queda después de costos.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div>
+        <table style="width:100%;border-collapse:collapse;font-size:10px">
+          <tr><td style="padding:4px 6px;color:#374151;border-bottom:1px solid #dbeafe">Emily factura el 30% del contrato</td><td style="padding:4px 6px;font-weight:700;color:#2563eb;text-align:right;border-bottom:1px solid #dbeafe">$325.200.000</td></tr>
+          <tr><td style="padding:4px 6px;color:#374151;border-bottom:1px solid #dbeafe">Menos: inversión Emily (etapa 1)</td><td style="padding:4px 6px;font-weight:700;color:#dc2626;text-align:right;border-bottom:1px solid #dbeafe">- $80.000.000</td></tr>
+          <tr><td style="padding:4px 6px;color:#374151;border-bottom:1px solid #dbeafe">Menos: inversión Stiven</td><td style="padding:4px 6px;font-weight:700;color:#dc2626;text-align:right;border-bottom:1px solid #dbeafe">- $100.000.000</td></tr>
+          <tr><td style="padding:4px 6px;color:#374151;border-bottom:1px solid #dbeafe">Menos: otros costos ejecución</td><td style="padding:4px 6px;font-weight:700;color:#dc2626;text-align:right;border-bottom:1px solid #dbeafe">- ~$45M</td></tr>
+          <tr style="background:#dcfce7"><td style="padding:5px 6px;font-weight:700;color:#15803d">= Utilidad neta estimada</td><td style="padding:5px 6px;font-weight:800;color:#15803d;text-align:right">$100–200M ✓</td></tr>
+        </table>
+      </div>
+      <div style="background:#fff;border:1px solid #bfdbfe;border-radius:8px;padding:10px">
+        <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:6px">¿Qué recibe Stiven en total?</div>
+        <div style="font-size:10px;color:#374151;line-height:1.8">
+          <span style="color:#16a34a;font-weight:700">+ $100M</span> recupera su inversión<br>
+          <span style="color:#16a34a;font-weight:700">+ $75–100M</span> su parte de la utilidad (15%)<br>
+          <span style="color:#dc2626;font-weight:700">- $15M</span> costo del préstamo (6 meses)<br>
+          <hr style="border:none;border-top:1px solid #bfdbfe;margin:4px 0">
+          <span style="color:#2563eb;font-weight:800">= $160–185M en total</span><br>
+          <span style="font-size:9px;color:#6b7280">Ganancia real sobre lo invertido: $60–85M</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#1e40af;margin-top:8px;padding-top:6px;border-top:1px solid #bfdbfe">
+      <strong>Pendiente clave:</strong> solicitar el desglose del analista de costos para confirmar que el estimado de utilidad es sólido y no optimista. Los costos reales determinan si la utilidad es $150M o $200M.
+    </div>
+  </div>
+
   <!-- Proyección -->
   <div class="section-title">Proyección Financiera de Stiven</div>
-  <div class="chart-box">
-    <div class="chart-title">Inversión vs. Retorno estimado (millones COP)</div>
-    <div class="chart-wrap" style="height:140px">
-      <canvas id="chartProyeccion"></canvas>
+  <div class="grid-2" style="margin-bottom:0">
+    <div class="chart-box" style="margin-bottom:0">
+      <div class="chart-title">Flujo del 30% de Emily (millones COP)</div>
+      <div class="chart-wrap" style="height:130px">
+        <canvas id="chartWaterfall"></canvas>
+      </div>
+    </div>
+    <div class="chart-box" style="margin-bottom:0">
+      <div class="chart-title">Stiven: inversión vs. retorno total (millones COP)</div>
+      <div class="chart-wrap" style="height:130px">
+        <canvas id="chartProyeccion"></canvas>
+      </div>
     </div>
   </div>
 
@@ -768,15 +807,42 @@ new Chart(document.getElementById('chartProgress'), {
   }
 });
 
-// ── CHART 4: Proyección financiera Stiven ──
+// ── CHART 4: Waterfall flujo 30% ──
+new Chart(document.getElementById('chartWaterfall'), {
+  type: 'bar',
+  data: {
+    labels: ['Facturación\n30%', 'Costos\nEmily', 'Costos\nStiven', 'Otros\ncostos', 'Utilidad\nneta'],
+    datasets: [{
+      data: [325.2, -80, -100, -45, 0],
+      backgroundColor: [BLUE, RED, RED, RED, 'transparent'],
+      borderRadius: 6,
+    },{
+      data: [0, 0, 0, 0, 100.2],
+      backgroundColor: [GREEN],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` $${Math.abs(ctx.parsed.y)}M` } }
+    },
+    scales: {
+      x: { stacked: true, ticks: { font: { size: 8 }, color: '#374151' }, grid: { display: false } },
+      y: { stacked: true, ticks: { font: { size: 8 }, color: '#6b7280', callback: v => '$'+v+'M' }, grid: { color: '#f3f4f6' } }
+    }
+  }
+});
+
+// ── CHART 5: Stiven inversión vs retorno total ──
 new Chart(document.getElementById('chartProyeccion'), {
   type: 'bar',
   data: {
-    labels: ['Inversión total\nStiven', 'Costo financiero\n(6 meses)', 'Retorno bruto\nestimado (15%)', 'Retorno neto\nestimado'],
+    labels: ['Mete\n(inversión)', 'Recupera\ncapital', 'Gana\n(utilidad 15%)', 'Paga\npréstamo', 'Recibe\nen total'],
     datasets: [{
-      label: 'Millones COP',
-      data: [100, -15, 87.5, 72.5],
-      backgroundColor: [BLUE, RED, PURPLE, GREEN],
+      data: [100, 100, 87.5, -15, 172.5],
+      backgroundColor: [RED, BLUE, GREEN, '#f97316', PURPLE],
       borderRadius: 8,
     }]
   },
@@ -784,16 +850,11 @@ new Chart(document.getElementById('chartProyeccion'), {
     responsive: true, maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
-      tooltip: {
-        callbacks: { label: ctx => ` $${ctx.parsed.y.toLocaleString('es-CO')}M` }
-      }
+      tooltip: { callbacks: { label: ctx => ` $${Math.abs(ctx.parsed.y).toLocaleString('es-CO')}M` } }
     },
     scales: {
-      x: { ticks: { font: { size: 9 }, color: '#374151' }, grid: { display: false } },
-      y: {
-        ticks: { font: { size: 9 }, color: '#6b7280', callback: v => '$' + v + 'M' },
-        grid: { color: '#f3f4f6' }
-      }
+      x: { ticks: { font: { size: 8 }, color: '#374151' }, grid: { display: false } },
+      y: { ticks: { font: { size: 8 }, color: '#6b7280', callback: v => '$'+v+'M' }, grid: { color: '#f3f4f6' } }
     }
   }
 });
