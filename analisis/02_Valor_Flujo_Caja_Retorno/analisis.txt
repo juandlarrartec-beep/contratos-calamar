@@ -1,0 +1,86 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 2 — VALOR, FLUJO DE CAJA Y RETORNO
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿Valor del contrato y anticipo?                 │
+│ RESPUESTA:  "El contrato tiene un monto de $1.084.000.000   │
+│              El 20% son $216.600.000"                       │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: REVELADOR — El contrato es de MÁS DE MIL MILLONES.
+  Este dato cambia la escala del negocio completamente.
+
+  NÚMEROS CLAVE (solo este contrato):
+  Valor total:          $1.084.000.000
+  Anticipo (20%):       $  216.600.000
+  30% de Emily:         $  325.200.000 (bruto)
+  15% de Stiven:        $  162.600.000 (bruto — si utilidad = 15%)
+  Utilidad estimada 30%:$  150M–200M (según Emily)
+  Utilidad estimada 15%:$   75M–100M (parte de Stiven estimada)
+
+  RELACIÓN INVERSIÓN/RETORNO de Stiven:
+  Inversión estimada:   $  100.000.000
+  Retorno potencial:    $   75M–100M
+  ROI estimado:         ~75%–100% en 6 meses
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿Cómo se calculó la rentabilidad?               │
+│ RESPUESTA:  "Un analista de costos y presupuestos lo hizo.  │
+│              Depende de aprobación de 6 presupuestos por    │
+│              la interventoría. No es exacta aún."           │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: RIESGO MODERADO — La rentabilidad no está
+  garantizada. La interventoría puede rechazar o reducir
+  ítems del presupuesto, lo que bajaría la utilidad.
+  PENDIENTE: Solicitar el análisis de costos del analista.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿Cuánto dinero necesita de Stiven?              │
+│ RESPUESTA:  "Estimación de $100.000.000 para cargos         │
+│              administrativos y ejecución de ser necesario"  │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: IMPORTANTE — Stiven tiene $50M disponibles.
+  Le faltan $50M adicionales para cubrir la estimación.
+  Sin embargo Emily dijo que Stiven "cuenta con más recursos".
+
+  SITUACIÓN ACTUAL DE CAJA DE STIVEN:
+  Capital prestado:     $50.000.000 (al 5% mensual)
+  Costo financiero:     $2.500.000/mes desde 6/marzo
+  Recursos propios:     disponibles (monto no definido)
+  Ya invertido:         $12.000.000 (anticipo nómina 30/03)
+  Disponible:           $38.000.000 del prestado
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 4: ¿Cuándo recupera Stiven la inversión?           │
+│ RESPUESTA:  "Cronograma a 6 meses, pendiente de aval de     │
+│              interventoría"                                 │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: Recuperación estimada: octubre–noviembre 2026.
+  A ese ritmo, el costo financiero del préstamo de Stiven
+  suma ~$15M en 6 meses ($2.5M × 6) — debe descontarse
+  de la utilidad final.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 5: ¿Cómo son las actas de pago?                    │
+│ RESPUESTA:  "Dependen de la ejecución del subcontratista.   │
+│              Hay intención de hacerlo en menos tiempo por   │
+│              el clima."                                     │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Si avanzan más rápido que el cronograma
+  los cobros de actas parciales llegan antes.
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ Contrato de $1.084M — escala significativa.
+✅ ROI potencial para Stiven: 75%–100% en 6 meses.
+⚠️  Rentabilidad sujeta a aprobación de interventoría.
+⚠️  Stiven necesita ~$100M total, tiene $50M prestados + propios.
+⚠️  Costo financiero: $2.5M/mes deben descontarse de la utilidad.
+
+ACCIONES CONCRETAS PENDIENTES:
+1. Solicitar el análisis de costos del analista de presupuestos
+2. Definir flujo de caja real (Emily lo pidió explícitamente)
+3. Establecer cuándo llega el anticipo de $216.600.000
+4. Calcular costo real del préstamo de Stiven vs utilidad

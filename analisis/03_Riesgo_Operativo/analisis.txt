@@ -1,0 +1,70 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 3 — RIESGO OPERATIVO
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿La entidad paga a tiempo?                      │
+│ RESPUESTA:  "No se tiene registro de retrasos por parte     │
+│              de la entidad"                                 │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Historial limpio de pagos.
+  Reducir el riesgo de demora estatal en la evaluación.
+  VERIFICAR: Consultar SECOP contratos anteriores de la
+  misma entidad para confirmar historial de pagos.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿Impacto del invierno?                          │
+│ RESPUESTA:  "Alta complejidad de accesos en inviernos       │
+│              fuertes. Hay planes de contingencia."          │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: RIESGO REAL Y CONFIRMADO por la misma Emily.
+  Calamar tiene accesos difíciles en época de lluvias.
+  El invierno en la región Caribe/Centro suele ser
+  abril–mayo y septiembre–noviembre.
+  PENDIENTE: Solicitar los planes de contingencia por escrito.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿Proveedores están cerrados?                    │
+│ RESPUESTA:  "Acuerdos verbales. Presupuestos no avalados    │
+│              aún. A días de terminar presupuestación."      │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: RIESGO ALTO — Sin contratos escritos con
+  proveedores, los precios pueden cambiar cuando se ejecute.
+  Emily mencionó que la ferretería da crédito — positivo.
+  PENDIENTE: Cuando se avalen los presupuestos, verificar
+  que los precios de proveedores estén congelados.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 4: ¿Cuántas personas en nómina y costo mensual?    │
+│ RESPUESTA:  SIN RESPUESTA — No contestada                   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: PENDIENTE CRÍTICO — Sin este dato no se puede
+  calcular el flujo de caja real ni el punto de equilibrio.
+  ACCIÓN INMEDIATA: Exigir esta información antes de
+  comprometer más dinero.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 5: ¿Quién absorbe sobrecostos?                     │
+│ RESPUESTA:  "Nosotros" (el consorcio)                       │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: NECESITA CLARIDAD — "Nosotros" ¿incluye a Stiven?
+  Si Stiven es socio del 15%, podría quedar expuesto a
+  absorber el 15% de cualquier sobrecosto.
+  PENDIENTE: Definir en el contrato escrito cómo se manejan
+  los sobrecostos y cuál es la exposición máxima de Stiven.
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ Entidad pagadora con buen historial.
+⚠️  Invierno es un riesgo real y confirmado.
+🔴 Proveedores solo verbales — riesgo de variación de precios.
+🔴 Costo de nómina no informado — dato crítico faltante.
+⚠️  Exposición de Stiven a sobrecostos no está aclarada.
+
+ACCIONES CONCRETAS PENDIENTES:
+1. Solicitar planes de contingencia climática por escrito
+2. Exigir costo mensual de nómina ANTES del próximo pago
+3. Definir límite de exposición de Stiven en sobrecostos
+4. Verificar historial de pagos de la entidad en SECOP

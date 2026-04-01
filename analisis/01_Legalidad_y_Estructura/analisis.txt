@@ -1,0 +1,61 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 1 — LEGALIDAD Y ESTRUCTURA DEL CONTRATO
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿Podés mostrarme el contrato adjudicado?        │
+│ RESPUESTA:  "Sí" + PDF adjunto                              │
+│ ARCHIVO:    CONTRATO_DE_OBRA_1380-2097-2025.pdf (disponible)│
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — El contrato existe y fue compartido.
+  Verificar en SECOP el número 1380-2097-2025.
+  El contrato inició el 5 de marzo de 2026 (ya está corriendo).
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿El consorcio está constituido legalmente?      │
+│ RESPUESTA:  "Sí, el consorcio está constituido"             │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Existe estructura legal.
+  PENDIENTE: Solicitar documento de constitución del consorcio
+  para verificar % de participación de cada integrante.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿Nombres legales de los integrantes?            │
+│ RESPUESTA:  "En el contrato adjunto están todos los nombres"│
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Verificable en el PDF adjunto.
+  ACCIÓN: Leer el contrato y extraer nombres completos y NIT
+  de todos los consorciados para investigarlos.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 4: ¿Hay inhabilidades o sanciones?                 │
+│ RESPUESTA:  "No existe ninguna"                             │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Declaración de Emily.
+  VERIFICAR: Consultar el SECOP/RUES/SES con los nombres del
+  contrato para confirmar que no hay sanciones vigentes.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 5: ¿El contrato está perfeccionado?                │
+│ RESPUESTA:  "Sí, con acta de inicio del 5 de marzo"         │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: MUY POSITIVO — El contrato ya arrancó formalmente.
+  Esto significa: a) es real, b) la entidad ya lo legalizó,
+  c) el anticipo ya puede estar en trámite.
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ El contrato existe, es real, y ya está en ejecución.
+✅ No hay alertas legales declaradas.
+✅ Consorcio constituido legalmente.
+
+ACCIONES CONCRETAS PENDIENTES:
+1. Leer el PDF del contrato y extraer:
+   - Valor exacto del contrato
+   - Nombres y NIT de todos los consorciados
+   - Objeto exacto de la obra
+   - Plazo de ejecución
+2. Buscar en secop.gov.co con el número 1380-2097-2025
+3. Consultar RUE/RUES de los consorciados

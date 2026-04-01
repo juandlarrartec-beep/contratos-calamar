@@ -1,0 +1,78 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 5 — MI ROL COMO SOCIO
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿Qué % de participación corresponde a Stiven?  │
+│ RESPUESTA:  SIN RESPUESTA — No contestada                   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: RIESGO CRÍTICO — Este es el dato más importante
+  de todo el due diligence y no fue respondido.
+  Emily dijo previamente que el % se define "por mutuo
+  acuerdo proporcional a la inversión".
+  Si Stiven pone $100M de $100M → podría ser 15%.
+  Si pone menos → proporcionalmente menos.
+  ACCIÓN INMEDIATA: Definir y escriturar este porcentaje
+  ANTES de cualquier pago adicional.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿El acuerdo queda por escrito?                  │
+│ RESPUESTA:  "Podemos hacerlo, no tengo problema con eso"   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: MUY POSITIVO — Emily acepta contrato escrito.
+  Esto es la señal más importante: está dispuesta a
+  formalizar el acuerdo.
+  ACCIÓN: Redactar contrato de cuentas en participación
+  con abogado. Debe incluir: %, derechos, obligaciones,
+  mecanismo de retiro, resolución de conflictos.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿El nombre de Stiven aparece en documentos?     │
+│ RESPUESTA:  "Eres socio mío, no de ellos"                   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: NEUTRAL/RIESGO — Stiven es socio SILENCIOSO.
+  Su nombre NO aparece en ningún documento oficial del
+  contrato estatal. Esto tiene dos lecturas:
+  (+) Sin responsabilidades ante el Estado.
+  (-) Sin protección legal directa del contrato estatal.
+  Su único respaldo es el contrato privado con Emily.
+  Por eso el contrato escrito es ABSOLUTAMENTE CRÍTICO.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 4: ¿Stiven queda expuesto a demandas o deudas?     │
+│ RESPUESTA:  "No"                                            │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Emily declara que Stiven no tiene
+  responsabilidad legal ante terceros ni ante el Estado.
+  Esto es consistente con ser socio silencioso.
+  VERIFICAR: El contrato escrito debe blindar esto.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 5: ¿Mecanismo para salir del acuerdo?              │
+│ RESPUESTA:  SIN RESPUESTA — No contestada                   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: RIESGO ALTO — Sin cláusula de salida, Stiven
+  no tiene mecanismo claro para recuperar su inversión
+  si algo sale mal o si hay desacuerdo con Emily.
+  ACCIÓN: Incluir en el contrato escrito:
+  - Cómo se liquida la sociedad si hay desacuerdo
+  - Cuándo y cómo Stiven recupera el capital invertido
+  - Qué pasa si Emily no puede continuar
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ Emily acepta contrato escrito — señal de confianza.
+✅ Stiven no queda expuesto legalmente ante el Estado.
+🔴 % de Stiven NO está definido — urgente antes de más pagos.
+🔴 Mecanismo de salida no definido — va en el contrato.
+⚠️  Stiven es invisible en documentos — solo lo protege
+    el contrato privado con Emily.
+
+ACCIONES CONCRETAS PENDIENTES:
+1. URGENTE: Definir % exacto de Stiven (proporcional a los
+   $100M que ponga vs lo que ya puso Emily)
+2. Contratar abogado para redactar cuentas en participación
+3. El contrato debe incluir: %, reportes, salida, liquidación
+4. Firmar ANTES del próximo desembolso

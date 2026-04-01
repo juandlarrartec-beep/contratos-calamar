@@ -1,0 +1,62 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 6 — HISTORIAL Y REFERENCIAS
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿Tenés contratos anteriores con el Estado?      │
+│ RESPUESTA:  "Sí los tengo pero no a nombre mío porque se   │
+│              necesitan empresas con mucha experiencia para  │
+│              ganar la licitación"                           │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: SEÑAL DE ALERTA MODERADA.
+  Emily ejecuta contratos, pero NUNCA a su nombre.
+  Siempre bajo el paraguas de las empresas de Alejandra
+  y los socios poderosos.
+  LECTURA: Emily es operadora, no contratista titulada.
+  Su experiencia es real pero no verificable a su nombre.
+  VERIFICAR: Buscar en SECOP las empresas de Alejandra
+  y los socios para confirmar el historial.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿Quién es Alejandra exactamente?                │
+│ RESPUESTA:  "Ella es dueña de varias empresas que se        │
+│              presentan a licitaciones. Junto con sus socios │
+│              tiene varios contratos a nivel nacional."      │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Alejandra es una operadora seria
+  con estructura empresarial real y track record.
+  Esto da más solidez al consorcio — no es un grupo informal.
+  PENDIENTE: Solicitar nombre completo de Alejandra y
+  NIT de sus empresas para verificar en SECOP.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿Contactos del ministerio o interventoría?      │
+│ RESPUESTA:  "No es prudente hacerlo de esa manera.          │
+│              Podría invitarte a reuniones y visitas."        │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: NEUTRO CON MATIZ NEGATIVO.
+  Emily se niega al contacto directo pero ofrece
+  una alternativa: acompañarla en persona.
+  LEER ENTRE LÍNEAS: Puede ser que no quiere que Stiven
+  hable directamente con la interventoría (normal en
+  este tipo de negocios) O puede ser que quiere controlar
+  el flujo de información.
+  ACCIÓN: Aceptar la invitación a visitas y reuniones.
+  La visita a Calamar es clave para validar todo.
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ Hay experiencia real en contratos estatales.
+✅ Alejandra tiene estructura empresarial sólida.
+⚠️  Emily nunca ha tenido contratos A SU NOMBRE.
+⚠️  No se puede verificar historial de Emily directamente.
+⚠️  Se niega al contacto con la interventoría (aunque
+    es comprensible en el contexto).
+
+ACCIONES CONCRETAS PENDIENTES:
+1. Solicitar nombre completo y NIT de Alejandra y sus empresas
+2. Buscar esas empresas en secop.gov.co — verificar contratos
+3. Confirmar y coordinar visita a Calamar con Emily
+4. En la visita, intentar conocer a Alejandra en persona

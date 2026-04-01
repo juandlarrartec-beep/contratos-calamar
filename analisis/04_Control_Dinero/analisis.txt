@@ -1,0 +1,63 @@
+═══════════════════════════════════════════════════════════════
+CATEGORÍA 4 — CONTROL DEL DINERO
+Análisis de respuestas de Emily · 1 abril 2026
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 1: ¿Cómo funciona el PIN del consorcio?            │
+│ RESPUESTA:  "Los consorciados tienen uno y yo tengo el otro.│
+│              No se hará ningún pago sin que lo aprobemos."  │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO pero NO es control de Stiven.
+  El sistema de doble PIN es entre los consorciados y Emily.
+  Stiven no tiene acceso directo al PIN — depende de Emily
+  para que le informe de cada movimiento.
+  PENDIENTE: Negociar cómo Emily reporta a Stiven cada
+  movimiento. ¿Extracto bancario? ¿WhatsApp? ¿Reunión?
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 2: ¿Puede Stiven consultar la cuenta?              │
+│ RESPUESTA:  "Por medio de mi celular sí. Por seguridad del  │
+│              banco no hay otra manera."                     │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: LIMITADO — Stiven solo puede ver la cuenta
+  cuando está con Emily físicamente o cuando ella le muestra.
+  No hay acceso independiente de Stiven.
+  RIESGO: Dependencia total de la voluntad de Emily de mostrar.
+  PENDIENTE: Definir frecuencia y formato de reporte financiero.
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 3: ¿Hay contabilidad formal?                       │
+│ RESPUESTA:  "El consorcio tiene contador"                   │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Existe registro contable formal.
+  El contador lleva las cuentas del consorcio.
+  PENDIENTE: Solicitar reportes del contador periódicamente.
+  ¿Puede Stiven recibir los estados de cuenta del consorcio?
+
+┌─────────────────────────────────────────────────────────────┐
+│ PREGUNTA 4: ¿Quién tiene firma en la cuenta?                │
+│ RESPUESTA:  "Si se requiere de uno de ellos (los            │
+│              consorciados), en ese caso la ingeniera        │
+│              Alejandra y yo"                                │
+└─────────────────────────────────────────────────────────────┘
+→ IMPACTO: POSITIVO — Doble firma confirmada.
+  Los pagos requieren Alejandra + Emily.
+  Esto protege contra movimientos unilaterales.
+  Stiven no tiene firma — es un socio externo al consorcio.
+
+───────────────────────────────────────────────────────────────
+CONCLUSIÓN DE LA CATEGORÍA
+───────────────────────────────────────────────────────────────
+✅ Sistema de doble PIN y doble firma — bien estructurado.
+✅ Tiene contador formal.
+⚠️  Stiven NO tiene acceso independiente a la cuenta.
+⚠️  La visibilidad financiera depende totalmente de Emily.
+🔴 Sin mecanismo formal de reporte — esto hay que definirlo.
+
+ACCIONES CONCRETAS PENDIENTES:
+1. Definir en el contrato escrito: Emily envía extracto
+   bancario del consorcio a Stiven cada X días
+2. Solicitar acceso a reportes del contador del consorcio
+3. Establecer reunión de seguimiento financiero quincenal
+4. Definir qué pasa con la info financiera si hay desacuerdo
