@@ -423,6 +423,117 @@
         <div class="fin-row"><span class="fin-label">Total estimado pre-inicio</span><span class="fin-val" style="color:var(--red)">~$32.000.000</span></div>
       </div>
     </div>
+    <!-- Análisis: 30% es facturación, no utilidad -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px">
+      <h3 style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:16px">¿Cómo se genera la utilidad del 30%?</h3>
+
+      <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:20px;flex-shrink:0">⚠️</span>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px">El 30% NO es utilidad pura — es facturación</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6">El contrato vale <strong style="color:var(--text)">$1.084B</strong>. Emily factura el 30% = <strong style="color:var(--accent)">$325.200.000</strong>. Ese es el dinero que el Estado le paga por ejecutar su parte. De ahí salen todos los costos, y lo que queda es la utilidad.</div>
+        </div>
+      </div>
+
+      <!-- Tabla waterfall -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Construcción de la utilidad</div>
+          <div style="background:var(--surface2);border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)">
+              <span style="font-size:13px;color:var(--muted)">Emily factura (30% contrato)</span>
+              <span style="font-size:13px;font-weight:700;color:var(--accent)">$325.200.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)">
+              <span style="font-size:13px;color:var(--muted)">− Costos Emily (etapa 1)</span>
+              <span style="font-size:13px;font-weight:700;color:var(--red)">−$80.000.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)">
+              <span style="font-size:13px;color:var(--muted)">− Inversión Stiven</span>
+              <span style="font-size:13px;font-weight:700;color:var(--red)">−$100.000.000</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border)">
+              <span style="font-size:13px;color:var(--muted)">− Otros costos ejecución</span>
+              <span style="font-size:13px;font-weight:700;color:var(--red)">~−$45M</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px 14px;background:rgba(34,197,94,.08);border-top:1px solid rgba(34,197,94,.2)">
+              <span style="font-size:13px;font-weight:700;color:var(--green)">= Utilidad neta estimada</span>
+              <span style="font-size:14px;font-weight:800;color:var(--green)">$100–200M ✓</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">¿Qué recibe Stiven en total?</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:rgba(79,124,255,.1);border:1px solid rgba(79,124,255,.25);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:12px;color:var(--accent);font-weight:600">Recupera su inversión</div>
+                <div style="font-size:11px;color:var(--muted)">Capital de trabajo devuelto</div>
+              </div>
+              <span style="font-size:16px;font-weight:800;color:var(--accent)">+$100M</span>
+            </div>
+            <div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:12px;color:var(--green);font-weight:600">Su parte de la utilidad (15%)</div>
+                <div style="font-size:11px;color:var(--muted)">Ganancia real sobre lo invertido</div>
+              </div>
+              <span style="font-size:16px;font-weight:800;color:var(--green)">+$75–100M</span>
+            </div>
+            <div style="background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:12px;color:var(--red);font-weight:600">Costo del préstamo (6 meses)</div>
+                <div style="font-size:11px;color:var(--muted)">$2.5M × 6 meses</div>
+              </div>
+              <span style="font-size:16px;font-weight:800;color:var(--red)">−$15M</span>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(79,124,255,.15),rgba(124,92,255,.15));border:1px solid rgba(124,92,255,.3);border-radius:10px;padding:14px;display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:var(--text)">Total que recibe Stiven</div>
+                <div style="font-size:11px;color:var(--muted)">Ganancia neta: $60–85M</div>
+              </div>
+              <span style="font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">~$160–185M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra visual waterfall -->
+      <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px">Flujo visual del 30% de Emily</div>
+      <div style="display:flex;gap:4px;align-items:flex-end;height:80px;padding:0 4px">
+        <div style="flex:3.25;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;background:var(--accent);border-radius:6px 6px 0 0;height:80px;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:10px;font-weight:700;color:#fff;writing-mode:unset">$325M</span>
+          </div>
+          <span style="font-size:9px;color:var(--muted);text-align:center">Facturación<br>30%</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:16px;padding-bottom:20px">−</div>
+        <div style="flex:.8;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;background:var(--red);border-radius:6px 6px 0 0;height:20px"></div>
+          <span style="font-size:9px;color:var(--muted);text-align:center">Emily<br>$80M</span>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;background:var(--red);border-radius:6px 6px 0 0;height:25px"></div>
+          <span style="font-size:9px;color:var(--muted);text-align:center">Stiven<br>$100M</span>
+        </div>
+        <div style="flex:.45;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;background:var(--yellow);border-radius:6px 6px 0 0;height:11px"></div>
+          <span style="font-size:9px;color:var(--muted);text-align:center">Otros<br>$45M</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:16px;padding-bottom:20px">=</div>
+        <div style="flex:1.5;display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div style="width:100%;background:var(--green);border-radius:6px 6px 0 0;height:25px;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:9px;font-weight:700;color:#fff">~$100M+</span>
+          </div>
+          <span style="font-size:9px;color:var(--green);font-weight:700;text-align:center">Utilidad<br>neta ✓</span>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;padding:10px 14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12px;color:var(--yellow)">
+        <strong>Pendiente clave:</strong> solicitar el desglose del analista de costos para confirmar que el estimado de utilidad es real y no optimista. Los costos de ejecución determinan si la utilidad final es $150M o $200M.
+      </div>
+    </div>
+
     <div class="notas-box">
       <h3>Notas financieras</h3>
       <textarea id="notas-finanzas" placeholder="Anotá montos, porcentajes o datos adicionales..."></textarea>
