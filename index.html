@@ -617,23 +617,168 @@
 
   <!-- ── FINANZAS ── -->
   <div id="tab-finanzas" class="section">
-    <div class="grid-2">
-      <div class="card">
-        <h3>Capital de Stiven</h3>
-        <div class="fin-row"><span class="fin-label">Capital disponible</span><span class="fin-val green">$50.000.000</span></div>
-        <div class="fin-row"><span class="fin-label">Origen del capital</span><span class="fin-val" style="color:var(--yellow)">Prestado al 5% mensual</span></div>
-        <div class="fin-row"><span class="fin-label">Fecha inicio deuda</span><span class="fin-val accent">6 marzo 2026</span></div>
-        <div class="fin-row"><span class="fin-label">Costo financiero mensual</span><span class="fin-val" style="color:var(--red)">$2.500.000</span></div>
-        <div class="fin-row"><span class="fin-label">Recursos adicionales</span><span class="fin-val green">Disponibles (propios)</span></div>
+
+    <!-- ESTADO ACTUAL DE LA INVERSIÓN CONJUNTA -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Estado Actual de la Inversión Conjunta <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">💼 Invertido por Stiven</div>
+        <div id="fin-stiven-total" style="font-size:22px;font-weight:800;color:var(--accent)">$0</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px">Pagos registrados: <span id="fin-stiven-count">0</span></div>
       </div>
-      <div class="card">
-        <h3>Gastos pre-inicio confirmados</h3>
-        <div class="fin-row"><span class="fin-label">Póliza (pagada 28/03)</span><span class="fin-val" style="color:var(--yellow)">$7.000.000</span></div>
-        <div class="fin-row"><span class="fin-label">Salarios profesionales admin</span><span class="fin-val" style="color:var(--yellow)">~$20.000.000</span></div>
-        <div class="fin-row"><span class="fin-label">Derechos / similar a pólizas</span><span class="fin-val" style="color:var(--yellow)">~$5.000.000</span></div>
-        <div class="fin-row"><span class="fin-label">Total estimado pre-inicio</span><span class="fin-val" style="color:var(--red)">~$32.000.000</span></div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">👷 Referencia Emily</div>
+        <div style="font-size:22px;font-weight:800;color:var(--yellow)">~$80M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px">Etapa 1 — estimado</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">🏛 Anticipo esperado</div>
+        <div style="font-size:22px;font-weight:800;color:var(--green)">$216.6M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px">20% del contrato</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center">
+        <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px">📈 Utilidad estimada</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent2)">$150–200M</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:4px">15% para cada socio</div>
       </div>
     </div>
+
+    <!-- GRÁFICOS: Capital + Flujo de caja -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Estructura del capital de trabajo</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Quién pone qué para ejecutar el 30%</div>
+        <div style="height:160px"><canvas id="fin-chartCapital"></canvas></div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Flujo de caja proyectado</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Egresos pre-inicio vs. anticipo del Estado (millones COP)</div>
+        <div style="height:160px"><canvas id="fin-chartFlujo"></canvas></div>
+      </div>
+    </div>
+
+    <!-- GRÁFICO: Utilidades para cada socio -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Proyección de Utilidades por Socio <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Comparativa: inversión vs. retorno esperado (millones COP)</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Escenario base con utilidad neta estimada de $175M para el 30%</div>
+      <div style="height:180px"><canvas id="fin-chartUtilidades"></canvas></div>
+    </div>
+
+    <!-- DISTRIBUCIÓN DE LA UTILIDAD -->
+    <div style="background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(79,124,255,.08));border:1px solid rgba(34,197,94,.2);border-radius:var(--radius);padding:18px;margin-bottom:16px">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:14px">¿Cómo se distribuye la utilidad entre los dos socios?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#ef4444);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px">E</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">Emily</div>
+              <div style="font-size:11px;color:var(--muted)">15% del contrato</div>
+            </div>
+          </div>
+          <div class="fin-row" style="border-color:rgba(245,158,11,.2)"><span class="fin-label">Recupera inversión etapa 1</span><span style="font-size:13px;font-weight:700;color:var(--accent)">+ $80M</span></div>
+          <div class="fin-row" style="border-color:rgba(245,158,11,.2)"><span class="fin-label">Utilidad estimada (15%)</span><span style="font-size:13px;font-weight:700;color:var(--green)">+ $75–100M</span></div>
+          <div class="fin-row" style="border-color:transparent"><span class="fin-label" style="font-weight:700;color:var(--text)">Total estimado para Emily</span><span style="font-size:14px;font-weight:800;color:var(--green)">~$155–180M</span></div>
+        </div>
+        <div style="background:rgba(79,124,255,.1);border:1px solid rgba(79,124,255,.25);border-radius:10px;padding:14px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a78bfa,#4f7cff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:14px">S</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">Stiven</div>
+              <div style="font-size:11px;color:var(--muted)">15% del contrato</div>
+            </div>
+          </div>
+          <div class="fin-row" style="border-color:rgba(79,124,255,.2)"><span class="fin-label">Recupera capital invertido</span><span style="font-size:13px;font-weight:700;color:var(--accent)">+ $100M</span></div>
+          <div class="fin-row" style="border-color:rgba(79,124,255,.2)"><span class="fin-label">Utilidad estimada (15%)</span><span style="font-size:13px;font-weight:700;color:var(--green)">+ $75–100M</span></div>
+          <div class="fin-row" style="border-color:rgba(79,124,255,.2)"><span class="fin-label">Costo financiero (6 meses)</span><span style="font-size:13px;font-weight:700;color:var(--red)">− $15M</span></div>
+          <div class="fin-row" style="border-color:transparent"><span class="fin-label" style="font-weight:700;color:var(--text)">Total estimado para Stiven</span><span style="font-size:14px;font-weight:800;color:var(--green)">~$160–185M</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROTECCIONES FINANCIERAS -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Protecciones Financieras del Proyecto <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">🔐</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px">Doble PIN bancario</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">Ningún movimiento de fondos sin aprobación conjunta. Los consorciados tienen un PIN y Emily otro.</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">✍️</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px">Doble firma en cuenta</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">Los pagos requieren firma de Alejandra y Emily. Ninguna puede mover fondos sola.</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">📊</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px">Contador formal</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">El consorcio tiene contador propio que lleva la contabilidad oficial de todos los movimientos.</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">📋</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px">Contrato escrito (en proceso)</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">Emily confirma que puede formalizarse el acuerdo de participación del 15% c/u por escrito.</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">📱</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px">Acceso a extractos</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">Stiven puede consultar los movimientos de la cuenta del consorcio a través de Emily con extracto bancario.</div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;display:flex;gap:10px;align-items:flex-start">
+        <div style="font-size:22px;flex-shrink:0">🏛</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:4px">Contrato público verificable</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">El contrato #1380-2097-2025 es público y verificable en secop.gov.co con todos sus valores y estado.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GASTOS PRE-INICIO -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px">Gastos Pre-Inicio Identificados <span style="flex:1;height:1px;background:rgba(79,124,255,.3);display:block"></span></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border)">
+        <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Concepto</span>
+        <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;text-align:right;padding-right:20px">Monto</span>
+        <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Estado</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center">
+        <span style="font-size:13px;color:var(--text)">Pólizas de seguro</span>
+        <span style="font-size:13px;font-weight:700;color:var(--text);text-align:right;padding-right:20px">$7.000.000</span>
+        <span style="background:rgba(34,197,94,.15);color:var(--green);font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px">Pagada ✓</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center">
+        <span style="font-size:13px;color:var(--text)">Anticipo nómina profesionales admin</span>
+        <span style="font-size:13px;font-weight:700;color:var(--text);text-align:right;padding-right:20px">$12.000.000</span>
+        <span style="background:rgba(34,197,94,.15);color:var(--green);font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px">Pagado ✓</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center">
+        <span style="font-size:13px;color:var(--text)">Saldo nómina profesionales admin</span>
+        <span style="font-size:13px;font-weight:700;color:var(--yellow);text-align:right;padding-right:20px">~$8.000.000</span>
+        <span style="background:rgba(245,158,11,.15);color:var(--yellow);font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px">Pendiente</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:12px 16px;border-bottom:1px solid var(--border);align-items:center">
+        <span style="font-size:13px;color:var(--text)">Derechos / viabilidades</span>
+        <span style="font-size:13px;font-weight:700;color:var(--yellow);text-align:right;padding-right:20px">~$5.000.000</span>
+        <span style="background:rgba(245,158,11,.15);color:var(--yellow);font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px">Pendiente</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto auto;gap:0;padding:12px 16px;background:rgba(79,124,255,.05);align-items:center">
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Total estimado pre-inicio</span>
+        <span style="font-size:14px;font-weight:800;color:var(--accent);text-align:right;padding-right:20px">~$32.000.000</span>
+        <span style="background:rgba(79,124,255,.15);color:var(--accent);font-size:11px;font-weight:600;padding:2px 10px;border-radius:999px">En curso</span>
+      </div>
+    </div>
+
     <div class="notas-box">
       <h3>Notas financieras</h3>
       <textarea id="notas-finanzas" placeholder="Anotá montos, porcentajes o datos adicionales..."></textarea>
@@ -904,6 +1049,10 @@ function renderPagos() {
   const totalStiven = pagos.filter(p => p.quien==='Stiven').reduce((s,p) => s+p.monto, 0);
   document.getElementById('cnt-stiven').textContent = fmt(totalStiven);
   document.getElementById('cnt-total').textContent = pagos.length;
+  const finS = document.getElementById('fin-stiven-total');
+  const finC = document.getElementById('fin-stiven-count');
+  if (finS) finS.textContent = fmt(totalStiven);
+  if (finC) finC.textContent = pagos.filter(p=>p.quien==='Stiven').length;
 
   if (!pagos.length) { body.innerHTML = '<div class="planilla-empty">No hay pagos registrados aún</div>'; return; }
   body.innerHTML = pagos.map(p => `
@@ -1033,6 +1182,52 @@ function initResumenCharts() {
     options: { responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` $${c.parsed.y}M`}} },
       scales:{ x:{grid:{display:false}, ticks:tickStyle}, y:{grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'}} }
+    }
+  });
+
+  // ── FINANZAS CHARTS ──
+
+  // Capital de trabajo (donut)
+  new Chart(document.getElementById('fin-chartCapital'), {
+    type:'doughnut',
+    data:{
+      labels:['Emily etapa 1 (~$80M)','Stiven capital trabajo (~$100M)','Otros costos ejecución (~$45M)'],
+      datasets:[{ data:[80,100,45], backgroundColor:['#f59e0b','#4f7cff','#6b7280'], borderColor:'#1a1d27', borderWidth:3, hoverOffset:5 }]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, cutout:'58%',
+      plugins:{ legend:{ position:'bottom', labels:{ color:'#e2e8f0', font:{size:9}, padding:8, boxWidth:10 } } }
+    }
+  });
+
+  // Flujo de caja barras
+  new Chart(document.getElementById('fin-chartFlujo'), {
+    type:'bar',
+    data:{
+      labels:['Pólizas\npagadas','Anticipo\nnómina','Saldo\nnómina','Derechos\nviabilidades','TOTAL\npre-inicio','Anticipo\nEstado 20%'],
+      datasets:[
+        { label:'Egresos', data:[7,12,8,5,32,0], backgroundColor:'rgba(239,68,68,.7)', borderRadius:5 },
+        { label:'Ingreso Estado', data:[0,0,0,0,0,216.6], backgroundColor:'rgba(34,197,94,.7)', borderRadius:5 }
+      ]
+    },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{ color:'#e2e8f0', font:{size:9}, padding:8, boxWidth:10 } }, tooltip:{callbacks:{label:c=>` $${c.parsed.y}M`}} },
+      scales:{ x:{ grid:{display:false}, ticks:tickStyle }, y:{ grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'} } }
+    }
+  });
+
+  // Utilidades comparativa
+  new Chart(document.getElementById('fin-chartUtilidades'), {
+    type:'bar',
+    data:{
+      labels:['Invierte / Invirtió','Recupera capital','Utilidad 15%','Costo financiero','Total recibe'],
+      datasets:[
+        { label:'Emily', data:[80,80,87.5,0,167.5], backgroundColor:'rgba(245,158,11,.8)', borderRadius:6 },
+        { label:'Stiven', data:[100,100,87.5,-15,172.5], backgroundColor:'rgba(79,124,255,.8)', borderRadius:6 }
+      ]
+    },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{ color:'#e2e8f0', font:{size:10}, padding:12, boxWidth:12 } }, tooltip:{callbacks:{label:c=>` ${c.dataset.label}: $${Math.abs(c.parsed.y)}M`}} },
+      scales:{ x:{ grid:{display:false}, ticks:tickStyle }, y:{ grid, ticks:{...tickStyle, callback:v=>'$'+v+'M'} } }
     }
   });
 
