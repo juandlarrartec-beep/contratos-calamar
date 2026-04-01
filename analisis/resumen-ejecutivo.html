@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Resumen Ejecutivo — Contratos Calamar</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  @page { size: A4; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f2f5;
+    color: #1a1d2e;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── PÁGINA ── */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #fff;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; page-break-after: always; box-shadow: none; }
+    .page:last-child { page-break-after: auto; }
+    .no-print { display: none !important; }
+  }
+
+  /* ── COLORES ── */
+  :root {
+    --blue: #2563eb; --blue-light: #eff6ff; --blue-mid: #bfdbfe;
+    --purple: #7c3aed; --purple-light: #f5f3ff;
+    --green: #16a34a; --green-light: #f0fdf4; --green-mid: #bbf7d0;
+    --red: #dc2626; --red-light: #fef2f2;
+    --yellow: #d97706; --yellow-light: #fffbeb;
+    --gray: #6b7280; --gray-light: #f9fafb; --border: #e5e7eb;
+    --dark: #111827;
+  }
+
+  /* ══════════════════════════════
+     PÁGINA 1 — PORTADA
+  ══════════════════════════════ */
+  .cover {
+    background: linear-gradient(145deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    min-height: 297mm;
+  }
+  .cover-top {
+    padding: 14mm 18mm 0;
+  }
+  .cover-logo {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 50mm;
+  }
+  .cover-logo-dot {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff;
+  }
+  .cover-logo-text { font-size: 13px; color: rgba(255,255,255,.5); font-weight: 500; }
+
+  .cover-main { padding: 0 18mm; }
+  .cover-tag {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(59,130,246,.2); border: 1px solid rgba(59,130,246,.4);
+    color: #93c5fd; font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .cover-h1 {
+    font-size: 38px; font-weight: 800; color: #fff; line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .cover-h2 {
+    font-size: 20px; font-weight: 300; color: rgba(255,255,255,.6);
+    margin-bottom: 24px;
+  }
+  .cover-divider {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 999px; margin-bottom: 28px;
+  }
+  .cover-desc {
+    font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.7;
+    max-width: 140mm;
+  }
+  .cover-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 4mm; padding: 14mm 18mm; margin-top: 20mm;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .cover-stat {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 12px; padding: 14px;
+  }
+  .cover-stat-val {
+    font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 2px;
+  }
+  .cover-stat-val.accent { color: #60a5fa; }
+  .cover-stat-val.green  { color: #4ade80; }
+  .cover-stat-val.yellow { color: #fbbf24; }
+  .cover-stat-label { font-size: 10px; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .8px; }
+  .cover-footer {
+    padding: 6mm 18mm;
+    border-top: 1px solid rgba(255,255,255,.08);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .cover-footer-text { font-size: 11px; color: rgba(255,255,255,.3); }
+
+  /* ══════════════════════════════
+     PÁGINAS INTERIORES
+  ══════════════════════════════ */
+  .inner { padding: 12mm 16mm; min-height: 297mm; display: flex; flex-direction: column; }
+
+  .page-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 6mm; border-bottom: 2px solid var(--border);
+    margin-bottom: 8mm;
+  }
+  .page-header-left { display: flex; align-items: center; gap: 10px; }
+  .page-num {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+  }
+  .page-title { font-size: 15px; font-weight: 700; color: var(--dark); }
+  .page-sub { font-size: 11px; color: var(--gray); }
+  .page-brand { font-size: 10px; color: var(--gray); opacity: .5; }
+
+  /* ── SECCIONES ── */
+  .section-title {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--blue); margin-bottom: 4mm;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px; background: var(--blue-mid);
+  }
+
+  /* ── VEREDICTO ── */
+  .veredicto-box {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1.5px solid #86efac;
+    border-radius: 14px; padding: 16px 20px;
+    margin-bottom: 6mm; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .veredicto-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .veredicto-title { font-size: 16px; font-weight: 800; color: #15803d; margin-bottom: 4px; }
+  .veredicto-text { font-size: 12px; color: #166534; line-height: 1.6; }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin-bottom: 6mm; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; margin-bottom: 6mm; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 3mm; margin-bottom: 6mm; }
+
+  /* ── METRIC CARD ── */
+  .metric-card {
+    background: var(--gray-light); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .metric-card.blue  { background: var(--blue-light);   border-color: var(--blue-mid); }
+  .metric-card.green { background: var(--green-light);  border-color: var(--green-mid); }
+  .metric-card.purple{ background: var(--purple-light); border-color: #ddd6fe; }
+  .metric-card.yellow{ background: var(--yellow-light); border-color: #fde68a; }
+  .metric-label { font-size: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+  .metric-value { font-size: 20px; font-weight: 800; color: var(--dark); line-height: 1; }
+  .metric-value.blue   { color: var(--blue); }
+  .metric-value.green  { color: var(--green); }
+  .metric-value.purple { color: var(--purple); }
+  .metric-value.yellow { color: var(--yellow); }
+  .metric-sub { font-size: 10px; color: var(--gray); margin-top: 3px; }
+
+  /* ── CHART BOX ── */
+  .chart-box {
+    background: var(--gray-light); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 6mm;
+  }
+  .chart-title { font-size: 12px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .chart-wrap { position: relative; }
+
+  /* ── RIESGOS ── */
+  .riesgo-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 12px; border-radius: 10px; margin-bottom: 3mm;
+    border: 1px solid;
+  }
+  .riesgo-row.alto   { background: var(--red-light);    border-color: #fecaca; }
+  .riesgo-row.medio  { background: var(--yellow-light);  border-color: #fde68a; }
+  .riesgo-row.bueno  { background: var(--green-light);   border-color: var(--green-mid); }
+  .riesgo-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .riesgo-row.alto   .riesgo-dot { background: var(--red); }
+  .riesgo-row.medio  .riesgo-dot { background: var(--yellow); }
+  .riesgo-row.bueno  .riesgo-dot { background: var(--green); }
+  .riesgo-titulo { font-size: 11px; font-weight: 700; margin-bottom: 2px; }
+  .riesgo-row.alto  .riesgo-titulo { color: var(--red); }
+  .riesgo-row.medio .riesgo-titulo { color: var(--yellow); }
+  .riesgo-row.bueno .riesgo-titulo { color: var(--green); }
+  .riesgo-desc { font-size: 10px; color: var(--gray); line-height: 1.5; }
+
+  /* ── ACCIONES ── */
+  .accion-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 10px; border-radius: 8px;
+    border-left: 3px solid; margin-bottom: 2mm;
+  }
+  .accion-item.urgente { border-color: var(--red); background: var(--red-light); }
+  .accion-item.pronto  { border-color: var(--blue); background: var(--blue-light); }
+  .accion-item.normal  { border-color: var(--green); background: var(--green-light); }
+  .accion-num {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0; color: #fff;
+  }
+  .accion-item.urgente .accion-num { background: var(--red); }
+  .accion-item.pronto  .accion-num { background: var(--blue); }
+  .accion-item.normal  .accion-num { background: var(--green); }
+  .accion-text { font-size: 11px; color: var(--dark); line-height: 1.5; }
+  .accion-tag {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 1px 6px; border-radius: 999px; margin-right: 4px;
+  }
+  .tag-rojo   { background: #fecaca; color: var(--red); }
+  .tag-azul   { background: var(--blue-mid); color: var(--blue); }
+  .tag-verde  { background: var(--green-mid); color: var(--green); }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; gap: 0; margin-bottom: 6mm; }
+  .tl-item { flex: 1; position: relative; }
+  .tl-item::before {
+    content: ''; position: absolute; top: 14px; left: 50%; right: -50%;
+    height: 2px; background: var(--border); z-index: 0;
+  }
+  .tl-item:last-child::before { display: none; }
+  .tl-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #fff;
+    margin: 0 auto 6px; position: relative; z-index: 1;
+  }
+  .tl-dot.done   { background: var(--green); }
+  .tl-dot.active { background: var(--blue); }
+  .tl-dot.next   { background: var(--gray); }
+  .tl-label { font-size: 9px; text-align: center; color: var(--dark); font-weight: 600; }
+  .tl-sub   { font-size: 8px; text-align: center; color: var(--gray); margin-top: 2px; }
+
+  /* ── TABLA ── */
+  .tabla { width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 6mm; }
+  .tabla th {
+    background: #1e3a5f; color: #fff;
+    padding: 8px 10px; text-align: left;
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .tabla th:first-child { border-radius: 8px 0 0 0; }
+  .tabla th:last-child  { border-radius: 0 8px 0 0; }
+  .tabla td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  .tabla tr:last-child td { border-bottom: none; }
+  .tabla tr:nth-child(even) td { background: var(--gray-light); }
+  .tabla tr.highlight td { background: #eff6ff; font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: auto; padding-top: 4mm;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text { font-size: 9px; color: var(--gray); }
+
+  /* ── BTN PRINT ── */
+  .btn-print {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    padding: 14px 24px; background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff; border: none; border-radius: 12px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 8px 25px rgba(37,99,235,.4); transition: all .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-print:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,99,235,.5); }
+</style>
+</head>
+<body>
+
+<button class="btn-print no-print" onclick="window.print()">
+  🖨 Descargar PDF
+</button>
+
+<!-- ═══════════════════════════════════════
+     PÁGINA 1 — PORTADA
+════════════════════════════════════════ -->
+<div class="page">
+<div class="cover">
+  <div class="cover-top">
+    <div class="cover-logo">
+      <div class="cover-logo-dot">C</div>
+      <span class="cover-logo-text">Due Diligence · Inversión Privada</span>
+    </div>
+    <div class="cover-main">
+      <div class="cover-tag">Informe Ejecutivo</div>
+      <div class="cover-h1">Contratos<br>Calamar</div>
+      <div class="cover-h2">Análisis de Inversión en Obra Civil Estatal</div>
+      <div class="cover-divider"></div>
+      <div class="cover-desc">
+        Evaluación completa del negocio basada en 27 de 30 preguntas respondidas por la contratista principal.
+        Contrato adjudicado por entidad estatal colombiana. Ejecución iniciada el 5 de marzo de 2026.
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-val accent">$1.084M</div>
+        <div class="cover-stat-label">Valor del contrato</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val green">$75M–$100M</div>
+        <div class="cover-stat-label">Retorno estimado Stiven</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val yellow">6 meses</div>
+        <div class="cover-stat-label">Cronograma de ejecución</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val accent">27/30</div>
+        <div class="cover-stat-label">Preguntas respondidas</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val green">$216.6M</div>
+        <div class="cover-stat-label">Anticipo del Estado (20%)</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-val yellow">$100M</div>
+        <div class="cover-stat-label">Inversión total requerida</div>
+      </div>
+    </div>
+    <div class="cover-footer">
+      <span class="cover-footer-text">Confidencial — Solo para uso interno · Stiven & Juan</span>
+      <span class="cover-footer-text">1 de abril de 2026</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PÁGINA 2 — VEREDICTO + ESTRUCTURA + NÚMEROS
+════════════════════════════════════════ -->
+<div class="page">
+<div class="inner">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-num">2</div>
+      <div>
+        <div class="page-title">Veredicto y Estructura del Negocio</div>
+        <div class="page-sub">Decisión de inversión · Distribución societaria</div>
+      </div>
+    </div>
+    <div class="page-brand">Contratos Calamar · Due Diligence 2026</div>
+  </div>
+
+  <!-- Veredicto -->
+  <div class="section-title">Veredicto General</div>
+  <div class="veredicto-box">
+    <div class="veredicto-icon">✅</div>
+    <div>
+      <div class="veredicto-title">SÍ — Con condiciones. No sin ellas.</div>
+      <div class="veredicto-text">
+        El contrato es real, verificable en SECOP con número 1380-2097-2025, y ya está en ejecución desde el 5 de marzo de 2026.
+        La escala es mayor de lo esperado: más de $1.000 millones. Emily muestra apertura real: acepta contrato escrito, entrega
+        documentos, invita a visitas. El principal riesgo no es una estafa — <strong>el principal riesgo es entrar sin contrato escrito.</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Métricas clave -->
+  <div class="section-title">Números Clave del Contrato</div>
+  <div class="grid-4" style="margin-bottom:5mm">
+    <div class="metric-card blue">
+      <div class="metric-label">Valor total</div>
+      <div class="metric-value blue" style="font-size:16px">$1.084M</div>
+      <div class="metric-sub">Contrato #1380-2097-2025</div>
+    </div>
+    <div class="metric-card green">
+      <div class="metric-label">Anticipo Estado (20%)</div>
+      <div class="metric-value green" style="font-size:16px">$216.6M</div>
+      <div class="metric-sub">En tramitación</div>
+    </div>
+    <div class="metric-card purple">
+      <div class="metric-label">Utilidad estimada (30%)</div>
+      <div class="metric-value purple" style="font-size:16px">$150–200M</div>
+      <div class="metric-sub">Sujeto a interventoría</div>
+    </div>
+    <div class="metric-card yellow">
+      <div class="metric-label">Retorno Stiven (15%)</div>
+      <div class="metric-value yellow" style="font-size:16px">$75–100M</div>
+      <div class="metric-sub">Bruto estimado</div>
+    </div>
+  </div>
+
+  <!-- Gráficos lado a lado -->
+  <div class="grid-2">
+    <div class="chart-box">
+      <div class="chart-title">Distribución societaria del contrato</div>
+      <div class="chart-wrap" style="height:150px">
+        <canvas id="chartSocietario"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Comparativa financiera (millones COP)</div>
+      <div class="chart-wrap" style="height:150px">
+        <canvas id="chartFinanciero"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Due diligence progress -->
+  <div class="section-title">Progreso del Due Diligence</div>
+  <div class="chart-box" style="margin-bottom:0">
+    <div class="chart-title">Preguntas respondidas por categoría</div>
+    <div class="chart-wrap" style="height:110px">
+      <canvas id="chartProgress"></canvas>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-text">Contratos Calamar · Informe Ejecutivo · 1 abril 2026</div>
+    <div class="footer-text">Página 2 de 4</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PÁGINA 3 — PROYECCIÓN + RIESGOS + TIMELINE
+════════════════════════════════════════ -->
+<div class="page">
+<div class="inner">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-num">3</div>
+      <div>
+        <div class="page-title">Proyección Financiera y Mapa de Riesgos</div>
+        <div class="page-sub">Retorno de inversión · Riesgos identificados</div>
+      </div>
+    </div>
+    <div class="page-brand">Contratos Calamar · Due Diligence 2026</div>
+  </div>
+
+  <!-- Proyección -->
+  <div class="section-title">Proyección Financiera de Stiven</div>
+  <div class="chart-box">
+    <div class="chart-title">Inversión vs. Retorno estimado (millones COP)</div>
+    <div class="chart-wrap" style="height:140px">
+      <canvas id="chartProyeccion"></canvas>
+    </div>
+  </div>
+
+  <!-- Tabla proyección -->
+  <table class="tabla">
+    <tr>
+      <th>Concepto</th><th>Monto</th><th>Nota</th>
+    </tr>
+    <tr><td>Inversión total de Stiven</td><td><strong>$100.000.000</strong></td><td>$50M prestados + propios</td></tr>
+    <tr><td>Costo financiero préstamo (6 meses)</td><td style="color:#dc2626">- $15.000.000</td><td>$2.5M/mes × 6</td></tr>
+    <tr><td>Retorno bruto estimado (15%)</td><td style="color:#16a34a">+ $75M – $100M</td><td>Sujeto a interventoría</td></tr>
+    <tr class="highlight"><td>Retorno neto estimado</td><td style="color:#2563eb"><strong>$60M – $85M</strong></td><td>En ~6 meses</td></tr>
+    <tr><td>ROI sobre capital propio</td><td style="color:#7c3aed"><strong>60% – 85%</strong></td><td>En 6 meses</td></tr>
+  </table>
+
+  <!-- Timeline -->
+  <div class="section-title">Cronograma del Proyecto</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot done">✓</div>
+      <div class="tl-label">Contrato firmado</div>
+      <div class="tl-sub">5 Mar 2026</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot done">✓</div>
+      <div class="tl-label">Fase diagnóstico</div>
+      <div class="tl-sub">Mar 2026</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot active">→</div>
+      <div class="tl-label">Presupuestación</div>
+      <div class="tl-sub">Abr 2026</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot next">4</div>
+      <div class="tl-label">Anticipo Estado</div>
+      <div class="tl-sub">May 2026</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot next">5</div>
+      <div class="tl-label">Ejecución obra</div>
+      <div class="tl-sub">May–Sep 2026</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot next">6</div>
+      <div class="tl-label">Liquidación</div>
+      <div class="tl-sub">Sep–Oct 2026</div>
+    </div>
+  </div>
+
+  <!-- Riesgos -->
+  <div class="section-title">Mapa de Riesgos</div>
+  <div class="grid-2" style="gap:3mm;margin-bottom:0">
+    <div>
+      <div class="riesgo-row alto">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Sin contrato escrito — CRÍTICO</div><div class="riesgo-desc">El único respaldo legal de Stiven es el acuerdo privado con Emily. Sin firmarlo, no hay protección.</div></div>
+      </div>
+      <div class="riesgo-row alto">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">% de Stiven no definido</div><div class="riesgo-desc">El porcentaje de participación aún no se fijó. Debe acordarse antes del próximo pago.</div></div>
+      </div>
+      <div class="riesgo-row alto">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Sin mecanismo de salida</div><div class="riesgo-desc">No se definió cómo Stiven recupera su capital si hay desacuerdo o problema.</div></div>
+      </div>
+      <div class="riesgo-row medio">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Invierno — riesgo climático real</div><div class="riesgo-desc">Emily confirmó alta complejidad de accesos. Hay planes de contingencia pero el impacto es incierto.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="riesgo-row medio">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Proveedores solo verbales</div><div class="riesgo-desc">Los presupuestos no están avalados aún. Precios pueden variar al iniciar ejecución.</div></div>
+      </div>
+      <div class="riesgo-row medio">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Rentabilidad no exacta</div><div class="riesgo-desc">Depende de aprobación de 6 presupuestos por la interventoría. Puede bajar si rechazan ítems.</div></div>
+      </div>
+      <div class="riesgo-row bueno">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Entidad pagadora sin historial de retrasos</div><div class="riesgo-desc">Emily no tiene registro de mora en pagos por parte del ministerio.</div></div>
+      </div>
+      <div class="riesgo-row bueno">
+        <div class="riesgo-dot"></div>
+        <div><div class="riesgo-titulo">Doble PIN y doble firma en cuenta</div><div class="riesgo-desc">Ningún movimiento sin aprobación conjunta. Protección contra uso unilateral del dinero.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-text">Contratos Calamar · Informe Ejecutivo · 1 abril 2026</div>
+    <div class="footer-text">Página 3 de 4</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PÁGINA 4 — PLAN DE ACCIÓN + CIERRE
+════════════════════════════════════════ -->
+<div class="page">
+<div class="inner">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-num">4</div>
+      <div>
+        <div class="page-title">Plan de Acción y Cierre</div>
+        <div class="page-sub">Pasos concretos · Documentos pendientes · Señales positivas</div>
+      </div>
+    </div>
+    <div class="page-brand">Contratos Calamar · Due Diligence 2026</div>
+  </div>
+
+  <!-- Plan de acción -->
+  <div class="section-title">Plan de Acción — Orden Estricto</div>
+
+  <div style="margin-bottom:5mm">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.6px;margin-bottom:2mm">Esta semana — Sin más pagos hasta completar esto</div>
+    <div class="accion-item urgente">
+      <div class="accion-num">1</div>
+      <div class="accion-text"><span class="accion-tag tag-rojo">URGENTE</span> Leer el contrato PDF completo y extraer: nombres, NITs, valor exacto, plazo.</div>
+    </div>
+    <div class="accion-item urgente">
+      <div class="accion-num">2</div>
+      <div class="accion-text"><span class="accion-tag tag-rojo">URGENTE</span> Buscar el contrato 1380-2097-2025 en <strong>secop.gov.co</strong> para verificación pública.</div>
+    </div>
+    <div class="accion-item urgente">
+      <div class="accion-num">3</div>
+      <div class="accion-text"><span class="accion-tag tag-rojo">URGENTE</span> Definir % exacto de Stiven con Emily. Proponerle: proporcional a $100M que él ponga.</div>
+    </div>
+    <div class="accion-item urgente">
+      <div class="accion-num">4</div>
+      <div class="accion-text"><span class="accion-tag tag-rojo">URGENTE</span> Solicitar costo mensual de nómina por categoría — dato crítico faltante.</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:5mm">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--blue);letter-spacing:.6px;margin-bottom:2mm">Antes del próximo desembolso</div>
+    <div class="accion-item pronto">
+      <div class="accion-num">5</div>
+      <div class="accion-text"><span class="accion-tag tag-azul">ANTES DE PAGAR</span> Contratar abogado y redactar <strong>contrato de cuentas en participación</strong>.</div>
+    </div>
+    <div class="accion-item pronto">
+      <div class="accion-num">6</div>
+      <div class="accion-text"><span class="accion-tag tag-azul">ANTES DE PAGAR</span> El contrato debe incluir: %, mecanismo de salida, frecuencia de reportes, sobrecostos.</div>
+    </div>
+    <div class="accion-item pronto">
+      <div class="accion-num">7</div>
+      <div class="accion-text"><span class="accion-tag tag-azul">ANTES DE PAGAR</span> Construir flujo de caja real con Emily — ella misma lo solicitó.</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:5mm">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);letter-spacing:.6px;margin-bottom:2mm">Cuando avalen los presupuestos</div>
+    <div class="accion-item normal">
+      <div class="accion-num">8</div>
+      <div class="accion-text"><span class="accion-tag tag-verde">PRÓXIMO</span> Visita a Calamar para ver la obra en campo y conocer a Alejandra en persona.</div>
+    </div>
+    <div class="accion-item normal">
+      <div class="accion-num">9</div>
+      <div class="accion-text"><span class="accion-tag tag-verde">PRÓXIMO</span> Solicitar: acta de inicio, análisis de costos, cronograma avalado, NITs de empresas de Alejandra.</div>
+    </div>
+  </div>
+
+  <!-- Señales positivas -->
+  <div class="section-title">Por Qué Tiene Sentido Seguir</div>
+  <div class="grid-2" style="margin-bottom:0;gap:3mm">
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px">
+      <div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px">✅ Señales fuertes de confianza</div>
+      <div style="font-size:10px;color:#166534;line-height:1.7">
+        • Emily acepta contrato escrito sin problema<br>
+        • Entrega todos los documentos solicitados<br>
+        • Ella misma pide flujo de caja antes de pedir plata<br>
+        • Invita a visitas y reuniones presenciales<br>
+        • El contrato ya está en ejecución — no es promesa futura
+      </div>
+    </div>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px">
+      <div style="font-size:11px;font-weight:700;color:#1d4ed8;margin-bottom:6px">📊 Por qué los números convencen</div>
+      <div style="font-size:10px;color:#1e40af;line-height:1.7">
+        • Contrato de $1.084M — escala de negocio real<br>
+        • ROI estimado 60–85% en solo 6 meses<br>
+        • Anticipo del Estado: $216M — flujo de entrada seguro<br>
+        • Dos contratos más adjudicados para después<br>
+        • Ferretería da crédito — reduce capital de trabajo
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-text">Contratos Calamar · Informe Ejecutivo · 1 abril 2026 · Confidencial</div>
+    <div class="footer-text">Página 4 de 4</div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── COLORES BASE ──
+const BLUE   = '#2563eb';
+const PURPLE = '#7c3aed';
+const GREEN  = '#16a34a';
+const YELLOW = '#d97706';
+const RED    = '#dc2626';
+const GRAY   = '#9ca3af';
+
+// ── CHART 1: Estructura societaria (Donut) ──
+new Chart(document.getElementById('chartSocietario'), {
+  type: 'doughnut',
+  data: {
+    labels: ['3 Socios Poderosos (70%)', 'Emily (15%)', 'Stiven (15%)'],
+    datasets: [{
+      data: [70, 15, 15],
+      backgroundColor: ['#1e3a5f', GREEN, BLUE],
+      borderColor: ['#fff','#fff','#fff'],
+      borderWidth: 3,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: { font: { size: 10 }, padding: 10, color: '#374151', boxWidth: 14 }
+      },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.parsed}%`
+        }
+      }
+    }
+  }
+});
+
+// ── CHART 2: Comparativa financiera (Bar horizontal) ──
+new Chart(document.getElementById('chartFinanciero'), {
+  type: 'bar',
+  data: {
+    labels: ['Valor contrato', 'Anticipo (20%)', 'Utilidad estimada (30%)', 'Retorno Stiven (15%)', 'Inversión Stiven'],
+    datasets: [{
+      label: 'Millones COP',
+      data: [1084, 216.6, 175, 87.5, 100],
+      backgroundColor: [BLUE, GREEN, PURPLE, YELLOW, RED],
+      borderRadius: 6,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ` $${ctx.parsed.x.toLocaleString('es-CO')}M` }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: '#f3f4f6' },
+        ticks: { font: { size: 9 }, color: '#6b7280',
+          callback: v => '$' + v + 'M'
+        }
+      },
+      y: { ticks: { font: { size: 9 }, color: '#374151' }, grid: { display: false } }
+    }
+  }
+});
+
+// ── CHART 3: Progress por categoría (Bar) ──
+new Chart(document.getElementById('chartProgress'), {
+  type: 'bar',
+  data: {
+    labels: ['Legalidad', 'Valor/Retorno', 'Riesgo Op.', 'Control $', 'Mi Rol', 'Historial', 'Próx. Pasos'],
+    datasets: [
+      {
+        label: 'Respondidas',
+        data: [5, 5, 4, 4, 3, 3, 3],
+        backgroundColor: GREEN, borderRadius: 4
+      },
+      {
+        label: 'Sin responder',
+        data: [0, 0, 1, 0, 2, 0, 0],
+        backgroundColor: '#fee2e2', borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { font: { size: 9 }, padding: 8, color: '#374151', boxWidth: 12 } }
+    },
+    scales: {
+      x: { stacked: true, ticks: { font: { size: 9 }, color: '#374151' }, grid: { display: false } },
+      y: { stacked: true, ticks: { font: { size: 9 }, color: '#6b7280', stepSize: 1 }, grid: { color: '#f3f4f6' } }
+    }
+  }
+});
+
+// ── CHART 4: Proyección financiera Stiven ──
+new Chart(document.getElementById('chartProyeccion'), {
+  type: 'bar',
+  data: {
+    labels: ['Inversión total\nStiven', 'Costo financiero\n(6 meses)', 'Retorno bruto\nestimado (15%)', 'Retorno neto\nestimado'],
+    datasets: [{
+      label: 'Millones COP',
+      data: [100, -15, 87.5, 72.5],
+      backgroundColor: [BLUE, RED, PURPLE, GREEN],
+      borderRadius: 8,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ` $${ctx.parsed.y.toLocaleString('es-CO')}M` }
+      }
+    },
+    scales: {
+      x: { ticks: { font: { size: 9 }, color: '#374151' }, grid: { display: false } },
+      y: {
+        ticks: { font: { size: 9 }, color: '#6b7280', callback: v => '$' + v + 'M' },
+        grid: { color: '#f3f4f6' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
