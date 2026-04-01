@@ -155,11 +155,15 @@
     @media(max-width:900px){ .pago-row { grid-template-columns: 1fr 1fr; gap: 8px; } }
     .pago-date { font-size: 13px; color: var(--muted); }
     .pago-cat { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-    .cat-poliza   { background: rgba(124,92,255,.2); color: #a78bfa; }
-    .cat-nomina   { background: rgba(34,197,94,.2);  color: var(--green); }
-    .cat-material { background: rgba(245,158,11,.2); color: var(--yellow); }
-    .cat-derechos { background: rgba(79,124,255,.2); color: var(--accent); }
-    .cat-otro     { background: rgba(126,134,153,.2);color: var(--muted); }
+    .cat-poliza        { background: rgba(124,92,255,.2); color: #a78bfa; }
+    .cat-nomina        { background: rgba(34,197,94,.2);  color: var(--green); }
+    .cat-material      { background: rgba(245,158,11,.2); color: var(--yellow); }
+    .cat-derechos      { background: rgba(79,124,255,.2); color: var(--accent); }
+    .cat-administrativo{ background: rgba(6,182,212,.2);  color: #22d3ee; }
+    .cat-otro          { background: rgba(126,134,153,.2);color: var(--muted); }
+    .otro-detalle { margin-top: 8px; display: none; }
+    .otro-detalle input { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; padding: 8px 12px; width: 100%; font-family: inherit; outline: none; transition: border-color .2s; }
+    .otro-detalle input:focus { border-color: var(--accent); }
     .pago-quien { font-size: 13px; font-weight: 600; }
     .quien-stiven { color: var(--accent); }
     .quien-emily  { color: var(--yellow); }
@@ -260,15 +264,19 @@
           <option value="Emily">Emily</option>
         </select>
         <input type="number" id="pago-monto" placeholder="Monto en pesos (ej: 12000000)" />
-        <select id="pago-cat">
+        <select id="pago-cat" onchange="toggleOtroDetalle(this.value)">
           <option value="Póliza">Póliza</option>
           <option value="Nómina">Nómina / Salarios</option>
+          <option value="Administrativo">Administrativo</option>
           <option value="Derechos">Derechos / Viabilidades</option>
           <option value="Materiales">Materiales</option>
           <option value="Otro">Otro</option>
         </select>
       </div>
-      <input type="text" class="input-full" id="pago-concepto" placeholder="Concepto / descripción del pago..." />
+      <div class="otro-detalle" id="otro-detalle">
+        <input type="text" id="pago-otro-desc" placeholder="Especificá qué tipo de gasto es..." />
+      </div>
+      <input type="text" class="input-full" id="pago-concepto" placeholder="Concepto / descripción del pago..." style="margin-top:8px" />
       <div class="pago-form-footer">
         <label class="btn-attach-pago" for="pago-archivo-input">📎 Adjuntar comprobante</label>
         <input type="file" id="pago-archivo-input" style="display:none" accept="image/*,.pdf" onchange="previewPagoArchivo(this)" />
@@ -506,7 +514,10 @@ function showTab(id) {
 
 // ── FORMAT ──
 function fmt(n) { return '$' + Number(n).toLocaleString('es-CO'); }
-function catClass(c) { return { 'Póliza':'cat-poliza','Nómina':'cat-nomina','Materiales':'cat-material','Derechos':'cat-derechos','Otro':'cat-otro' }[c] || 'cat-otro'; }
+function catClass(c) { return { 'Póliza':'cat-poliza','Nómina':'cat-nomina','Materiales':'cat-material','Derechos':'cat-derechos','Administrativo':'cat-administrativo','Otro':'cat-otro' }[c] || 'cat-otro'; }
+function toggleOtroDetalle(val) {
+  document.getElementById('otro-detalle').style.display = val === 'Otro' ? 'block' : 'none';
+}
 function safeName(name) {
   // Separar nombre y extensión
   const lastDot = name.lastIndexOf('.');
@@ -535,6 +546,7 @@ async function loadRespuestas() {
   const { data } = await sb.from('respuestas').select('*');
   if (data) data.forEach(r => { respuestas[`${r.cat_idx}-${r.item_idx}`] = r; });
   buildPreguntas();
+  updateBadge();
 }
 
 function buildPreguntas() {
@@ -722,7 +734,9 @@ async function addPago() {
   const fecha    = document.getElementById('pago-fecha').value;
   const quien    = document.getElementById('pago-quien').value;
   const monto    = parseInt(document.getElementById('pago-monto').value);
-  const cat      = document.getElementById('pago-cat').value;
+  let cat        = document.getElementById('pago-cat').value;
+  const otroDesc = document.getElementById('pago-otro-desc').value.trim();
+  if (cat === 'Otro' && otroDesc) cat = `Otro: ${otroDesc}`;
   const concepto = document.getElementById('pago-concepto').value.trim();
   if (!fecha || !monto || !concepto) { toast('Completá fecha, monto y concepto', 'err'); return; }
   if (isNaN(monto) || monto <= 0)    { toast('Monto inválido', 'err'); return; }
@@ -744,6 +758,9 @@ async function addPago() {
   document.getElementById('pago-fecha').value = new Date().toISOString().split('T')[0];
   document.getElementById('pago-monto').value = '';
   document.getElementById('pago-concepto').value = '';
+  document.getElementById('pago-otro-desc').value = '';
+  document.getElementById('otro-detalle').style.display = 'none';
+  document.getElementById('pago-cat').value = 'Póliza';
   document.getElementById('pago-archivo-input').value = '';
   document.getElementById('pago-attach-preview').style.display = 'none';
   pagoArchivoFile = null;
