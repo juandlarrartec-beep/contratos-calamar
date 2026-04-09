@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contratos Calamar — Due Diligence</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Neon Data API client -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
@@ -788,9 +788,97 @@
 </div>
 
 <script>
-const SUPABASE_URL = 'https://dwvincawpyxbafkdqoyp.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_jODOeEhsu8JgDoFbSAdiaw_5PBuFoH5';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// ── NEON SQL HTTP CLIENT ──
+const NEON_SQL = 'https://ep-divine-fire-acxhppmp.sa-east-1.aws.neon.tech/sql';
+const NEON_CONN = 'postgresql://neondb_owner:npg_Tyah0kB5ZrKY@ep-divine-fire-acxhppmp.sa-east-1.aws.neon.tech/neondb';
+
+async function neonQuery(query, params = []) {
+  const resp = await fetch(NEON_SQL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Neon-Connection-String': NEON_CONN },
+    body: JSON.stringify({ query, params })
+  });
+  if (!resp.ok) throw new Error(await resp.text());
+  return await resp.json();
+}
+
+// Supabase-compatible wrapper para no tocar el resto del código
+const sb = {
+  from(table) {
+    let _orderCol = null, _orderAsc = true, _eqFilters = [];
+    const chain = {
+      select() { return chain; },
+      order(col, { ascending = true } = {}) { _orderCol = col; _orderAsc = ascending; return chain; },
+      eq(col, val) { _eqFilters.push({ col, val }); return chain; },
+      async then(resolve) {
+        let q = `SELECT * FROM ${table}`;
+        const params = [];
+        if (_eqFilters.length) {
+          const wheres = _eqFilters.map((f, i) => { params.push(f.val); return `${f.col} = $${i+1}`; });
+          q += ' WHERE ' + wheres.join(' AND ');
+        }
+        if (_orderCol) q += ` ORDER BY ${_orderCol} ${_orderAsc ? 'ASC' : 'DESC'}`;
+        try { const r = await neonQuery(q, params); resolve({ data: r.rows, error: null }); }
+        catch (e) { resolve({ data: null, error: e }); }
+      },
+      async insert(data) {
+        const cols = Object.keys(data);
+        const vals = Object.values(data);
+        const placeholders = cols.map((_, i) => `$${i+1}`);
+        try {
+          await neonQuery(`INSERT INTO ${table} (${cols.join(',')}) VALUES (${placeholders.join(',')})`, vals);
+          return { error: null };
+        } catch (e) { return { error: e }; }
+      },
+      async upsert(data, { onConflict } = {}) {
+        const cols = Object.keys(data);
+        const vals = Object.values(data);
+        const placeholders = cols.map((_, i) => `$${i+1}`);
+        const updates = cols.filter(c => !onConflict?.split(',').includes(c)).map((c, i) => `${c} = EXCLUDED.${c}`);
+        const conflictCols = onConflict || 'id';
+        try {
+          await neonQuery(
+            `INSERT INTO ${table} (${cols.join(',')}) VALUES (${placeholders.join(',')}) ON CONFLICT (${conflictCols}) DO UPDATE SET ${updates.join(',')}`,
+            vals
+          );
+          return { error: null };
+        } catch (e) { return { error: e }; }
+      },
+      delete() {
+        return {
+          eq(col, val) {
+            return {
+              async then(resolve) {
+                try { await neonQuery(`DELETE FROM ${table} WHERE ${col} = $1`, [val]); resolve({ error: null }); }
+                catch (e) { resolve({ error: e }); }
+              }
+            };
+          }
+        };
+      }
+    };
+    return chain;
+  },
+};
+
+// ── ARCHIVO UTILS (base64 en DB) ──
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function openBase64File(data, type, nombre) {
+  const bin = atob(data);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  const blob = new Blob([bytes], { type });
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
 
 const CATS = [
   { emoji:'📋', cat:'Legalidad y estructura del contrato', items:[
@@ -891,8 +979,10 @@ function validateFile(file) {
 
 // ── PREGUNTAS ──
 async function loadRespuestas() {
-  const { data } = await sb.from('respuestas').select('*');
-  if (data) data.forEach(r => { respuestas[`${r.cat_idx}-${r.item_idx}`] = r; });
+  try {
+    const result = await neonQuery('SELECT id, cat_idx, item_idx, texto, archivo_url, archivo_nombre, archivo_type, checked, updated_at FROM respuestas');
+    if (result.rows) result.rows.forEach(r => { respuestas[`${r.cat_idx}-${r.item_idx}`] = r; });
+  } catch(e) { console.error('loadRespuestas:', e); }
   buildPreguntas();
   updateBadge();
 }
@@ -930,7 +1020,7 @@ function buildPreguntas() {
             <textarea id="ta-${ci}-${ii}" placeholder="Respuesta de Emily...">${texto}</textarea>
             ${archUrl ? `
               <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
-                <a class="archivo-adjunto" href="${archUrl}" target="_blank">📎 ${archNom || 'Archivo adjunto'}</a>
+                <a class="archivo-adjunto" href="#" onclick="event.preventDefault();viewRespFile(${ci},${ii})">📎 ${archNom || 'Archivo adjunto'}</a>
                 <button onclick="deleteRespArchivo(${ci},${ii})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 5px;border-radius:4px;transition:color .2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--muted)'" title="Eliminar archivo">✕</button>
               </div>` : ''}
             <div class="resp-footer">
@@ -992,25 +1082,37 @@ async function uploadRespArchivo(ci, ii, input) {
   if (!file) return;
   const err = validateFile(file);
   if (err) { toast(err, 'err'); input.value = ''; return; }
-  const path = `respuestas/${ci}-${ii}-${Date.now()}-${safeName(file.name)}`;
-  const { error: upErr } = await sb.storage.from('archivos').upload(path, file, { upsert: true });
-  if (upErr) { toast('Error al subir archivo', 'err'); return; }
-  const { data: { publicUrl } } = sb.storage.from('archivos').getPublicUrl(path);
+  toast('Subiendo archivo...', 'ok');
+  const b64 = await fileToBase64(file);
   const existing = respuestas[`${ci}-${ii}`] || {};
   const texto = document.getElementById(`ta-${ci}-${ii}`)?.value || '';
-  const payload = { cat_idx: ci, item_idx: ii, texto, checked: existing.checked||false, archivo_url: publicUrl, archivo_nombre: file.name, updated_at: new Date().toISOString() };
+  const payload = { cat_idx: ci, item_idx: ii, texto, checked: existing.checked||false, archivo_nombre: file.name, archivo_data: b64, archivo_type: file.type, archivo_url: 'base64', updated_at: new Date().toISOString() };
   const { error } = await sb.from('respuestas').upsert(payload, { onConflict: 'cat_idx,item_idx' });
-  if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_url: publicUrl, archivo_nombre: file.name, texto }; buildPreguntas(); toast('Archivo subido ✓'); }
+  if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_nombre: file.name, archivo_data: b64, archivo_type: file.type, archivo_url: 'base64', texto }; buildPreguntas(); toast('Archivo subido ✓'); }
   else toast('Error al guardar archivo', 'err');
 }
 
 async function deleteRespArchivo(ci, ii) {
   if (!confirm('¿Eliminar el archivo adjunto?')) return;
   const existing = respuestas[`${ci}-${ii}`] || {};
-  const payload = { cat_idx: ci, item_idx: ii, texto: existing.texto||'', checked: existing.checked||false, archivo_url: null, archivo_nombre: null, updated_at: new Date().toISOString() };
+  const payload = { cat_idx: ci, item_idx: ii, texto: existing.texto||'', checked: existing.checked||false, archivo_url: null, archivo_nombre: null, archivo_data: null, archivo_type: null, updated_at: new Date().toISOString() };
   const { error } = await sb.from('respuestas').upsert(payload, { onConflict: 'cat_idx,item_idx' });
-  if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_url: null, archivo_nombre: null }; buildPreguntas(); toast('Archivo eliminado'); }
+  if (!error) { respuestas[`${ci}-${ii}`] = { ...existing, archivo_url: null, archivo_nombre: null, archivo_data: null, archivo_type: null }; buildPreguntas(); toast('Archivo eliminado'); }
   else toast('Error al eliminar archivo', 'err');
+}
+
+async function viewRespFile(ci, ii) {
+  const r = respuestas[`${ci}-${ii}`];
+  if (!r) return;
+  if (r.archivo_data) { openBase64File(r.archivo_data, r.archivo_type || 'application/octet-stream', r.archivo_nombre); return; }
+  if (r.archivo_url && r.archivo_url !== 'base64') { window.open(r.archivo_url, '_blank'); return; }
+  // Fetch from DB if not cached
+  const { data } = await sb.from('respuestas').select('*').eq('cat_idx', ci).eq('item_idx', ii);
+  if (data?.[0]?.archivo_data) {
+    respuestas[`${ci}-${ii}`].archivo_data = data[0].archivo_data;
+    respuestas[`${ci}-${ii}`].archivo_type = data[0].archivo_type;
+    openBase64File(data[0].archivo_data, data[0].archivo_type, r.archivo_nombre);
+  } else toast('Archivo no encontrado', 'err');
 }
 
 function toggleCat(ci, header) {
@@ -1038,8 +1140,10 @@ function updateBadge() {
 
 // ── PAGOS ──
 async function loadPagos() {
-  const { data } = await sb.from('pagos').select('*').order('fecha', { ascending: false });
-  if (data) pagos = data;
+  try {
+    const result = await neonQuery('SELECT id, fecha, concepto, categoria, quien, monto, archivo_url, archivo_nombre, archivo_type FROM pagos ORDER BY fecha DESC');
+    if (result.rows) pagos = result.rows;
+  } catch(e) { console.error('loadPagos:', e); }
   renderPagos();
 }
 
@@ -1063,7 +1167,7 @@ function renderPagos() {
       <div class="pago-quien ${p.quien==='Stiven'?'quien-stiven':'quien-emily'}">${p.quien}</div>
       <div>
         ${p.archivo_url
-          ? `<a class="pago-archivo-link" href="${p.archivo_url}" target="_blank">📎 ${p.archivo_nombre||'Ver'}</a>`
+          ? `<a class="pago-archivo-link" href="#" onclick="event.preventDefault();viewPagoFile(${p.id})">📎 ${p.archivo_nombre||'Ver'}</a>`
           : `<span style="font-size:12px;color:var(--muted)">—</span>`}
       </div>
       <div class="pago-monto" style="text-align:right">${fmt(p.monto)}</div>
@@ -1093,17 +1197,16 @@ async function addPago() {
   if (!fecha || !monto || !concepto) { toast('Completá fecha, monto y concepto', 'err'); return; }
   if (isNaN(monto) || monto <= 0)    { toast('Monto inválido', 'err'); return; }
 
-  let archivo_url = null, archivo_nombre = null;
+  let archivo_url = null, archivo_nombre = null, archivo_data = null, archivo_type = null;
   if (pagoArchivoFile) {
-    const path = `pagos/${Date.now()}-${safeName(pagoArchivoFile.name)}`;
-    const { error: upErr } = await sb.storage.from('archivos').upload(path, pagoArchivoFile);
-    if (upErr) { toast('Error al subir comprobante', 'err'); return; }
-    const { data: { publicUrl } } = sb.storage.from('archivos').getPublicUrl(path);
-    archivo_url = publicUrl;
+    toast('Subiendo comprobante...', 'ok');
+    archivo_data = await fileToBase64(pagoArchivoFile);
+    archivo_type = pagoArchivoFile.type;
+    archivo_url = 'base64';
     archivo_nombre = pagoArchivoFile.name;
   }
 
-  const { error } = await sb.from('pagos').insert({ fecha, concepto, categoria: cat, quien, monto, archivo_url, archivo_nombre });
+  const { error } = await sb.from('pagos').insert({ fecha, concepto, categoria: cat, quien, monto, archivo_url, archivo_nombre, archivo_data, archivo_type });
   if (error) { toast('Error al registrar pago', 'err'); return; }
 
   toast('Pago registrado ✓');
@@ -1117,6 +1220,18 @@ async function addPago() {
   document.getElementById('pago-attach-preview').style.display = 'none';
   pagoArchivoFile = null;
   await loadPagos();
+}
+
+async function viewPagoFile(id) {
+  const pago = pagos.find(p => p.id === id);
+  if (!pago) return;
+  toast('Cargando archivo...', 'ok');
+  try {
+    const result = await neonQuery('SELECT archivo_data, archivo_type, archivo_nombre FROM pagos WHERE id = $1', [id]);
+    if (result.rows?.[0]?.archivo_data) {
+      openBase64File(result.rows[0].archivo_data, result.rows[0].archivo_type, result.rows[0].archivo_nombre);
+    } else toast('Archivo no encontrado', 'err');
+  } catch(e) { toast('Error al cargar archivo', 'err'); }
 }
 
 async function deletePago(id) {
