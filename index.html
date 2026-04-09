@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contratos Calamar — Due Diligence</title>
-  <!-- Neon Data API client -->
+  <script type="module" src="https://esm.sh/@neondatabase/serverless@1"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
@@ -788,18 +788,21 @@
 </div>
 
 <script>
-// ── NEON SQL HTTP CLIENT ──
-const NEON_SQL = 'https://ep-divine-fire-acxhppmp.sa-east-1.aws.neon.tech/sql';
-const NEON_CONN = 'postgresql://neondb_owner:npg_Tyah0kB5ZrKY@ep-divine-fire-acxhppmp.sa-east-1.aws.neon.tech/neondb';
+// ── NEON SERVERLESS CLIENT ──
+const NEON_CONN = 'postgresql://neondb_owner:npg_Tyah0kB5ZrKY@ep-divine-fire-acxhppmp.sa-east-1.aws.neon.tech/neondb?sslmode=require';
+let _neonPool = null;
+
+async function getNeonPool() {
+  if (_neonPool) return _neonPool;
+  const { Pool } = await import('https://esm.sh/@neondatabase/serverless@1');
+  _neonPool = new Pool({ connectionString: NEON_CONN });
+  return _neonPool;
+}
 
 async function neonQuery(query, params = []) {
-  const resp = await fetch(NEON_SQL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Neon-Connection-String': NEON_CONN },
-    body: JSON.stringify({ query, params })
-  });
-  if (!resp.ok) throw new Error(await resp.text());
-  return await resp.json();
+  const pool = await getNeonPool();
+  const result = await pool.query(query, params);
+  return result;
 }
 
 // Supabase-compatible wrapper para no tocar el resto del código
