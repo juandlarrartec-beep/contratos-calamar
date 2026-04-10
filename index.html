@@ -225,6 +225,22 @@
 
   <!-- ── PREGUNTAS ── -->
   <div id="tab-preguntas" class="section active">
+
+    <!-- Contrato pinneado — siempre accesible desde GitHub Pages -->
+    <div style="background:linear-gradient(135deg,rgba(79,124,255,.12),rgba(124,92,255,.08));border:1px solid rgba(79,124,255,.3);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:28px">📄</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text)">Contrato de Obra No. 1380-2097-2025</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Documento oficial · $1.084.000.000 · Inicio 5 marzo 2026</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="https://juandlarrartec-beep.github.io/contratos-calamar/analisis/01_Legalidad_y_Estructura/CONTRATO_DE_OBRA_1380-2097-2025.pdf" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--accent);color:#fff;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none">👁 Ver contrato</a>
+        <a href="https://juandlarrartec-beep.github.io/contratos-calamar/analisis/01_Legalidad_y_Estructura/CONTRATO_DE_OBRA_1380-2097-2025.pdf" download="CONTRATO_DE_OBRA_1380-2097-2025.pdf" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);border-radius:8px;font-size:12px;font-weight:600;text-decoration:none">⬇ Descargar</a>
+      </div>
+    </div>
+
     <div class="progress-bar-wrap">
       <h3>Progreso de la reunión</h3>
       <div class="progress-stats">
@@ -1022,9 +1038,8 @@ function buildPreguntas() {
           <div class="respuesta-area">
             <textarea id="ta-${ci}-${ii}" placeholder="Respuesta de Emily...">${texto}</textarea>
             ${archUrl ? `
-              <div style="display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap">
-                <a class="archivo-adjunto" href="${archUrl}" target="_blank" rel="noopener noreferrer">👁 Ver — ${archNom || 'Archivo adjunto'}</a>
-                <a class="archivo-adjunto" href="${archUrl}" download="${archNom || 'archivo'}" style="background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:var(--green)">⬇ Descargar</a>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+                <a class="archivo-adjunto" href="#" onclick="event.preventDefault();viewRespFile(${ci},${ii})">📎 ${archNom || 'Archivo adjunto'}</a>
                 <button onclick="deleteRespArchivo(${ci},${ii})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 5px;border-radius:4px;transition:color .2s" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--muted)'" title="Eliminar archivo">✕</button>
               </div>` : ''}
             <div class="resp-footer">
@@ -1171,10 +1186,7 @@ function renderPagos() {
       <div class="pago-quien ${p.quien==='Stiven'?'quien-stiven':'quien-emily'}">${p.quien}</div>
       <div>
         ${p.archivo_url
-          ? `<div style="display:flex;gap:4px;flex-wrap:wrap">
-              <a class="pago-archivo-link" href="${p.archivo_url}" target="_blank" rel="noopener noreferrer">👁 Ver</a>
-              <a class="pago-archivo-link" href="${p.archivo_url}" download="${p.archivo_nombre||'comprobante'}" style="background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:var(--green)">⬇</a>
-             </div>`
+          ? `<a class="pago-archivo-link" href="#" onclick="event.preventDefault();viewPagoFile(${p.id})">📎 ${p.archivo_nombre||'Ver'}</a>`
           : `<span style="font-size:12px;color:var(--muted)">—</span>`}
       </div>
       <div class="pago-monto" style="text-align:right">${fmt(p.monto)}</div>
