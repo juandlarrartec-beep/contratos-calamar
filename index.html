@@ -181,6 +181,45 @@
     .secop-box p { font-size: 13px; color: var(--muted); }
     .secop-box code { background: rgba(79,124,255,.2); color: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: 13px; }
 
+    /* ── INDICADOR GLOBAL (Capital vs Conciliación) ── */
+    .indicador-global { background: linear-gradient(135deg, rgba(79,124,255,.08), rgba(124,92,255,.05)); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+    .indicador-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 16px; }
+    .indicador-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    @media(max-width:700px){ .indicador-grid { grid-template-columns: repeat(2, 1fr); } }
+    .indicador-item { text-align: center; padding: 14px 10px; background: var(--surface2); border-radius: 10px; border: 1px solid var(--border); }
+    .indicador-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+    .indicador-num { font-size: 20px; font-weight: 800; word-break: break-word; }
+    .indicador-num.invertido  { color: var(--accent); }
+    .indicador-num.conciliado { color: var(--green); }
+    .indicador-num.pendiente  { color: var(--yellow); }
+    .indicador-num.pct        { color: var(--text); }
+    .indicador-num.pct.low    { color: var(--red); }
+    .indicador-num.pct.mid    { color: var(--yellow); }
+    .indicador-num.pct.high   { color: var(--green); }
+    .indicador-bar { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
+    .indicador-bar-fill { height: 100%; border-radius: 999px; transition: width .4s ease, background .3s; }
+
+    /* ── CONCILIACIÓN (filas expandibles) ── */
+    .conc-header { display: grid; grid-template-columns: 30px 100px 1fr 120px 140px 110px 40px; gap: 8px; padding: 12px 20px; background: var(--surface2); border-bottom: 1px solid var(--border); }
+    .conc-header span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); }
+    @media(max-width:900px){ .conc-header { display: none; } }
+    .conc-row { display: grid; grid-template-columns: 30px 100px 1fr 120px 140px 110px 40px; gap: 8px; padding: 14px 20px; border-bottom: 1px solid var(--border); align-items: center; transition: background .15s; }
+    .conc-row:last-child { border-bottom: none; }
+    .conc-row:hover { background: var(--surface2); }
+    .conc-row.clickable { cursor: pointer; }
+    @media(max-width:900px){ .conc-row { grid-template-columns: 30px 1fr 1fr; gap: 8px; } }
+    .conc-expand-icon { color: var(--muted); font-size: 12px; transition: transform .2s; display: flex; justify-content: center; }
+    .conc-expand-icon.open { transform: rotate(90deg); color: var(--accent); }
+    .conc-detalles-wrap { background: var(--surface2); border-bottom: 1px solid var(--border); padding: 0; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+    .conc-detalles-wrap.open { max-height: 2000px; padding: 14px 24px; }
+    .conc-detalles-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .conc-detalles-table th { text-align: left; padding: 6px 8px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; font-size: 10px; border-bottom: 1px solid var(--border); }
+    .conc-detalles-table td { padding: 8px; border-bottom: 1px solid rgba(46,51,71,.5); color: var(--text); }
+    .conc-detalles-table tr:last-child td { border-bottom: none; }
+    .conc-detalles-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+    .conc-prov { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .conc-meta { font-size: 11px; color: var(--muted); }
+
     .notas-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
     .notas-box h3 { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; }
     .notas-box textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; line-height: 1.6; padding: 12px; resize: vertical; min-height: 120px; font-family: inherit; outline: none; transition: border-color .2s; }
@@ -214,7 +253,8 @@
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('preguntas')">Preguntas <span id="badge-preguntas" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
-  <div class="tab" onclick="showTab('pagos')">Pagos <span id="badge-pagos" style="background:var(--green);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
+  <div class="tab" onclick="showTab('pagos')">Capital <span id="badge-pagos" style="background:var(--accent);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
+  <div class="tab" onclick="showTab('conciliacion')">Conciliación <span id="badge-conciliacion" style="background:var(--green);color:#fff;font-size:11px;padding:2px 7px;border-radius:999px;margin-left:4px">0</span></div>
   <div class="tab" onclick="showTab('riesgos')">Riesgos</div>
   <div class="tab" onclick="showTab('resumen')">Resumen</div>
   <div class="tab" onclick="showTab('contratos')">Contratos</div>
@@ -252,28 +292,41 @@
     <div id="preguntas-container"><div class="loading"><div class="spinner"></div>Cargando preguntas...</div></div>
   </div>
 
-  <!-- ── PAGOS ── -->
+  <!-- ── CAPITAL (antes Pagos) ── -->
   <div id="tab-pagos" class="section">
     <div style="background:rgba(126,134,153,.08);border:1px dashed var(--border);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:8px">
       <span style="font-size:13px">👷</span>
       <span style="font-size:12px;color:var(--muted)"><strong style="color:var(--muted)">Referencia Emily — Etapa 1:</strong> inversión estimada anterior ~$80.000.000 (dato no verificado)</span>
     </div>
+
+    <!-- Indicador global (mismo componente en ambas pestañas) -->
+    <div class="indicador-global" id="indicador-capital">
+      <div class="indicador-title">Estado de rendición de cuentas</div>
+      <div class="indicador-grid">
+        <div class="indicador-item"><div class="indicador-label">💼 Invertido</div><div class="indicador-num invertido" data-kpi="invertido">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">✅ Conciliado</div><div class="indicador-num conciliado" data-kpi="conciliado">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">⏳ Pendiente</div><div class="indicador-num pendiente" data-kpi="pendiente">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">📊 % Conciliación</div><div class="indicador-num pct" data-kpi="pct">0%</div></div>
+      </div>
+      <div class="indicador-bar"><div class="indicador-bar-fill" data-kpi="bar" style="width:0%;background:var(--green)"></div></div>
+    </div>
+
     <div class="contador-wrap">
-      <h3 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px">Inversión de Stiven al día de hoy</h3>
+      <h3 style="font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px">Capital invertido por Stiven</h3>
       <div class="contador-grid">
         <div class="contador-item">
-          <div class="contador-label">💼 Total pagado</div>
+          <div class="contador-label">💼 Total aportado</div>
           <div class="contador-num stiven" id="cnt-stiven">$0</div>
         </div>
         <div class="contador-item">
-          <div class="contador-label">📋 Pagos registrados</div>
+          <div class="contador-label">📋 Aportes registrados</div>
           <div class="contador-num total" id="cnt-total">0</div>
         </div>
       </div>
     </div>
 
     <div class="pago-form">
-      <h3>Registrar nuevo pago</h3>
+      <h3>Registrar nuevo aporte</h3>
       <div class="pago-fields">
         <input type="date" id="pago-fecha" />
         <select id="pago-quien">
@@ -307,6 +360,66 @@
         <span>Fecha</span><span>Concepto</span><span>Categoría</span><span>Quién</span><span>Comprobante</span><span style="text-align:right">Monto</span><span></span>
       </div>
       <div id="planilla-body"><div class="loading"><div class="spinner"></div>Cargando pagos...</div></div>
+    </div>
+  </div>
+
+  <!-- ── CONCILIACIÓN ── -->
+  <div id="tab-conciliacion" class="section">
+    <div style="background:rgba(34,197,94,.06);border:1px dashed rgba(34,197,94,.3);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:8px">
+      <span style="font-size:13px">🧾</span>
+      <span style="font-size:12px;color:var(--muted)"><strong style="color:var(--green)">Conciliación de gastos:</strong> Emily sube comprobantes de los pagos realizados con el capital invertido por Stiven.</span>
+    </div>
+
+    <!-- Indicador global (mismo que en Capital) -->
+    <div class="indicador-global" id="indicador-conc">
+      <div class="indicador-title">Estado de rendición de cuentas</div>
+      <div class="indicador-grid">
+        <div class="indicador-item"><div class="indicador-label">💼 Invertido</div><div class="indicador-num invertido" data-kpi="invertido">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">✅ Conciliado</div><div class="indicador-num conciliado" data-kpi="conciliado">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">⏳ Pendiente</div><div class="indicador-num pendiente" data-kpi="pendiente">$0</div></div>
+        <div class="indicador-item"><div class="indicador-label">📊 % Conciliación</div><div class="indicador-num pct" data-kpi="pct">0%</div></div>
+      </div>
+      <div class="indicador-bar"><div class="indicador-bar-fill" data-kpi="bar" style="width:0%;background:var(--green)"></div></div>
+    </div>
+
+    <div class="pago-form">
+      <h3>Registrar gasto conciliado</h3>
+      <div class="pago-fields">
+        <input type="date" id="conc-fecha" />
+        <input type="number" id="conc-monto" placeholder="Monto en pesos (ej: 1500000)" />
+        <select id="conc-cat">
+          <option value="Póliza">Póliza</option>
+          <option value="Nómina">Nómina / Jornales</option>
+          <option value="Administrativo">Administrativo</option>
+          <option value="Derechos">Derechos / Viabilidades</option>
+          <option value="Materiales">Materiales</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <select id="conc-metodo">
+          <option value="Transferencia">Transferencia</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Cheque">Cheque</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <input type="text" id="conc-proveedor" placeholder="Proveedor / a quién se pagó (opcional)" />
+        <input type="text" id="conc-factura" placeholder="Nº factura / recibo (opcional)" />
+      </div>
+      <input type="text" class="input-full" id="conc-concepto" placeholder="Concepto / descripción del gasto..." style="margin-top:8px" />
+      <textarea class="input-full" id="conc-notas" placeholder="Notas u observaciones (opcional)..." style="margin-top:8px;min-height:60px;resize:vertical"></textarea>
+      <div class="pago-form-footer">
+        <label class="btn-attach-pago" for="conc-archivo-input">📎 Adjuntar comprobante</label>
+        <input type="file" id="conc-archivo-input" style="display:none" accept="image/*,.pdf" onchange="previewConcArchivo(this)" />
+        <button class="btn-add-pago" onclick="addConciliacion()">+ Registrar gasto</button>
+      </div>
+      <div class="attach-preview" id="conc-attach-preview"></div>
+    </div>
+
+    <div class="planilla-wrap">
+      <div class="conc-header">
+        <span></span><span>Fecha</span><span>Concepto</span><span>Categoría</span><span>Proveedor / Método</span><span style="text-align:right">Monto</span><span></span>
+      </div>
+      <div id="conc-body"><div class="loading"><div class="spinner"></div>Cargando conciliaciones...</div></div>
     </div>
   </div>
 
@@ -821,7 +934,7 @@ async function neonQuery(query, params = []) {
   return result;
 }
 
-// Supabase-compatible wrapper para no tocar el resto del código
+// Wrapper sobre Neon que imita la API de Supabase (legacy) — evita reescribir todas las llamadas
 const sb = {
   from(table) {
     let _orderCol = null, _orderAsc = true, _eqFilters = [];
@@ -950,6 +1063,9 @@ let respuestas = {}; // { "ci-ii": { texto, archivo_url, archivo_nombre, checked
 let openCats = JSON.parse(localStorage.getItem('calamar-opencats') || '[]');
 let pagos = [];
 let pagoArchivoFile = null;
+let conciliaciones = [];
+let concArchivoFile = null;
+let concExpanded = JSON.parse(localStorage.getItem('calamar-conc-expanded') || '[]');
 
 // ── TOAST ──
 function toast(msg, type='ok') {
@@ -1192,6 +1308,7 @@ function renderPagos() {
       <div class="pago-monto" style="text-align:right">${fmt(p.monto)}</div>
       <div style="text-align:center"><button class="btn-del" onclick="deletePago(${p.id})" title="Eliminar">✕</button></div>
     </div>`).join('');
+  renderIndicadorGlobal();
 }
 
 function previewPagoArchivo(input) {
@@ -1258,6 +1375,213 @@ async function deletePago(id) {
   const { error } = await sb.from('pagos').delete().eq('id', id);
   if (!error) { await loadPagos(); toast('Pago eliminado'); }
   else toast('Error al eliminar', 'err');
+}
+
+// ── CONCILIACIÓN ──
+async function bootstrapConciliaciones() {
+  try {
+    await neonQuery(`
+      CREATE TABLE IF NOT EXISTS conciliaciones (
+        id              SERIAL PRIMARY KEY,
+        fecha           DATE NOT NULL,
+        concepto        TEXT NOT NULL,
+        categoria       TEXT NOT NULL,
+        proveedor       TEXT,
+        nro_factura     TEXT,
+        metodo_pago     TEXT,
+        monto           BIGINT NOT NULL,
+        archivo_url     TEXT,
+        archivo_nombre  TEXT,
+        archivo_data    TEXT,
+        archivo_type    TEXT,
+        notas           TEXT,
+        detalles        JSONB,
+        created_at      TIMESTAMPTZ DEFAULT NOW()
+      )
+    `);
+  } catch(e) { console.error('bootstrapConciliaciones:', e); }
+}
+
+async function loadConciliaciones() {
+  try {
+    const result = await neonQuery('SELECT id, fecha, concepto, categoria, proveedor, nro_factura, metodo_pago, monto, archivo_url, archivo_nombre, archivo_type, notas, detalles FROM conciliaciones ORDER BY fecha DESC, id DESC');
+    if (result.rows) conciliaciones = result.rows;
+  } catch(e) { console.error('loadConciliaciones:', e); }
+  renderConciliaciones();
+}
+
+function renderConciliaciones() {
+  const body = document.getElementById('conc-body');
+  document.getElementById('badge-conciliacion').textContent = conciliaciones.length;
+
+  if (!conciliaciones.length) {
+    body.innerHTML = '<div class="planilla-empty">No hay gastos conciliados aún</div>';
+    renderIndicadorGlobal();
+    return;
+  }
+
+  body.innerHTML = conciliaciones.map(c => {
+    const hasDetalles = Array.isArray(c.detalles) && c.detalles.length > 0;
+    const isOpen = concExpanded.includes(c.id);
+    const provMeta = [c.proveedor, c.metodo_pago].filter(Boolean).join(' · ');
+    const facturaLine = c.nro_factura ? `<div class="conc-meta">Factura: ${c.nro_factura}</div>` : '';
+    const rowClass = hasDetalles ? 'conc-row clickable' : 'conc-row';
+    const onClickRow = hasDetalles ? `onclick="toggleConcExpand(${c.id})"` : '';
+    const expandIcon = hasDetalles
+      ? `<div class="conc-expand-icon ${isOpen?'open':''}" id="exp-${c.id}">▶</div>`
+      : `<div></div>`;
+
+    let detallesHTML = '';
+    if (hasDetalles) {
+      const cols = new Set();
+      c.detalles.forEach(d => Object.keys(d).forEach(k => cols.add(k)));
+      const orderedCols = ['item','nombre','cedula','titular','documento','banco','tipo_cuenta','nro_cuenta','valor'].filter(k => cols.has(k));
+      const headers = orderedCols.map(k => `<th>${({item:'#',nombre:'Nombre',cedula:'Cédula',titular:'Titular',documento:'Documento',banco:'Banco',tipo_cuenta:'Tipo Cta.',nro_cuenta:'Nº Cuenta',valor:'Valor'})[k]||k}</th>`).join('');
+      const rows = c.detalles.map(d => {
+        return '<tr>' + orderedCols.map(k => {
+          const v = d[k];
+          if (k === 'valor') return `<td class="num">${v==null?'—':fmt(v)}</td>`;
+          return `<td>${v==null?'—':String(v)}</td>`;
+        }).join('') + '</tr>';
+      }).join('');
+      detallesHTML = `
+        <div class="conc-detalles-wrap ${isOpen?'open':''}" id="det-${c.id}">
+          <table class="conc-detalles-table">
+            <thead><tr>${headers}</tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>`;
+    }
+
+    return `
+      <div class="${rowClass}" ${onClickRow}>
+        ${expandIcon}
+        <div class="pago-date">${c.fecha}</div>
+        <div style="font-size:14px;line-height:1.4">
+          ${c.concepto}
+          ${provMeta ? `<div class="conc-prov">${provMeta}</div>` : ''}
+          ${facturaLine}
+        </div>
+        <div><span class="pago-cat ${catClass(c.categoria)}">${c.categoria}</span></div>
+        <div>
+          ${c.archivo_url
+            ? `<a class="pago-archivo-link" href="#" onclick="event.stopPropagation();event.preventDefault();viewConcFile(${c.id})">📎 ${c.archivo_nombre||'Ver'}</a>`
+            : `<span style="font-size:12px;color:var(--muted)">Sin comprobante</span>`}
+        </div>
+        <div class="pago-monto" style="text-align:right">${fmt(c.monto)}</div>
+        <div style="text-align:center"><button class="btn-del" onclick="event.stopPropagation();deleteConciliacion(${c.id})" title="Eliminar">✕</button></div>
+      </div>
+      ${detallesHTML}`;
+  }).join('');
+
+  renderIndicadorGlobal();
+}
+
+function toggleConcExpand(id) {
+  const wrap = document.getElementById('det-' + id);
+  const icon = document.getElementById('exp-' + id);
+  if (!wrap) return;
+  const isOpen = wrap.classList.toggle('open');
+  icon.classList.toggle('open', isOpen);
+  if (isOpen) { if (!concExpanded.includes(id)) concExpanded.push(id); }
+  else { concExpanded = concExpanded.filter(x => x !== id); }
+  localStorage.setItem('calamar-conc-expanded', JSON.stringify(concExpanded));
+}
+
+function previewConcArchivo(input) {
+  const file = input.files[0] || null;
+  const prev = document.getElementById('conc-attach-preview');
+  if (!file) { concArchivoFile = null; prev.style.display = 'none'; return; }
+  const err = validateFile(file);
+  if (err) { toast(err, 'err'); input.value = ''; concArchivoFile = null; prev.style.display = 'none'; return; }
+  concArchivoFile = file;
+  prev.textContent = '📎 ' + file.name;
+  prev.style.display = 'block';
+}
+
+async function addConciliacion() {
+  const fecha       = document.getElementById('conc-fecha').value;
+  const monto       = parseInt(document.getElementById('conc-monto').value);
+  const categoria   = document.getElementById('conc-cat').value;
+  const metodo_pago = document.getElementById('conc-metodo').value;
+  const proveedor   = document.getElementById('conc-proveedor').value.trim() || null;
+  const nro_factura = document.getElementById('conc-factura').value.trim() || null;
+  const concepto    = document.getElementById('conc-concepto').value.trim();
+  const notas       = document.getElementById('conc-notas').value.trim() || null;
+
+  if (!fecha || !monto || !concepto) { toast('Completá fecha, monto y concepto', 'err'); return; }
+  if (isNaN(monto) || monto <= 0)    { toast('Monto inválido', 'err'); return; }
+
+  let archivo_url = null, archivo_nombre = null, archivo_data = null, archivo_type = null;
+  if (concArchivoFile) {
+    toast('Subiendo comprobante...', 'ok');
+    archivo_data = await fileToBase64(concArchivoFile);
+    archivo_type = concArchivoFile.type;
+    archivo_url = 'base64';
+    archivo_nombre = concArchivoFile.name;
+  }
+
+  const { error } = await sb.from('conciliaciones').insert({
+    fecha, concepto, categoria, proveedor, nro_factura, metodo_pago, monto,
+    archivo_url, archivo_nombre, archivo_data, archivo_type, notas
+  });
+  if (error) { toast('Error al registrar gasto', 'err'); console.error(error); return; }
+
+  toast('Gasto conciliado ✓');
+  document.getElementById('conc-fecha').value = new Date().toISOString().split('T')[0];
+  document.getElementById('conc-monto').value = '';
+  document.getElementById('conc-concepto').value = '';
+  document.getElementById('conc-proveedor').value = '';
+  document.getElementById('conc-factura').value = '';
+  document.getElementById('conc-notas').value = '';
+  document.getElementById('conc-cat').value = 'Póliza';
+  document.getElementById('conc-metodo').value = 'Transferencia';
+  document.getElementById('conc-archivo-input').value = '';
+  document.getElementById('conc-attach-preview').style.display = 'none';
+  concArchivoFile = null;
+  await loadConciliaciones();
+}
+
+async function viewConcFile(id) {
+  toast('Cargando archivo...', 'ok');
+  try {
+    const result = await neonQuery('SELECT archivo_data, archivo_type, archivo_nombre FROM conciliaciones WHERE id = $1', [id]);
+    if (result.rows?.[0]?.archivo_data) {
+      openBase64File(result.rows[0].archivo_data, result.rows[0].archivo_type, result.rows[0].archivo_nombre);
+    } else toast('Archivo no encontrado', 'err');
+  } catch(e) { toast('Error al cargar archivo', 'err'); }
+}
+
+async function deleteConciliacion(id) {
+  if (!confirm('¿Eliminar este gasto conciliado?')) return;
+  const { error } = await sb.from('conciliaciones').delete().eq('id', id);
+  if (!error) { await loadConciliaciones(); toast('Gasto eliminado'); }
+  else toast('Error al eliminar', 'err');
+}
+
+// ── INDICADOR GLOBAL (compartido entre Capital y Conciliación) ──
+function renderIndicadorGlobal() {
+  const invertido  = pagos.filter(p => p.quien === 'Stiven').reduce((s,p) => s + Number(p.monto||0), 0);
+  const conciliado = conciliaciones.reduce((s,c) => s + Number(c.monto||0), 0);
+  const pendiente  = Math.max(invertido - conciliado, 0);
+  const pct        = invertido > 0 ? Math.min((conciliado / invertido) * 100, 100) : 0;
+
+  let pctClass = 'low', barColor = 'var(--red)';
+  if (pct >= 80)      { pctClass = 'high'; barColor = 'var(--green)'; }
+  else if (pct >= 50) { pctClass = 'mid';  barColor = 'var(--yellow)'; }
+
+  document.querySelectorAll('.indicador-global').forEach(root => {
+    const q = sel => root.querySelector(sel);
+    q('[data-kpi="invertido"]').textContent  = fmt(invertido);
+    q('[data-kpi="conciliado"]').textContent = fmt(conciliado);
+    q('[data-kpi="pendiente"]').textContent  = fmt(pendiente);
+    const pctEl = q('[data-kpi="pct"]');
+    pctEl.textContent = pct.toFixed(1) + '%';
+    pctEl.className = 'indicador-num pct ' + pctClass;
+    const bar = q('[data-kpi="bar"]');
+    bar.style.width = pct + '%';
+    bar.style.background = barColor;
+  });
 }
 
 // ── CHARTS RESUMEN ──
@@ -1381,8 +1705,12 @@ function initResumenCharts() {
 
 // ── INIT ──
 document.getElementById('pago-fecha').value = new Date().toISOString().split('T')[0];
+document.getElementById('conc-fecha').value = new Date().toISOString().split('T')[0];
 loadRespuestas();
-loadPagos();
+(async () => {
+  await bootstrapConciliaciones();
+  await Promise.all([loadPagos(), loadConciliaciones()]);
+})();
 initResumenCharts();
 </script>
 </body>
