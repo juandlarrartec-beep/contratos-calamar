@@ -1,23 +1,79 @@
 ╔═══════════════════════════════════════════════════════════════╗
 ║         RESUMEN EJECUTIVO — CONTRATOS CALAMAR                 ║
-║         Due Diligence completo · 1 abril 2026                 ║
-║         Basado en 27/30 preguntas respondidas por Emily       ║
+║         Due Diligence + Análisis de costos · 12 mayo 2026     ║
+║         Actualizado con audio de Stiven (cost breakdown)      ║
 ╚═══════════════════════════════════════════════════════════════╝
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. LOS NÚMEROS REALES DEL NEGOCIO
+1. LOS NÚMEROS REALES DEL NEGOCIO (post-audio Stiven 12/05)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Valor contrato #1:          $1.084.000.000
-  Anticipo 20%:               $  216.600.000
-  Utilidad estimada (30%):    $  150M – $200M
-  Parte de Stiven (15%):      $   75M – $100M (estimado)
-  Inversión total requerida:  $  100.000.000
-  Capital Stiven disponible:  $   50.000.000 (prestados 5%/mes)
-  Ya invertido:               $   12.000.000
-  Costo financiero préstamo:  $    2.500.000/mes
+  FRAMEWORK CORRECTO:
+  Valor contrato − Gastos totales = Utilidad
+  De esa utilidad se sacan los porcentajes (no del contrato)
+
+  GASTOS REALISTAS (estimación de Stiven en audio):
+  ──────────────────────────────────────────────────
+  Construcción (6 colegios × $40M):    $240.000.000
+  Ornamentación ($20M × 6):            $120.000.000
+  Materiales (~18% obra):              $200.000.000
+  Gastos administrativos ($30M × 6m):  $180.000.000
+                                      ─────────────
+  TOTAL GASTOS:                        $740.000.000
+  (Stiven dijo $720M en el audio por error de suma:
+   $20M faltantes que hay que rehacer antes de hablar con Emily)
+
+  CÁLCULO DE UTILIDAD:
+  ──────────────────────────────────────────────────
+  Valor contrato:                    $1.084.000.000
+  − Gastos:                         −  $740.000.000
+                                    ──────────────
+  = UTILIDAD REAL:                     $344.000.000
+  (Stiven la estimó en $360M con sus gastos a $720M)
+
+  Rango realista: $344M – $364M
+
+  DISTRIBUCIÓN DE LA UTILIDAD:
+  ──────────────────────────────────────────────────
+  Estructura 70/30 (3 socios silentes vs Emily+Stiven):
+  − 70% a 3 socios:                    $254.800.000
+  = Pool Emily + Stiven:               $109.200.000
+
+  Stiven (negociable dentro del pool 30%):
+  • 50% paritario       →  $54.600.000
+  • 33% un tercio       →  $36.400.000
+  • 25% un cuarto       →  $27.300.000
+
+  RETORNO REVISADO PARA STIVEN:
+  ──────────────────────────────────────────────────
+  ANTES (incorrecto, 15% sobre contrato):  $75M–$100M
+  AHORA (15% sobre utilidad real):         $54M (bruto)
+  Neto post-costo financiero ($15M):       ~$40M
+  ROI en 6 meses sobre $100M:              ~40%
+
+  CAPITAL INVERTIDO HASTA 12/05/2026 (Neon DB — 21 pagos):
+  ──────────────────────────────────────────────────
+  Pólizas seguro de trabajo:             $7.000.000
+  Nómina profesionales admin (varios):  ~$35.500.000
+  Administrativos / gestión:            ~$14.000.000
+  Otros (planos, intereses, dotaciones, materiales,
+   afiliaciones, banner, anticipos maestro):
+                                        ~$39.760.000
+                                       ─────────────
+  TOTAL INVERTIDO:                     ~$96.260.000
+
+  CAPITAL CONCILIADO POR EMILY (4 gastos):
+  Total conciliado:                    ~$57.820.000
+  Pendiente conciliar:                 ~$38.440.000
+  % conciliación:                       ~60%
+
+  Pendiente para llegar al techo $100M:  ~$3.740.000
+
+  COSTO FINANCIERO:
+  Préstamo $50M al 5% mensual = $2.5M/mes
+  6 meses de costo:                    $15.000.000
   Cronograma de ejecución:    6 meses (inicio: 5 marzo 2026)
-  Retorno estimado Stiven:    75%–100% en 6 meses
+  Retorno NETO estimado Stiven:    ~40% sobre $100M en 6m
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -133,24 +189,48 @@
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-8. PROYECCIÓN FINANCIERA DE STIVEN (escenario base)
+8. PROYECCIÓN FINANCIERA DE STIVEN (3 escenarios, post-audio)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  Inversión total (Stiven):   $100.000.000
-  Retorno bruto estimado:     $ 75.000.000 – $100.000.000
-  Costo préstamo 6 meses:   - $ 15.000.000 ($2.5M × 6)
-  Retorno neto estimado:      $ 60.000.000 – $ 85.000.000
+  Inversión total prevista:        $100.000.000
+  Costo préstamo 6 meses:        - $ 15.000.000 ($2.5M × 6)
 
-  Sobre el capital prestado de $50M:
-  Ganancia neta sobre $50M:   $10M–$35M (20%–70%)
-  En 6 meses.
+  ESCENARIO BASE (utilidad $364M, Stiven 15%):
+  ──────────────────────────────────────────────
+  Retorno bruto:                    $ 54.600.000
+  − costo financiero:               $ 15.000.000
+  = Neto sobre $100M invertidos:    $ 39.600.000
+  ROI neto en 6m:                   ~40%
 
-  NOTA: Esto asume que la interventoría avala los presupuestos
-  y que el clima no retrasa la ejecución. Escenario pesimista
-  podría reducir utilidad a $100–150M total (30%), bajando
-  la parte de Stiven a $50–75M bruto.
+  ESCENARIO PESIMISTA (interventoría recorta, util. $250M):
+  ──────────────────────────────────────────────
+  Retorno bruto (15%):              $ 37.500.000
+  − costo financiero:               $ 15.000.000
+  = Neto:                           $ 22.500.000
+  ROI neto:                         ~22%
+
+  ESCENARIO POSITIVO (Stiven negocia 25% + recupera margen
+  oculto de subcontratación, util. bruta real $424M):
+  ──────────────────────────────────────────────
+  Retorno bruto:                    $106.000.000
+  − costo financiero:               $ 15.000.000
+  = Neto:                           $ 91.000.000
+  ROI neto:                         ~91%
+
+  Sobre el capital prestado de $50M específicamente:
+  Ganancia neta en escenario base sobre $50M: ~$20M (~40%)
+
+  NOTA CRÍTICA — MARGEN OCULTO DE SUBCONTRATACIÓN
+  ──────────────────────────────────────────────
+  Stiven detectó que Emily INFLA las facturas del maestro
+  (cobra $120M, factura $150–160M). Eso desvía ~$60–80M
+  fuera de la utilidad reportada. Si el % de Stiven aplica
+  sobre la utilidad CONTABLE, pierde acceso a ese margen.
+  El contrato escrito tiene que blindar utilidad BRUTA con
+  derecho de auditoría sobre subcontratación.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Generado a partir del due diligence con Emily · 1 abril 2026
+  Actualizado a partir del audio de Stiven · 12 mayo 2026
   Proyecto: Contratos Calamar | Inversor: Stiven
+  Detalle completo: analisis/08_Audio_Stiven_12_05_2026/
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

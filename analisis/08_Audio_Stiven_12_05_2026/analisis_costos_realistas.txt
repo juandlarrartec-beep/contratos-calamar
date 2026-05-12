@@ -1,0 +1,231 @@
+═══════════════════════════════════════════════════════════════
+ANÁLISIS DE COSTOS REALISTAS — AUDIO STIVEN 12/05/2026
+Reconstrucción del breakdown que Stiven hizo en voz alta
+═══════════════════════════════════════════════════════════════
+
+CONTEXTO
+────────
+Stiven se sentó a calcular, fuera de Emily, cuánto cuesta
+realmente ejecutar el contrato. Lo hizo para llegar a la
+reunión con Emily con un piso claro y poder negociar bien
+su porcentaje.
+
+El framework que aplicó es el mismo que Juan pidió:
+  100% valor contrato − todos los gastos = utilidad real
+  Sobre esa utilidad se sacan los porcentajes.
+
+───────────────────────────────────────────────────────────────
+1. ALCANCE DEL PROYECTO (según Stiven en el audio)
+───────────────────────────────────────────────────────────────
+Son SEIS unidades de colegio, no tres.
+  3 colegios cercanos (3 ya conversadas con maestro)
+  3 colegios lejanos
+  El supuesto: mismo costo por unidad para todas.
+
+⚠️ Esto contradice el JSON `proyecto.json` que enumera 3 contratos.
+   Necesario aclarar si son 3 contratos × 2 colegios cada uno, o
+   si Stiven está agrupando todo el portafolio de Emily.
+
+───────────────────────────────────────────────────────────────
+2. DESGLOSE DE GASTOS (palabras de Stiven)
+───────────────────────────────────────────────────────────────
+
+  CONSTRUCCIÓN — mano de obra del maestro
+  ─────────────────────────────────────────────────
+  3 colegios cercanos                  $120.000.000
+  3 colegios lejanos                   $120.000.000
+                                      ─────────────
+  Subtotal construcción:               $240.000.000
+
+  ORNAMENTACIÓN — $20M por colegio × 6
+  ─────────────────────────────────────────────────
+  Subtotal ornamentación:              $120.000.000
+                                      ─────────────
+  Acumulado (construcción + ornament): $360.000.000
+
+  MATERIALES — Stiven ancla "~$200M"
+  ─────────────────────────────────────────────────
+  Nota: dijo "0,7% del valor de obra" pero luego ancló
+  en $200M (que equivale a ~18% del contrato, no a 0,7%).
+  La cifra 0,7% no aplica matemáticamente; quedamos con
+  los $200M que él mismo confirmó.
+  Subtotal materiales:                 $200.000.000
+
+  GASTOS ADMINISTRATIVOS — $30M/mes × 6 meses
+  ─────────────────────────────────────────────────
+  Subtotal admin:                      $180.000.000
+
+  ═════════════════════════════════════════════════
+  TOTAL GASTOS (versión Stiven, audio):$720.000.000
+  TOTAL GASTOS (suma corregida):       $740.000.000
+  ═════════════════════════════════════════════════
+
+⚠️ DISCREPANCIA: Stiven dice "$200M + $340M = $540M" pero la
+   suma real sería $200M + $360M = $560M. Después sumó
+   "$180M admin + $540M = $720M" cuando el dato corregido es
+   $180M + $560M = $740M. Diferencia: $20M menos en la versión
+   que Stiven le va a llevar a Emily. Hay que rehacerle la
+   cuenta antes de la conversación.
+
+───────────────────────────────────────────────────────────────
+3. UTILIDAD REAL DEL PROYECTO
+───────────────────────────────────────────────────────────────
+
+Aplicando el framework "valor contrato − gastos = utilidad":
+
+  Versión Stiven (con gastos $720M):
+  Valor contrato:           $1.084.000.000
+  − Gastos totales:        −  $720.000.000
+                          ──────────────
+  = Utilidad real:           $364.000.000
+
+  Versión corregida (con gastos $740M):
+  Valor contrato:           $1.084.000.000
+  − Gastos totales:        −  $740.000.000
+                          ──────────────
+  = Utilidad real:           $344.000.000
+
+  Rango realista de utilidad: $344M – $364M
+  (vs $325M que era la "utilidad" antes — 30% del contrato —
+   que en realidad ni siquiera era utilidad, era facturación)
+
+───────────────────────────────────────────────────────────────
+4. DISTRIBUCIÓN — APLICANDO % SOBRE UTILIDAD, NO SOBRE CONTRATO
+───────────────────────────────────────────────────────────────
+
+ANTES (incorrecto) — porcentajes sobre el VALOR del contrato:
+  30% Emily              $325.200.000 (era facturación, no util)
+  15% Stiven             $162.600.000 (no había base contable)
+
+AHORA (correcto) — porcentajes sobre la UTILIDAD real:
+
+  Supuesto 1: estructura 70/30 (3 socios silentes vs. Emily+Stiven)
+  ───────────────────────────────────────────────────────────
+  Utilidad total:                  $364.000.000
+  − 70% a 3 socios silentes:      −$254.800.000
+  = Pool Emily + Stiven:           $109.200.000
+
+  Dentro del pool Emily+Stiven, Stiven negocia su parte:
+   • Stiven 50% (paritario):       $ 54.600.000
+   • Stiven 33% (un tercio):       $ 36.400.000
+   • Stiven 25% (un cuarto):       $ 27.300.000
+
+  Supuesto 2: 15% directo sobre utilidad (sin layer de 70%)
+  ───────────────────────────────────────────────────────────
+  Utilidad:                        $364.000.000
+   • 15% Stiven:                   $ 54.600.000
+   • 30% Emily:                    $109.200.000
+
+  En ambos supuestos, el retorno bruto realista de Stiven
+  ronda los $54M, NO los $75M–$100M que figuraban antes.
+
+───────────────────────────────────────────────────────────────
+5. EL MARGEN OCULTO QUE EMILY ESTÁ TOCANDO (observación clave)
+───────────────────────────────────────────────────────────────
+
+Stiven en el audio:
+  "Ella tiene que jugar con ellos también, pues con un
+  sobrecosto en lo que se subcontrate con el maestro: si el
+  maestro cobró por tres instituciones $120M, ella lo pasa por
+  $150M, $160M."
+
+Implicación:
+  Emily INFLA el costo facturado por subcontratación.
+  El maestro cobra $120M reales, pero los libros del
+  consorcio registran $150–160M. Diferencia $30–40M por
+  bloque × 2 bloques (cercanos y lejanos) = $60–80M de
+  margen oculto que se queda Emily.
+
+  Este margen NO entra en la utilidad reportada. Es plata
+  que se desvía antes de calcular la "utilidad" sobre la
+  cual se reparten los porcentajes.
+
+⚠️ RIESGO PARA STIVEN
+  Si su % aplica sobre la utilidad CONTABLE (post-inflado),
+  pierde acceso al margen real que está escondido en
+  subcontratación. Su 15% ($54M) podría ser en realidad
+  un 12% sobre la utilidad total verdadera ($424M con el
+  margen recuperado).
+
+  Acción exigida: el contrato escrito tiene que blindar que
+  el % se aplica sobre utilidad BRUTA antes de la
+  manipulación de subcontratación, O Stiven exige ver las
+  facturas reales del maestro como anexo de cierre mensual.
+
+───────────────────────────────────────────────────────────────
+6. PROYECCIÓN FINANCIERA ACTUALIZADA DE STIVEN
+───────────────────────────────────────────────────────────────
+
+INVERSIÓN ESTIMADA TOTAL:        $100.000.000
+  Ya invertido (a 12/05/2026):   $ 29.000.000
+    • Pólizas:                   $  7.000.000
+    • Anticipo nómina admin:     $ 12.000.000
+    • Saldo nómina admin:        $ 10.000.000
+  Pendiente cubrir:              $ 71.000.000
+    + derechos/viabilidades:     ~$  5.000.000
+
+COSTO FINANCIERO DEL PRÉSTAMO ($50M al 5%/mes):
+  $2.500.000/mes × 6 meses =     $ 15.000.000
+
+RETORNO BRUTO ESTIMADO (escenario base, util. $364M):
+  15% sobre utilidad:            $ 54.600.000
+
+RETORNO NETO ESTIMADO:
+  Bruto:                          $ 54.600.000
+  − costo financiero préstamo:    $ 15.000.000
+                                 ──────────────
+  = Neto sobre $100M invertidos:  $ 39.600.000
+  ROI neto en 6 meses:            ~40%
+  TIR anualizada equivalente:    ~80% anual
+
+  Sobre los $50M prestados específicamente:
+  Ganancia neta sobre $50M:      ~$20M (40% en 6 meses)
+
+ESCENARIO PESIMISTA (rentabilidad recortada por interventoría
++ sobrecostos no presupuestados):
+  Si utilidad final cae a $250M  →  15% = $37.5M
+  Neto post-préstamo:              $22.5M
+  ROI sobre $100M:                 ~22%
+
+ESCENARIO POSITIVO (Stiven negocia % más alto + recupera
+margen oculto de subcontratación):
+  Si utilidad bruta real = $424M (con margen oculto incluido)
+  Si Stiven negocia 25%   → $106M
+  Neto post-préstamo:       $91M
+  ROI sobre $100M:          ~91%
+
+───────────────────────────────────────────────────────────────
+7. CONCLUSIONES Y ACCIONES INMEDIATAS
+───────────────────────────────────────────────────────────────
+
+✅ El proyecto SIGUE TENIENDO RETORNO POSITIVO, pero la
+   magnitud realista cambió:
+   ANTES: $75M–$100M de utilidad para Stiven
+   AHORA: $40M–$55M de utilidad neta para Stiven (escenario base)
+
+⚠️ El "30%" y "15%" históricos eran ENGAÑOSOS — se aplicaban
+   sobre el valor del contrato, no sobre utilidad. Convertir
+   a porcentaje-sobre-utilidad es lo único honesto.
+
+🔴 EL MARGEN OCULTO DE SUBCONTRATACIÓN ES EL DEAL-BREAKER
+   Sin acceso a las facturas reales del maestro o sin que el
+   contrato escrito blinde el % sobre utilidad BRUTA, Stiven
+   queda en desventaja estructural permanente.
+
+ACCIONES ANTES DE CUALQUIER NUEVO DESEMBOLSO:
+  1. Rehacer la cuenta a Stiven con la suma corregida
+     ($740M de gastos, no $720M)
+  2. Definir EXACTAMENTE el % de Stiven sobre la utilidad
+     real, no sobre el contrato.
+  3. Exigir que el contrato escrito mencione "utilidad
+     bruta antes de gastos de subcontratación inflados" o
+     equivalente, con derecho de auditoría.
+  4. Solicitar a Emily las cotizaciones del maestro firmadas
+     ANTES de que se ejecute cada bloque.
+  5. Pedir el análisis de costos del analista de presupuestos
+     y compararlo con esta estimación de Stiven.
+
+───────────────────────────────────────────────────────────────
+Generado a partir del audio de Stiven · 12 mayo 2026
+Proyecto: Contratos Calamar | Análisis para inversor: Stiven
+───────────────────────────────────────────────────────────────

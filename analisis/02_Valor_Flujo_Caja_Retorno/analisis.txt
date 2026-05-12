@@ -1,6 +1,7 @@
 ═══════════════════════════════════════════════════════════════
 CATEGORÍA 2 — VALOR, FLUJO DE CAJA Y RETORNO
-Análisis de respuestas de Emily · 1 abril 2026
+Análisis de respuestas de Emily · actualizado 12 mayo 2026
+Incorpora cost breakdown del audio de Stiven (12/05)
 ═══════════════════════════════════════════════════════════════
 
 ┌─────────────────────────────────────────────────────────────┐
@@ -11,18 +12,42 @@ Análisis de respuestas de Emily · 1 abril 2026
 → IMPACTO: REVELADOR — El contrato es de MÁS DE MIL MILLONES.
   Este dato cambia la escala del negocio completamente.
 
-  NÚMEROS CLAVE (solo este contrato):
+  ⚠️ CORRECCIÓN FRAMEWORK (audio Stiven 12/05):
+  Los porcentajes NO se aplican sobre el valor del contrato
+  sino sobre la UTILIDAD (contrato − gastos). Lo que figuraba
+  como "30% de Emily = $325M" era FACTURACIÓN, no utilidad.
+
+  GASTOS REALISTAS DEL PROYECTO (estimación Stiven):
+  Construcción (6 colegios × ~$40M)  $240.000.000
+  Ornamentación ($20M × 6)           $120.000.000
+  Materiales (~18% obra)             $200.000.000
+  Gastos administrativos ($30M × 6m) $180.000.000
+                                    ─────────────
+  TOTAL GASTOS:                      $740.000.000
+  (Stiven dijo $720M por error de suma; recalcular antes
+   de la conversación con Emily)
+
+  CÁLCULO DE UTILIDAD:
+  Valor contrato:                  $1.084.000.000
+  − Gastos:                       −  $740.000.000
+                                  ──────────────
+  = UTILIDAD REAL:                   $344.000.000
+  Rango realista: $344M – $364M
+
+  DISTRIBUCIÓN (estructura 70/30 + Stiven 15% sobre utilidad):
   Valor total:          $1.084.000.000
   Anticipo (20%):       $  216.600.000
-  30% de Emily:         $  325.200.000 (bruto)
-  15% de Stiven:        $  162.600.000 (bruto — si utilidad = 15%)
-  Utilidad estimada 30%:$  150M–200M (según Emily)
-  Utilidad estimada 15%:$   75M–100M (parte de Stiven estimada)
+  Utilidad real:        $  344M–$364M (vs $150M–$200M antes)
+  Pool 70% socios silentes:  $241M–$255M
+  Pool 30% Emily+Stiven:     $103M–$109M
+    Stiven 15% (sobre util.): $52M–$55M
 
-  RELACIÓN INVERSIÓN/RETORNO de Stiven:
+  RELACIÓN INVERSIÓN/RETORNO de Stiven (escenario base):
   Inversión estimada:   $  100.000.000
-  Retorno potencial:    $   75M–100M
-  ROI estimado:         ~75%–100% en 6 meses
+  Retorno bruto:        $   54.600.000 (15% de $364M)
+  Costo préstamo 6m:    -$  15.000.000
+  Retorno neto:         $   39.600.000
+  ROI neto:             ~40% en 6 meses (no 75%–100%)
 
 ┌─────────────────────────────────────────────────────────────┐
 │ PREGUNTA 2: ¿Cómo se calculó la rentabilidad?               │
@@ -71,16 +96,31 @@ Análisis de respuestas de Emily · 1 abril 2026
   los cobros de actas parciales llegan antes.
 
 ───────────────────────────────────────────────────────────────
-CONCLUSIÓN DE LA CATEGORÍA
+CONCLUSIÓN DE LA CATEGORÍA (revisada 12/05)
 ───────────────────────────────────────────────────────────────
-✅ Contrato de $1.084M — escala significativa.
-✅ ROI potencial para Stiven: 75%–100% en 6 meses.
-⚠️  Rentabilidad sujeta a aprobación de interventoría.
-⚠️  Stiven necesita ~$100M total, tiene $50M prestados + propios.
-⚠️  Costo financiero: $2.5M/mes deben descontarse de la utilidad.
+✅ Contrato de $1.084M — escala real confirmada.
+🔄 ROI realista de Stiven: ~40% NETO en 6m (no 75%–100%).
+   La cifra anterior aplicaba el % sobre el contrato, no
+   sobre la utilidad. Corregido con framework adecuado.
+⚠️  Rentabilidad sigue sujeta a aprobación de interventoría.
+⚠️  Stiven necesita ~$100M total — lleva $29M invertidos.
+⚠️  Costo financiero: $2.5M/mes ya descontados del retorno.
+🔴 RIESGO NUEVO: Emily infla facturas del maestro
+   ($120M reales → $150–160M facturados). $60–80M de margen
+   oculto que se desvía de la utilidad reportada antes de
+   aplicar los porcentajes. Sin auditoría sobre eso, Stiven
+   pierde acceso estructural al margen real.
 
 ACCIONES CONCRETAS PENDIENTES:
-1. Solicitar el análisis de costos del analista de presupuestos
-2. Definir flujo de caja real (Emily lo pidió explícitamente)
-3. Establecer cuándo llega el anticipo de $216.600.000
-4. Calcular costo real del préstamo de Stiven vs utilidad
+1. Rehacer la cuenta de Stiven con la suma corregida
+   ($740M de gastos vs los $720M del audio)
+2. Solicitar el análisis de costos del analista de
+   presupuestos para contrastar con esta estimación
+3. Definir EXACTAMENTE el % de Stiven sobre la utilidad
+   real (no sobre el contrato) y dejarlo por escrito
+4. Exigir que el contrato escrito blinde "utilidad bruta
+   antes de gastos de subcontratación inflados" con
+   derecho de auditoría sobre cotizaciones del maestro
+5. Establecer cuándo llega el anticipo de $216.600.000
+6. Pedir cotizaciones firmadas del maestro antes de cada
+   bloque de obra
